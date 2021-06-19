@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet.Views.ListFinances"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             BackgroundColor="#3a3a3a">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Grid x:Name="MainGrid" WidthRequest="380">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="400"/>
+                </Grid.RowDefinitions>
+
+                <Frame BackgroundColor="#303030"
+                        CornerRadius="5"
+                        HasShadow="True"
+                        HeightRequest="300"
+                        HorizontalOptions="CenterAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Text="Expenses"
+                                FontSize="25"
+                                VerticalOptions="Center" 
+                                HorizontalOptions="Center"
+                                TextColor="White"
+                                FontAttributes="None"/>
+
+                        <forms:ChartView Grid.Row="1"
+                                            x:Name="ExpensesChart"/>
+                    </Grid>
+                </Frame>
+
+                <ScrollView  Grid.Row="1">
+                    <StackLayout Margin="20"
+                                x:Name="ListItems"
+                               >
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="▲"
+                                       FontSize="Large"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"
+                                       TextColor="#04f440"
+                                       FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                       Grid.Column="1"
+                                       FontSize="Large"
+                                       VerticalOptions="Center" 
+                                       TextColor="White"
+                                       FontAttributes="None"/>
+                                <Button Text="✖"
+                                        Grid.Column="2"
+                                        FontSize="Large"
+                                        TextColor="Red"
+                                        BackgroundColor="#303030"
+                                        />
+                            </Grid>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#303030"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            Padding="20">
+                            <StackLayout Orientation="Horizontal"
+                                        Spacing="15">
+                                <Label Text="▲"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="#04f440"
+                                    FontAttributes="None"/>
+                                <Label Text="300000 HUF"
+                                    FontSize="Large"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"
+                                    FontAttributes="None"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+
+            <Button Text="+"
+                CornerRadius="50"
+                FontSize="40"
+                AbsoluteLayout.LayoutFlags="PositionProportional"  
+                AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
+                Clicked="Add_Clicked"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

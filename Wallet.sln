@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Android", "Wallet.Android\Wallet.Android.csproj", "{7FF72DDD-7F3D-44D4-851E-C312EF299B6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet", "Wallet\Wallet.csproj", "{6C8A8A9A-8679-47CB-A488-B5ABFEB33054}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FF72DDD-7F3D-44D4-851E-C312EF299B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FF72DDD-7F3D-44D4-851E-C312EF299B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FF72DDD-7F3D-44D4-851E-C312EF299B6E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7FF72DDD-7F3D-44D4-851E-C312EF299B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FF72DDD-7F3D-44D4-851E-C312EF299B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FF72DDD-7F3D-44D4-851E-C312EF299B6E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6C8A8A9A-8679-47CB-A488-B5ABFEB33054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C8A8A9A-8679-47CB-A488-B5ABFEB33054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C8A8A9A-8679-47CB-A488-B5ABFEB33054}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6C8A8A9A-8679-47CB-A488-B5ABFEB33054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C8A8A9A-8679-47CB-A488-B5ABFEB33054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C8A8A9A-8679-47CB-A488-B5ABFEB33054}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24ABB503-BCA5-4C94-84C7-E68540C172E9}
+	EndGlobalSection
+EndGlobal
