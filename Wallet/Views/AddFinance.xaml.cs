@@ -29,7 +29,8 @@ namespace Wallet.Views
                 Id = FinanceManager.FinanceId++,
                 Money = int.Parse(MoneyInput.Text),
                 CategoryId = selectedCategory.Id,
-                IsExpense = isExpense
+                IsExpense = isExpense,
+                Date = DateTime.Now
             };
 
             FinanceManager.InsertFront(finance);

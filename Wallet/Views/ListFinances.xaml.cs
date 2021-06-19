@@ -20,14 +20,14 @@ namespace Wallet.Views
         {
             InitializeComponent();
 
-            //  ResetDatabase();
+            //ResetDatabase();
 
             LoadFromDatabase();
         }
 
         private void ResetDatabase()
         {
-            FinanceManager.InsertFront(new Finance { Id = -1, Money = 563821, CategoryId = -1, IsExpense = false });
+            FinanceManager.InsertFront(new Finance { Id = -1, Money = 0, CategoryId = -1, IsExpense = false });
             Database.SaveFinances();
             FinanceCategoryManager.Categories.Clear();
             FinanceCategoryManager.Add(new FinanceCategory { Id = 1, Name = "Work", ColorCode = "#f7ba04" });
@@ -186,7 +186,7 @@ namespace Wallet.Views
             {
                 Frame financeFrame = new Frame
                 {
-                    BackgroundColor = Color.FromHex("#303030"),
+                    BackgroundColor = finance.IsExpense ? Color.FromHex("#303030") : Color.FromHex("#21bc39"),
                     CornerRadius = 5,
                     HasShadow = true,
                     Padding = 20
@@ -194,34 +194,32 @@ namespace Wallet.Views
 
                 Grid grid = new Grid();
 
+
                 ColumnDefinition columnDefinition1 = new ColumnDefinition
                 {
-                    Width = new GridLength(20, GridUnitType.Absolute)
                 };
 
                 ColumnDefinition columnDefinition2 = new ColumnDefinition
                 {
-                };
-
-                ColumnDefinition columnDefinition3 = new ColumnDefinition
-                {
                     Width = new GridLength(50, GridUnitType.Absolute)
                 };
 
-                Label arrowLabel = new Label()
-                {
-                    Text = finance.IsExpense ? "▼" : "▲",
-                    FontSize = 20,
-                    VerticalOptions = LayoutOptions.Center,
-                    TextColor = finance.IsExpense ? Color.FromHex("#ea281e") : Color.FromHex("#04f440")
-                };
+                StackLayout stackLayout = new StackLayout();
 
                 Label moneyLabel = new Label()
                 {
                     Text = finance.Money.ToString() + " HUF",
                     FontSize = 20,
                     VerticalOptions = LayoutOptions.Center,
-                    TextColor = Color.FromHex("#ffffff")
+                    TextColor = finance.IsExpense ? Color.FromHex("#ffffff") : Color.FromHex("#ffffff")
+                };
+
+                Label dateLabel = new Label()
+                {
+                    Text = finance.Date.ToShortDateString(),
+                    FontSize = 15,
+                    VerticalOptions = LayoutOptions.Center,
+                    TextColor = finance.IsExpense ? Color.FromHex("#adadad") : Color.FromHex("#6b6b6b")
                 };
 
                 Button deleteButton = new Button
@@ -231,32 +229,31 @@ namespace Wallet.Views
                     FontSize = 20,
                     VerticalOptions = LayoutOptions.Center,
                     TextColor = Color.FromHex("#d64c22"),
-                    BackgroundColor = Color.FromHex("#303030"),
+                    BackgroundColor = finance.IsExpense ? Color.FromHex("#303030") : Color.FromHex("#21bc39"),
                 };
 
                 if (finance.Id == -1)
                 {
-                    arrowLabel.Text = "";
-                    arrowLabel.TextColor = Color.FromHex("#ffffff");
-
                     deleteButton.Text = "";
+                    financeFrame.BackgroundColor = Color.FromHex("#303030");
+                    deleteButton.BackgroundColor = Color.FromHex("#303030");
                 }
                 else
                 {
                     deleteButton.Clicked += Delete_Clicked;
+                    stackLayout.Children.Add(dateLabel);
                 }
+
+                stackLayout.Children.Add(moneyLabel);
 
                 grid.ColumnDefinitions.Add(columnDefinition1);
                 grid.ColumnDefinitions.Add(columnDefinition2);
-                grid.ColumnDefinitions.Add(columnDefinition3);
 
-                grid.Children.Add(arrowLabel);
-                grid.Children.Add(moneyLabel);
+                grid.Children.Add(stackLayout);
                 grid.Children.Add(deleteButton);
 
-                arrowLabel.SetValue(Grid.ColumnProperty, 0);
-                moneyLabel.SetValue(Grid.ColumnProperty, 1);
-                deleteButton.SetValue(Grid.ColumnProperty, 2);
+                stackLayout.SetValue(Grid.ColumnProperty, 0);
+                deleteButton.SetValue(Grid.ColumnProperty, 1);
 
                 financeFrame.Content = grid;
 

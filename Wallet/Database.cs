@@ -17,7 +17,7 @@ namespace Wallet
             {
                 foreach (Finance finance in FinanceManager.Finances)
                 {
-                    string row = $"{finance.Id};{finance.Money};{finance.CategoryId};{finance.IsExpense}";
+                    string row = $"{finance.Id};{finance.Money};{finance.CategoryId};{finance.IsExpense};{finance.Date.ToShortDateString()}";
                     streamWriter.WriteLine(row);
                 }
             }
@@ -55,7 +55,8 @@ namespace Wallet
                             Id = int.Parse(data[0]),
                             Money = int.Parse(data[1]),
                             CategoryId = int.Parse(data[2]),
-                            IsExpense = data[3].Equals("True")
+                            IsExpense = data[3].Equals("True"),
+                            Date = DateTime.Parse(data[4])
                         });
                     }
                 }

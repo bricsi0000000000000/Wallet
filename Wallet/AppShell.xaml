@@ -99,10 +99,10 @@
         <ShellContent Route="ListFinances" ContentTemplate="{DataTemplate local:ListFinances}" />
     </FlyoutItem>
 
-    <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
+    <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to 
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
-
+ -->
     <!--
         TabBar lets you define content that won't show up in a flyout menu. When this content is active
         the flyout menu won't be available. This is useful for creating areas of the application where 
@@ -112,7 +112,7 @@
     <TabBar>
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </TabBar>
-    -->
+
     <Shell.FlyoutFooter>
         <Grid BackgroundColor="#2C2C2C"
               HeightRequest="50">
@@ -135,5 +135,5 @@
                     BackgroundColor="#2C2C2C"/>
         </Grid>
     </Shell.FlyoutFooter>
-
+    -->
 </Shell>
