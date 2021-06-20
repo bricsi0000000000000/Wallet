@@ -273,6 +273,13 @@ namespace Wallet.Views
                     TextColor = finance.IsExpense ? Color.FromHex("#ffffff") : Color.FromHex("#ffffff")
                 };
 
+                TapGestureRecognizer moneyLabelTap = new TapGestureRecognizer();
+                moneyLabelTap.Tapped += (s, e) =>
+                {
+                    Navigation.PushAsync(new AddFinance(finance.Id));
+                };
+                moneyLabel.GestureRecognizers.Add(moneyLabelTap);
+
                 Label dateLabel = new Label()
                 {
                     Text = finance.Date.ToShortDateString(),
@@ -368,7 +375,7 @@ namespace Wallet.Views
 
         private async void Add_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddFinance());
+            await Navigation.PushAsync(new AddFinance(-1));
         }
 
         private void Delete_Clicked(object sender, EventArgs e)

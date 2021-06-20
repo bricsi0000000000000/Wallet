@@ -64,6 +64,7 @@ namespace Wallet.Views
 
         private void MakeEntries(List<ChartEntry> finances, int monthes, float money, List<Finance> automatizedFinances)
         {
+            int entriIndex = 0;
             for (int i = 0; i < monthes; i++)
             {
                 foreach (Finance finance in automatizedFinances)
@@ -103,7 +104,7 @@ namespace Wallet.Views
 
                 if (addEntry)
                 {
-                    finances.Add(CreateChartEntry(money, $"{i + 1}", colorCodes[5]));
+                    finances.Add(CreateChartEntry(money, $"{i + 1}", colorCodes[entriIndex++]));
                 }
             }
         }

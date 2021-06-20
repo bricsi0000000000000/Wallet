@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Wallet.Models;
 
 namespace Wallet
@@ -15,6 +16,11 @@ namespace Wallet
         public static FinanceCategory Get(int id)
         {
             return Categories.Find(x => x.Id == id);
+        }
+
+        public static void Sort()
+        {
+            Categories = Categories.OrderBy(x => x.Id).ToList();
         }
     }
 }

@@ -86,6 +86,7 @@
                            TextColor="White"/>
 
                     <CheckBox Grid.Column="1"
+                              x:Name="IsIncomeCheckBox"
                               HorizontalOptions="StartAndExpand"
                               CheckedChanged="CheckBox_CheckedChanged"/>
                 </Grid>
@@ -130,6 +131,7 @@
                            TextColor="White"/>
 
                     <DatePicker Grid.Column="1"
+                                x:Name="AutomatizedDatePicker"
                                 DateSelected="AutomatizedDatePicker_DateSelected"/>
                 </Grid>
             </Frame>
@@ -138,7 +140,7 @@
                     Text="Save"
                     FontSize="20"
                     Margin="60,0,60,0"
-                    Clicked="Button_Clicked"/>
+                    Clicked="SaveButton_Clicked"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
