@@ -9,5 +9,6 @@ namespace Wallet.Models
         public int CategoryId { get; set; }
         public bool IsExpense { get; set; }
         public DateTime Date { get; set; }
+        public DateTime? AutomatizedDate { get; set; } = null;
     }
 }

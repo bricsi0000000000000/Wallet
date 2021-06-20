@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Wallet.Models;
 
 namespace Wallet
@@ -6,13 +7,9 @@ namespace Wallet
     public static class FinanceManager
     {
         public static int FinanceId = 1;
+        public static int Balance = 0;
 
         public static List<Finance> Finances { get; private set; } = new List<Finance>();
-
-        public static void InsertFront(Finance finance)
-        {
-            Finances.Insert(0, finance);
-        }
 
         public static void Add(Finance finance)
         {
@@ -27,6 +24,11 @@ namespace Wallet
         public static void Remove(int id)
         {
             Finances.RemoveAt(Finances.FindIndex(x => x.Id == id));
+        }
+
+        public static void Sort()
+        {
+            Finances = Finances.OrderByDescending(x => x.Date).ToList();
         }
     }
 }

@@ -8,10 +8,14 @@ namespace Wallet.Views
     {
         private bool isExpense = true;
         private FinanceCategory selectedCategory;
+        private DateTime selectedDate = DateTime.Now;
+        private DateTime? selectedAutomatizedDate = null;
 
         public AddFinance()
         {
             InitializeComponent();
+
+            SelectDate.Date = selectedDate;
 
             CategoryPicker.Items.Clear();
 
@@ -21,22 +25,24 @@ namespace Wallet.Views
             }
         }
 
-
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            Finance finance = new Finance
+            if (selectedCategory != null && selectedDate != null)
             {
-                Id = FinanceManager.FinanceId++,
-                Money = int.Parse(MoneyInput.Text),
-                CategoryId = selectedCategory.Id,
-                IsExpense = isExpense,
-                Date = DateTime.Now
-            };
+                Finance finance = new Finance();
 
-            FinanceManager.InsertFront(finance);
-            Database.SaveFinances();
+                finance.Id = FinanceManager.FinanceId++;
+                finance.Money = int.Parse(MoneyInput.Text);
+                finance.CategoryId = selectedCategory.Id;
+                finance.IsExpense = isExpense;
+                finance.Date = selectedAutomatizedDate == null ? selectedDate : (DateTime)selectedAutomatizedDate;
+                finance.AutomatizedDate = selectedAutomatizedDate;
 
-            await Navigation.PopToRootAsync();
+                FinanceManager.Add(finance);
+                Database.SaveFinances();
+
+                await Navigation.PopToRootAsync();
+            }
         }
 
         private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -47,6 +53,16 @@ namespace Wallet.Views
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedCategory = FinanceCategoryManager.Categories[((Picker)sender).SelectedIndex];
+        }
+
+        private void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            selectedDate = e.NewDate;
+        }
+
+        private void AutomatizedDatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            selectedAutomatizedDate = e.NewDate;
         }
     }
 }

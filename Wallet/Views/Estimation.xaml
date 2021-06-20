@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet.Views.Estimation"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             BackgroundColor="#3a3a3a">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Frame BackgroundColor="#303030"
+                       CornerRadius="5"
+                       HasShadow="True"
+                       HeightRequest="300"
+                       Margin="0,20,0,0"
+                       HorizontalOptions="CenterAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Text="After 6 month"
+                               FontSize="20"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"
+                               TextColor="White"
+                               FontAttributes="None"/>
+
+                        <forms:ChartView Grid.Row="1"
+                                         WidthRequest="310"
+                                         x:Name="After6MonthChart"/>
+                    </Grid>
+                </Frame>
+
+                <Frame BackgroundColor="#303030"
+                       CornerRadius="5"
+                       HasShadow="True"
+                       HeightRequest="300"
+                       HorizontalOptions="CenterAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Text="After 1 year"
+                               FontSize="20"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"
+                               TextColor="White"
+                               FontAttributes="None"/>
+
+                        <forms:ChartView Grid.Row="1"
+                                         WidthRequest="310"
+                                         x:Name="After1YearChart"/>
+                    </Grid>
+                </Frame>
+
+                <Frame BackgroundColor="#303030"
+                       CornerRadius="5"
+                       HasShadow="True"
+                       HeightRequest="300"
+                       HorizontalOptions="CenterAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Text="After 3 year"
+                               FontSize="20"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"
+                               TextColor="White"
+                               FontAttributes="None"/>
+
+                        <forms:ChartView Grid.Row="1"
+                                         WidthRequest="310"
+                                         x:Name="After3YearChart"/>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

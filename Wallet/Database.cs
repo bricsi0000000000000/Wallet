@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Wallet.Models;
 
 namespace Wallet
@@ -17,7 +18,8 @@ namespace Wallet
             {
                 foreach (Finance finance in FinanceManager.Finances)
                 {
-                    string row = $"{finance.Id};{finance.Money};{finance.CategoryId};{finance.IsExpense};{finance.Date.ToShortDateString()}";
+                    string row = $"{finance.Id};{finance.Money};{finance.CategoryId};{finance.IsExpense};{finance.Date.ToShortDateString()};";
+                    row += finance.AutomatizedDate == null ? "null" : finance.AutomatizedDate?.ToShortDateString();
                     streamWriter.WriteLine(row);
                 }
             }
@@ -50,17 +52,31 @@ namespace Wallet
                     if (!string.IsNullOrEmpty(row))
                     {
                         string[] data = row.Split(';');
-                        FinanceManager.Add(new Finance
+                        Finance finance = new Finance
                         {
                             Id = int.Parse(data[0]),
                             Money = int.Parse(data[1]),
                             CategoryId = int.Parse(data[2]),
                             IsExpense = data[3].Equals("True"),
                             Date = DateTime.Parse(data[4])
-                        });
+                        };
+
+                        DateTime.TryParse(data[5], out DateTime automatizedDate);
+                        if (automatizedDate == default)
+                        {
+                            finance.AutomatizedDate = null;
+                        }
+                        else
+                        {
+                            finance.AutomatizedDate = automatizedDate;
+                        }
+
+                        FinanceManager.Add(finance);
                     }
                 }
             }
+
+            FinanceManager.FinanceId = FinanceManager.Finances.Last().Id + 1;
         }
 
         public static void LoadCategories()
