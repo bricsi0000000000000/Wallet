@@ -7,7 +7,6 @@ using System.Linq;
 using Wallet.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using static Xamarin.Forms.Internals.Profile;
 
 namespace Wallet.Views
 {
@@ -17,11 +16,17 @@ namespace Wallet.Views
         List<ChartEntry> expenses = new List<ChartEntry>();
         private int allExpenses = 0;
 
+        private const string BACKGROUND_COLOR = "#ffffff";
+        private const string TEXT_COLOR = "#344955";
+        private const string DATE_COLOR = "#232F34";
+        private const string GREEN = "#27a555";
+        private const string RED = "#B00020";
+
         public ListFinances()
         {
             InitializeComponent();
 
-           // ResetDatabase();
+            //ResetDatabase();
 
             LoadFromDatabase();
         }
@@ -31,10 +36,10 @@ namespace Wallet.Views
             FinanceManager.Add(new Finance { Id = -1, Money = 0, CategoryId = -1, IsExpense = false, Date = default });
             Database.SaveFinances();
             FinanceCategoryManager.Categories.Clear();
-            FinanceCategoryManager.Add(new FinanceCategory { Id = 1, Name = "Work", ColorCode = "#f7ba04" });
-            FinanceCategoryManager.Add(new FinanceCategory { Id = 2, Name = "Entertainment", ColorCode = "#049ef7" });
-            FinanceCategoryManager.Add(new FinanceCategory { Id = 3, Name = "Food", ColorCode = "#18ce88" });
-            FinanceCategoryManager.Add(new FinanceCategory { Id = 4, Name = "Travel", ColorCode = "#d8d8d8" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 1, Name = "Grocery", ColorCode = "#049ef7" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 2, Name = "Restaurant", ColorCode = "#18ce88" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 3, Name = "Transport", ColorCode = "#d8d8d8" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 4, Name = "Shopping", ColorCode = "#fc0591" });
             Database.SaveCategories();
         }
 
@@ -66,116 +71,29 @@ namespace Wallet.Views
         {
             allExpenses = 0;
 
-            MainGrid.Children.Clear();
-            MainGrid.RowDefinitions.Clear();
+            ListItems.Children.Clear();
 
-            MainGrid.WidthRequest = 380;
-            MainGrid.Margin = new Thickness(0, 10, 0, 0);
-
-            RowDefinition rowDefinitionBalance = new RowDefinition
-            {
-                Height = new GridLength(80)
-            };
-
-            RowDefinition rowDefinitionChart = new RowDefinition
-            {
-                Height = new GridLength(300)
-            };
-
-            RowDefinition rowDefinitionList = new RowDefinition
-            {
-                Height = new GridLength(330)
-            };
-
-            RowDefinition rowDefinition3 = new RowDefinition();
-
-            MainGrid.RowDefinitions.Add(rowDefinitionBalance);
-            MainGrid.RowDefinitions.Add(rowDefinitionChart);
-            MainGrid.RowDefinitions.Add(rowDefinitionList);
-            MainGrid.RowDefinitions.Add(rowDefinition3);
-
-            LoadFinances();
-
-            Frame balanceFrame = new Frame
-            {
-                BackgroundColor = Color.FromHex("#303030"),
-                CornerRadius = 5,
-                HasShadow = true,
-                WidthRequest = 310,
-                HorizontalOptions = LayoutOptions.Center
-            };
-            balanceFrame.SetValue(Grid.RowProperty, 0);
 
             int incomes = FinanceManager.Finances.FindAll(x => !x.IsExpense).Sum(x => x.Money);
             int expenses = FinanceManager.Finances.FindAll(x => x.IsExpense).Sum(x => x.Money);
             FinanceManager.Balance = incomes - expenses;
 
-            Label balanceLabel = new Label()
-            {
-                Text = $"Balance: {FinanceManager.Balance} HUF",
-                FontSize = 25,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
-                TextColor = Color.FromHex("#ffffff")
-            };
+            List<Finance> monthlyExpenses = FinanceManager.Finances.FindAll(x => x.Date.Month == DateTime.Today.Month);
 
-            balanceFrame.Content = balanceLabel;
-            MainGrid.Children.Add(balanceFrame);
+            BalanceLabel.Text = FinanceManager.Balance.ToString();
+            MonthlyExpensesLabel.Text = monthlyExpenses.Sum(x => x.Money).ToString();
 
-            LoadChartFrame();
+            LoadFinances(monthlyExpenses);
+
+            ExpensesChart.Chart = MakeChart();
 
             LoadFinanceFrames();
         }
 
-        private void LoadChartFrame()
-        {
-            Frame chartFrame = new Frame
-            {
-                BackgroundColor = Color.FromHex("#303030"),
-                CornerRadius = 5,
-                HasShadow = true,
-                HeightRequest = 300,
-                WidthRequest = 310,
-                HorizontalOptions = LayoutOptions.Center
-            };
-            chartFrame.SetValue(Grid.RowProperty, 1);
-
-            Grid chartGrid = new Grid();
-            RowDefinition rowDefinition1 = new RowDefinition
-            {
-                Height = 45
-            };
-            RowDefinition rowDefinition2 = new RowDefinition();
-
-            Label chartLabel = new Label()
-            {
-                Text = $"Expenses: {allExpenses} HUF",
-                FontSize = 25,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
-                TextColor = Color.FromHex("#ffffff")
-            };
-
-            ChartView expensesChart = MakeChart();
-
-            chartGrid.Children.Add(chartLabel);
-            chartGrid.Children.Add(expensesChart);
-
-            chartLabel.SetValue(Grid.RowProperty, 0);
-            expensesChart.SetValue(Grid.RowProperty, 1);
-
-            chartGrid.RowDefinitions.Add(rowDefinition1);
-            chartGrid.RowDefinitions.Add(rowDefinition2);
-
-            chartFrame.Content = chartGrid;
-
-            MainGrid.Children.Add(chartFrame);
-        }
-
-        private void LoadFinances()
+        private void LoadFinances(List<Finance> monthlyExpenses)
         {
             expenses.Clear();
-            foreach (IGrouping<int, Finance> group in FinanceManager.Finances.FindAll(x => x.IsExpense).GroupBy(x => x.CategoryId))
+            foreach (IGrouping<int, Finance> group in monthlyExpenses.FindAll(x => x.IsExpense).GroupBy(x => x.CategoryId))
             {
                 Finance finance = new Finance
                 {
@@ -192,30 +110,26 @@ namespace Wallet.Views
             }
         }
 
-        private ChartView MakeChart()
+        private DonutChart MakeChart()
         {
-
-            return new ChartView()
+            return new DonutChart
             {
-                Chart = new DonutChart
-                {
-                    Entries = expenses,
-                    BackgroundColor = SKColor.Parse("#303030"),
-                    LabelMode = LabelMode.RightOnly,
-                    LabelTextSize = 30,
-                    IsAnimated = true
-                }
+                Entries = expenses,
+                BackgroundColor = SKColor.Parse(BACKGROUND_COLOR),
+                LabelMode = LabelMode.RightOnly,
+                LabelTextSize = 30,
+                IsAnimated = true
             };
         }
 
         private void AddAutomatizedFinances()
         {
-            List<Finance> automatizedFinances = FinanceManager.Finances.FindAll(x => x.AutomatizedDate != null);
+            List<Finance> automatizedFinances = FinanceManager.Finances.FindAll(x => x.IsAutomatized);
             DateTime today = DateTime.Today;
 
             foreach (Finance finance in automatizedFinances)
             {
-                int monthDifference = (int)(((today.Year - finance.AutomatizedDate?.Year) * 12) + today.Month - finance.AutomatizedDate?.Month);
+                int monthDifference = ((today.Year - finance.Date.Year) * 12) + today.Month - finance.Date.Month;
                 for (int i = 1; i < monthDifference; i++)
                 {
                     Finance newFinance = new Finance
@@ -224,7 +138,7 @@ namespace Wallet.Views
                         Money = finance.Money,
                         CategoryId = finance.CategoryId,
                         IsExpense = finance.IsExpense,
-                        Date = (DateTime)finance.AutomatizedDate?.AddMonths(1)
+                        Date = finance.Date.AddMonths(1)
                     };
                     FinanceManager.Add(finance);
                 }
@@ -233,25 +147,23 @@ namespace Wallet.Views
 
         private void LoadFinanceFrames()
         {
-            ScrollView scrollView = new ScrollView();
-            scrollView.SetValue(Grid.RowProperty, 2);
-
-            StackLayout mainStackLayout = new StackLayout
-            {
-                Margin = new Thickness(20, 10, 20, 20)
-            };
-
             AddAutomatizedFinances();
 
             FinanceManager.Sort();
 
             foreach (Finance finance in FinanceManager.Finances)
             {
+                if (finance.Id == -1)
+                {
+                    continue;
+                }
+
                 Frame financeFrame = new Frame
                 {
                     CornerRadius = 5,
                     HasShadow = true,
-                    Padding = 20
+                    Padding = 20,
+                    WidthRequest = 1000
                 };
 
                 Grid grid = new Grid();
@@ -269,8 +181,7 @@ namespace Wallet.Views
                 {
                     Text = finance.Money.ToString() + " HUF",
                     FontSize = 20,
-                    VerticalOptions = LayoutOptions.Center,
-                    TextColor = finance.IsExpense ? Color.FromHex("#ffffff") : Color.FromHex("#ffffff")
+                    VerticalOptions = LayoutOptions.Center
                 };
 
                 TapGestureRecognizer moneyLabelTap = new TapGestureRecognizer();
@@ -282,7 +193,7 @@ namespace Wallet.Views
 
                 Label dateLabel = new Label()
                 {
-                    Text = finance.Date.ToShortDateString(),
+                    Text = $"{finance.Date.ToShortDateString()}    {(finance.IsAutomatized ? "Regular" : "")}",
                     FontSize = 15,
                     VerticalOptions = LayoutOptions.Center
                 };
@@ -293,52 +204,27 @@ namespace Wallet.Views
                     Text = "✖",
                     FontSize = 20,
                     VerticalOptions = LayoutOptions.Center,
-                    TextColor = Color.FromHex("#d64c22")
+                    TextColor = Color.FromHex(RED)
                 };
 
                 if (finance.IsExpense)
                 {
-                    if (finance.AutomatizedDate != null)
-                    {
-                        financeFrame.BackgroundColor = Color.FromHex("#ed8b2a");
-                        deleteButton.BackgroundColor = Color.FromHex("#ed8b2a");
-                        dateLabel.TextColor = Color.FromHex("#3f3f3f");
-                    }
-                    else
-                    {
-                        financeFrame.BackgroundColor = Color.FromHex("#303030");
-                        deleteButton.BackgroundColor = Color.FromHex("#303030");
-                        dateLabel.TextColor = Color.FromHex("#adadad");
-                    }
+                    financeFrame.BackgroundColor = Color.FromHex(BACKGROUND_COLOR);
+                    deleteButton.BackgroundColor = Color.FromHex(BACKGROUND_COLOR);
+                    moneyLabel.TextColor = Color.FromHex(TEXT_COLOR);
+                    dateLabel.TextColor = Color.FromHex(DATE_COLOR);
                 }
                 else
                 {
-                    if (finance.AutomatizedDate != null)
-                    {
-                        financeFrame.BackgroundColor = Color.FromHex("#2aedb6");
-                        deleteButton.BackgroundColor = Color.FromHex("#2aedb6");
-                        dateLabel.TextColor = Color.FromHex("#3f3f3f");
-                    }
-                    else
-                    {
-                        financeFrame.BackgroundColor = Color.FromHex("#21bc39");
-                        deleteButton.BackgroundColor = Color.FromHex("#21bc39");
-                        dateLabel.TextColor = Color.FromHex("#6b6b6b");
-                    }
+                    financeFrame.BackgroundColor = Color.FromHex(GREEN);
+                    deleteButton.BackgroundColor = Color.FromHex(GREEN);
+                    moneyLabel.TextColor = Color.FromHex(BACKGROUND_COLOR);
+                    dateLabel.TextColor = Color.FromHex(BACKGROUND_COLOR);
                 }
 
-                if (finance.Id == -1)
-                {
-                    deleteButton.Text = "";
-                    financeFrame.BackgroundColor = Color.FromHex("#303030");
-                    deleteButton.BackgroundColor = Color.FromHex("#303030");
-                }
-                else
-                {
-                    financeFrame.BorderColor = Color.FromHex(FinanceCategoryManager.Get(finance.CategoryId).ColorCode);
-                    deleteButton.Clicked += Delete_Clicked;
-                    stackLayout.Children.Add(dateLabel);
-                }
+                financeFrame.BorderColor = Color.FromHex(FinanceCategoryManager.Get(finance.CategoryId).ColorCode);
+                deleteButton.Clicked += Delete_Clicked;
+                stackLayout.Children.Add(dateLabel);
 
                 stackLayout.Children.Add(moneyLabel);
 
@@ -352,13 +238,8 @@ namespace Wallet.Views
                 deleteButton.SetValue(Grid.ColumnProperty, 1);
 
                 financeFrame.Content = grid;
-
-                mainStackLayout.Children.Add(financeFrame);
+                ListItems.Children.Add(financeFrame);
             }
-
-            scrollView.Content = mainStackLayout;
-
-            MainGrid.Children.Add(scrollView);
         }
 
         private ChartEntry CreateChartEntry(Finance finance)
@@ -368,7 +249,7 @@ namespace Wallet.Views
                 Label = FinanceCategoryManager.Get(finance.CategoryId).Name,
                 ValueLabel = finance.Money.ToString(),
                 Color = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode),
-                TextColor = SKColor.Parse("#ffffff"),
+                TextColor = SKColor.Parse(TEXT_COLOR),
                 ValueLabelColor = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode)
             };
         }

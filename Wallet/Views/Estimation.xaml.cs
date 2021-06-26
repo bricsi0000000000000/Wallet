@@ -11,18 +11,20 @@ namespace Wallet.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Estimation : ContentPage
     {
+        private const string BACKGROUND_COLOR = "#ffffff";
+
         List<ChartEntry> after6MonthFinance = new List<ChartEntry>();
         List<ChartEntry> after1YearFinance = new List<ChartEntry>();
         List<ChartEntry> after3YearFinance = new List<ChartEntry>();
 
         private List<string> colorCodes = new List<string>
         {
-            "#80FBFF",
-            "#6CFCF3",
-            "#4EFDE1",
-            "#38FDD4",
-            "#1FFEC5",
-            "#00FFB3"
+            "#4A6572",
+            "#455E6A",
+            "#3B505A",
+            "#34474F",
+            "#29373D",
+            "#232F34"
         };
 
         public Estimation()
@@ -32,7 +34,7 @@ namespace Wallet.Views
 
         protected override void OnAppearing()
         {
-            List<Finance> automatizedFinances = FinanceManager.Finances.FindAll(x => x.AutomatizedDate != null);
+            List<Finance> automatizedFinances = FinanceManager.Finances.FindAll(x => x.IsAutomatized);
 
             // after 6 month
             after6MonthFinance.Clear();
@@ -118,7 +120,7 @@ namespace Wallet.Views
                 LineSize = 8,
                 PointMode = PointMode.Circle,
                 PointSize = 18,
-                BackgroundColor = SKColor.Parse("#303030"),
+                BackgroundColor = SKColor.Parse(BACKGROUND_COLOR),
                 EnableYFadeOutGradient = true,
                 LabelOrientation = Orientation.Horizontal,
                 ValueLabelOrientation = Orientation.Horizontal,

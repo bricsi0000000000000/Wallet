@@ -3,42 +3,77 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.ListFinances"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             BackgroundColor="#3a3a3a">
+             BackgroundColor="#EBEEF0">
     <ContentPage.Content>
         <AbsoluteLayout>
-            <Grid x:Name="MainGrid" WidthRequest="380">
+            <Grid x:Name="MainGrid">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="130"/>
                     <RowDefinition Height="300"/>
-                    <RowDefinition Height="400"/>
+                    <RowDefinition Height="280"/>
                 </Grid.RowDefinitions>
 
-                <Frame BackgroundColor="#303030"
-                        CornerRadius="5"
-                        HasShadow="True"
-                        HeightRequest="300"
-                        HorizontalOptions="CenterAndExpand">
+                <Frame BackgroundColor="#ffffff"
+                       CornerRadius="5"
+                       Margin="10, 10, 10, 2.5"
+                       WidthRequest="1000"
+                       HorizontalOptions="CenterAndExpand">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Label Text="Expenses"
-                                FontSize="25"
-                                VerticalOptions="Center" 
-                                HorizontalOptions="Center"
-                                TextColor="White"
-                                FontAttributes="None"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Balance:"
+                                   FontSize="20"
+                                   TextColor="{StaticResource Primary}"
+                                   />
+                            <Label x:Name="BalanceLabel"
+                                   Text="1000000"
+                                   FontSize="20"
+                                   TextColor="{StaticResource PrimaryBackground}"
+                                   />
+                            <Label Text="HUF"
+                                   FontSize="20"
+                                   TextColor="{StaticResource Primary}"
+                                   />
+                        </StackLayout>
 
-                        <forms:ChartView Grid.Row="1"
-                                            x:Name="ExpensesChart"/>
+
+                        <StackLayout Grid.Row="1"
+                                     Orientation="Horizontal">
+                            <Label Text="Monthly expenses:"
+                                   FontSize="20"
+                                   TextColor="{StaticResource Primary}"
+                                   />
+                            <Label x:Name="MonthlyExpensesLabel"
+                                   Text="1000"
+                                   FontSize="20"
+                                   TextColor="#232F34"
+                                   />
+                            <Label Text="HUF"
+                                   FontSize="20"
+                                   TextColor="{StaticResource Primary}"
+                                   />
+                        </StackLayout>
                     </Grid>
                 </Frame>
 
-                <ScrollView  Grid.Row="1">
-                    <StackLayout Margin="20"
-                                x:Name="ListItems"
-                               >
+                <Frame Grid.Row="1"
+                       BackgroundColor="#ffffff"
+                       CornerRadius="5"
+                       Margin="10, 2.5, 10, 2.5"
+                       WidthRequest="1000"
+                       HorizontalOptions="CenterAndExpand">
+                    <forms:ChartView Grid.Row="1"
+                                     x:Name="ExpensesChart"/>
+                </Frame>
+
+                <ScrollView Grid.Row="2">
+                    <StackLayout Margin="10, 2.5, 10, 0"
+                                 x:Name="ListItems"
+                                 >
                         <Frame BackgroundColor="#303030"
                             CornerRadius="5"
                             HasShadow="True"
@@ -304,11 +339,12 @@
             </Grid>
 
             <Button Text="+"
-                CornerRadius="50"
-                FontSize="40"
-                AbsoluteLayout.LayoutFlags="PositionProportional"  
-                AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
-                Clicked="Add_Clicked"/>
+                    CornerRadius="50"
+                    FontSize="40"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"  
+                    AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
+                    BackgroundColor="{StaticResource Secondary}"
+                    Clicked="Add_Clicked"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

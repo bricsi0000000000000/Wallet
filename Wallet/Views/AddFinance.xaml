@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.AddFinance"
-             BackgroundColor="#3a3a3a">
+             BackgroundColor="#EBEEF0">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -13,131 +13,90 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
-            <Frame BackgroundColor="#303030"
+            <Frame x:Name="MoneyFrame"
+                   BackgroundColor="#ffffff"
                    CornerRadius="5"
                    HasShadow="True"
                    Margin="20, 20, 20, 5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".4*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Text="Money"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="White"/>
-
-                    <Entry Grid.Column="1"
-                           x:Name="MoneyInput"
-                           Keyboard="Numeric"
-                           TextColor="White"
-                           />
-                </Grid>
+                <Entry Grid.Column="1"
+                       x:Name="MoneyInput"
+                       Keyboard="Numeric"
+                       BackgroundColor="#ffffff"
+                       TextColor="{StaticResource Primary}"
+                       Placeholder="Money"
+                       PlaceholderColor="#a5a5a5"
+                       />
             </Frame>
 
             <Frame Grid.Row="1"
-                   BackgroundColor="#303030"
+                   x:Name="CategoryPickerFrame"
+                   BackgroundColor="#ffffff"
                    CornerRadius="5"
                    HasShadow="True"
                    Margin="20,5,20,5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".4*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <Label Text="Category"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="White"/>
-
-                    <Picker Grid.Column="1"
-                            Title="Category"
-                            x:Name="CategoryPicker"
-                            SelectedIndexChanged="Picker_SelectedIndexChanged"
-                            >
-                        <Picker.Items>
-                            <x:String>Entertainment</x:String>
-                            <x:String>Work</x:String>
-                        </Picker.Items>
-                    </Picker>
-                </Grid>
+                <Picker Grid.Column="1"
+                        Title="Category"
+                        x:Name="CategoryPicker"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged"
+                        />
             </Frame>
 
             <Frame Grid.Row="2"
-                   BackgroundColor="#303030"
+                   x:Name="FinanceTypeFrame"
+                   BackgroundColor="#ffffff"
                    CornerRadius="5"
                    HasShadow="True"
                    Margin="20, 5, 20, 5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Text="Income"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="White"/>
-
-                    <CheckBox Grid.Column="1"
-                              x:Name="IsIncomeCheckBox"
-                              HorizontalOptions="StartAndExpand"
-                              CheckedChanged="CheckBox_CheckedChanged"/>
-                </Grid>
+                <Picker Grid.Column="1"
+                        Title="Finance type"
+                        x:Name="FinanceTypePicker"
+                        SelectedIndexChanged="FinanceTypePicker_SelectedIndexChanged"
+                        TextColor="{StaticResource Primary}"
+                        >
+                    <Picker.Items>
+                        <x:String>Expense</x:String>
+                        <x:String>Income</x:String>
+                    </Picker.Items>
+                </Picker>
             </Frame>
 
             <Frame Grid.Row="3"
-                   BackgroundColor="#303030"
+                   x:Name="DatePickerFrame"
+                   BackgroundColor="#ffffff"
                    CornerRadius="5"
                    HasShadow="True"
                    Margin="20, 5, 20, 5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".4*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Text="Date"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="White"/>
-
-                    <DatePicker Grid.Column="1"
-                                x:Name="SelectDate"
-                                DateSelected="DatePicker_DateSelected"/>
-                </Grid>
+               
+                <DatePicker Grid.Column="1"
+                            x:Name="SelectDate"
+                            DateSelected="DatePicker_DateSelected"/>
             </Frame>
 
             <Frame Grid.Row="4"
-                   BackgroundColor="#303030"
+                   BackgroundColor="#ffffff"
                    CornerRadius="5"
                    HasShadow="True"
                    Margin="20, 5, 20, 5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".4*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Text="Automatized date"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="White"/>
-
-                    <DatePicker Grid.Column="1"
-                                x:Name="AutomatizedDatePicker"
-                                DateSelected="AutomatizedDatePicker_DateSelected"/>
-                </Grid>
+                
+                <Picker Grid.Column="1"
+                        Title="How often"
+                        x:Name="IsAutomatizedPicker"
+                        SelectedIndexChanged="IsAutomatizedPicker_SelectedIndexChanged"
+                        >
+                    <Picker.Items>
+                        <x:String>Regular</x:String>
+                        <x:String>One time</x:String>
+                    </Picker.Items>
+                </Picker>
             </Frame>
 
             <Button Grid.Row="6"
                     Text="Save"
+                    BackgroundColor="{StaticResource Secondary}"
                     FontSize="20"
                     Margin="60,0,60,0"
                     Clicked="SaveButton_Clicked"/>

@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.Estimation"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             BackgroundColor="#3a3a3a">
+             BackgroundColor="#EBEEF0">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Frame BackgroundColor="#303030"
+                <Frame BackgroundColor="#ffffff"
                        CornerRadius="5"
                        HasShadow="True"
                        HeightRequest="300"
@@ -23,7 +23,7 @@
                                FontSize="20"
                                VerticalOptions="Center" 
                                HorizontalOptions="Center"
-                               TextColor="White"
+                               TextColor="{StaticResource Primary}"
                                FontAttributes="None"/>
 
                         <forms:ChartView Grid.Row="1"
@@ -32,7 +32,7 @@
                     </Grid>
                 </Frame>
 
-                <Frame BackgroundColor="#303030"
+                <Frame BackgroundColor="#ffffff"
                        CornerRadius="5"
                        HasShadow="True"
                        HeightRequest="300"
@@ -47,7 +47,7 @@
                                FontSize="20"
                                VerticalOptions="Center" 
                                HorizontalOptions="Center"
-                               TextColor="White"
+                               TextColor="{StaticResource Primary}"
                                FontAttributes="None"/>
 
                         <forms:ChartView Grid.Row="1"
@@ -56,7 +56,7 @@
                     </Grid>
                 </Frame>
 
-                <Frame BackgroundColor="#303030"
+                <Frame BackgroundColor="#ffffff"
                        CornerRadius="5"
                        HasShadow="True"
                        HeightRequest="300"
@@ -71,7 +71,7 @@
                                FontSize="20"
                                VerticalOptions="Center" 
                                HorizontalOptions="Center"
-                               TextColor="White"
+                               TextColor="{StaticResource Primary}"
                                FontAttributes="None"/>
 
                         <forms:ChartView Grid.Row="1"

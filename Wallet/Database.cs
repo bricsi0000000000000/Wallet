@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using Wallet.Models;
+using Xamarin.Essentials;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace Wallet
 {
@@ -12,14 +14,13 @@ namespace Wallet
 
         public static void SaveFinances()
         {
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string documentsPath = FileSystem.AppDataDirectory;
             string filePath = Path.Combine(documentsPath, financesFileName);
             using (StreamWriter streamWriter = new StreamWriter(filePath))
             {
                 foreach (Finance finance in FinanceManager.Finances)
                 {
-                    string row = $"{finance.Id};{finance.Money};{finance.CategoryId};{finance.IsExpense};{finance.Date.ToShortDateString()};";
-                    row += finance.AutomatizedDate == null ? "null" : finance.AutomatizedDate?.ToShortDateString();
+                    string row = $"{finance.Id};{finance.Money};{finance.CategoryId};{finance.IsExpense};{finance.Date.ToShortDateString()};{finance.IsAutomatized}";
                     streamWriter.WriteLine(row);
                 }
             }
@@ -41,7 +42,7 @@ namespace Wallet
 
         public static void LoadFinances()
         {
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string documentsPath = FileSystem.AppDataDirectory;
             string filePath = Path.Combine(documentsPath, financesFileName);
 
             using (StreamReader streamReader = new StreamReader(filePath))
@@ -58,29 +59,20 @@ namespace Wallet
                             Money = int.Parse(data[1]),
                             CategoryId = int.Parse(data[2]),
                             IsExpense = data[3].Equals("True"),
-                            Date = DateTime.Parse(data[4])
+                            Date = DateTime.Parse(data[4]),
+                            IsAutomatized = bool.Parse(data[5])
                         };
-
-                        DateTime.TryParse(data[5], out DateTime automatizedDate);
-                        if (automatizedDate == default)
-                        {
-                            finance.AutomatizedDate = null;
-                        }
-                        else
-                        {
-                            finance.AutomatizedDate = automatizedDate;
-                        }
 
                         FinanceManager.Add(finance);
                     }
                 }
             }
-
             FinanceManager.FinanceId = FinanceManager.Finances.Last().Id + 1;
         }
 
         public static void LoadCategories()
         {
+            FinanceCategoryManager.Categories.Clear();
             string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string filePath = Path.Combine(documentsPath, categoriesFileName);
 
@@ -101,6 +93,7 @@ namespace Wallet
                     }
                 }
             }
+            FinanceCategoryManager.CategoryId = FinanceCategoryManager.Categories.Last().Id + 1;
         }
     }
 }

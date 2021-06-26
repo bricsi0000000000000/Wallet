@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet.Views.AddCategory"
+             xmlns:xfsegmentedcontrol="clr-namespace:Udara.Plugin.XFColorPickerControl;assembly=Udara.Plugin.XFColorPickerControl"
+             BackgroundColor="#EBEEF0">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="110"/>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+
+            <Frame x:Name="NameFrame"
+                    CornerRadius="5"
+                    HasShadow="True"
+                    Margin="20, 20, 20, 5">
+                <Entry Grid.Column="1"
+                        x:Name="NameInput"
+                        BackgroundColor="#ffffff"
+                        TextColor="{StaticResource Primary}"
+                        Placeholder="Name"
+                        PlaceholderColor="#a5a5a5"
+                        />
+            </Frame>
+
+            <Frame Grid.Row="1"
+                   x:Name="ColorPickerFrame"
+                    BackgroundColor="#ffffff"
+                    CornerRadius="5"
+                    HasShadow="True"
+                    Margin="20,5,20,5">
+                <xfsegmentedcontrol:ColorPicker x:Name="ColorPicker"
+	                                            ColorFlowDirection="Horizontal"
+	                                            ColorSpectrumStyle="TintToHueToShadeStyle"
+	                                            PickedColorChanged="ColorPicker_PickedColorChanged"
+	                                            PointerRingBorderUnits="0.4"
+	                                            PointerRingDiameterUnits="0.7"
+	                                            PointerRingPositionXUnits="0.6"
+	                                            PointerRingPositionYUnits="0.6">
+                    <xfsegmentedcontrol:ColorPicker.BaseColorList>
+                        <x:Array Type="{x:Type x:String}">
+                            <!--  Red  -->
+                            <x:String>#ff0000</x:String>
+                            <!--  Yellow  -->
+                            <x:String>#ffff00</x:String>
+                            <!--  Green (Lime)  -->
+                            <x:String>#00ff00</x:String>
+                            <!--  Aqua  -->
+                            <x:String>#00ffff</x:String>
+                            <!--  Blue  -->
+                            <x:String>#0000ff</x:String>
+                            <!--  Fuchsia  -->
+                            <x:String>#ff00ff</x:String>
+                            <!--  Red  -->
+                            <x:String>#ff0000</x:String>
+                        </x:Array>
+                    </xfsegmentedcontrol:ColorPicker.BaseColorList>
+                </xfsegmentedcontrol:ColorPicker>
+            </Frame>
+
+            <Button Grid.Row="3"
+                    Text="Save"
+                    BackgroundColor="{StaticResource Secondary}"
+                    FontSize="20"
+                    Margin="60,0,60,0"
+                    Clicked="SaveButton_Clicked"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

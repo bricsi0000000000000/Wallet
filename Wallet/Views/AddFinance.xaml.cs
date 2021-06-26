@@ -7,10 +7,12 @@ namespace Wallet.Views
     public partial class AddFinance : ContentPage
     {
         private int id;
-        private bool isExpense = true;
         private FinanceCategory selectedCategory;
         private DateTime selectedDate = DateTime.Now;
-        private DateTime? selectedAutomatizedDate = null;
+
+        private const string RED = "#B00020";
+        private const string GREEN = "#27a555";
+        private const string BACKGROUND = "#EBEEF0";
 
         public AddFinance(int id)
         {
@@ -28,60 +30,59 @@ namespace Wallet.Views
             if (id == -1)
             {
                 SelectDate.Date = selectedDate;
+                FinanceTypePicker.SelectedIndex = 0;
+                IsAutomatizedPicker.SelectedIndex = 1;
             }
             else
             {
                 Finance finance = FinanceManager.Get(id);
                 MoneyInput.Text = finance.Money.ToString();
                 CategoryPicker.SelectedIndex = finance.CategoryId - 1;
-                IsIncomeCheckBox.IsChecked = !finance.IsExpense;
+                FinanceTypePicker.SelectedIndex = finance.IsExpense ? 0 : 1;
                 SelectDate.Date = finance.Date;
-                AutomatizedDatePicker.Date = finance.AutomatizedDate == null ? DateTime.Now : (DateTime)finance.AutomatizedDate;
+                IsAutomatizedPicker.SelectedIndex = finance.IsAutomatized ? 0 : 1;
             }
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            if (selectedCategory != null && selectedDate != null)
+            MoneyFrame.BorderColor = string.IsNullOrEmpty(MoneyInput.Text) ? Color.FromHex(RED) : Color.FromHex(BACKGROUND);
+            CategoryPickerFrame.BorderColor = selectedCategory == null ? Color.FromHex(RED) : Color.FromHex(BACKGROUND);
+            DatePickerFrame.BorderColor = selectedDate == null ? Color.FromHex(RED) : Color.FromHex(BACKGROUND);
+
+            if (!string.IsNullOrEmpty(MoneyInput.Text) && selectedCategory != null && selectedDate != null)
             {
-                if (id == -1)
+                Finance finance = new Finance();
+                if (id != -1)
                 {
-                    Finance finance = new Finance();
-
-                    finance.Id = FinanceManager.FinanceId++;
-                    finance.Money = int.Parse(MoneyInput.Text);
-                    finance.CategoryId = selectedCategory.Id;
-                    finance.IsExpense = isExpense;
-                    finance.Date = selectedAutomatizedDate == null ? selectedDate : (DateTime)selectedAutomatizedDate;
-                    finance.AutomatizedDate = selectedAutomatizedDate;
-
-                    FinanceManager.Add(finance);
+                    finance = FinanceManager.Get(id);
                 }
                 else
                 {
-                    Finance finance = FinanceManager.Get(id);
-
                     finance.Id = FinanceManager.FinanceId++;
-                    finance.Money = int.Parse(MoneyInput.Text);
-                    finance.CategoryId = selectedCategory.Id;
-                    finance.IsExpense = isExpense;
-                    finance.Date = selectedAutomatizedDate == null ? selectedDate : (DateTime)selectedAutomatizedDate;
-                    finance.AutomatizedDate = selectedAutomatizedDate;
+                }
+
+                finance.Money = int.Parse(MoneyInput.Text);
+                finance.CategoryId = selectedCategory.Id;
+                finance.IsExpense = FinanceTypePicker.SelectedIndex == 0;
+                finance.Date = selectedDate;
+                finance.IsAutomatized = IsAutomatizedPicker.SelectedIndex == 0;
+
+                if (id == -1)
+                {
+                    FinanceManager.Add(finance);
                 }
 
                 Database.SaveFinances();
+
                 await Navigation.PopToRootAsync();
             }
-        }
-
-        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            isExpense = !e.Value;
         }
 
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedCategory = FinanceCategoryManager.Categories[((Picker)sender).SelectedIndex];
+            CategoryPickerFrame.BorderColor = Color.FromHex(BACKGROUND);
         }
 
         private void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
@@ -89,9 +90,14 @@ namespace Wallet.Views
             selectedDate = e.NewDate;
         }
 
-        private void AutomatizedDatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        private void FinanceTypePicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedAutomatizedDate = e.NewDate;
+            FinanceTypeFrame.BackgroundColor = FinanceTypePicker.SelectedIndex == 0 ? Color.FromHex("#ffffff") : Color.FromHex(GREEN);
+        }
+
+        private void IsAutomatizedPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

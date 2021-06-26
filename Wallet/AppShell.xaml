@@ -4,7 +4,7 @@
        xmlns:local="clr-namespace:Wallet.Views"
        Title="Wallet"
        x:Class="Wallet.AppShell"
-       FlyoutBackgroundColor="#3a3a3a">
+       FlyoutBackgroundColor="{StaticResource Primary}">
 
     <Shell.Resources>
         <ResourceDictionary>
@@ -14,7 +14,7 @@
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="White" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
@@ -31,13 +31,14 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#3a3a3a" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
                                     <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#303030" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Secondary}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -50,7 +51,7 @@
     
     <Shell.FlyoutHeaderTemplate FlyoutHeaderBehavior="CollapseOnScroll">
         <DataTemplate>
-            <Grid BackgroundColor="#2C2C2C"
+            <Grid BackgroundColor="{StaticResource PrimaryBackground}"
                   HeightRequest="100">
                 <Label Text="Wallet"
                        TextColor="White"
@@ -69,5 +70,13 @@
 
     <FlyoutItem Title="Estimation" Icon="chart.png">
         <ShellContent Route="Estimation" ContentTemplate="{DataTemplate local:Estimation}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Categories" Icon="category.png">
+        <ShellContent Route="ListCategories" ContentTemplate="{DataTemplate local:ListCategories}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="History" Icon="history.png">
+        <ShellContent Route="History" ContentTemplate="{DataTemplate local:History}" />
     </FlyoutItem>
 </Shell>

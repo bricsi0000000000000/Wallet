@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace Wallet
 {
@@ -13,6 +14,7 @@ namespace Wallet
 
         protected override void OnStart()
         {
+          
         }
 
         protected override void OnSleep()
