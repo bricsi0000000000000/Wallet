@@ -2,6 +2,7 @@
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Wallet.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -30,11 +31,26 @@ namespace Wallet.Views
         public Estimation()
         {
             InitializeComponent();
+
+            List<Finance> monthlyExpenses = FinanceManager.Finances.FindAll(x => x.Date.Month == DateTime.Today.Month && x.Type == FinanceType.Expense);
+
+            int incomes = FinanceManager.Finances.FindAll(x => x.Type == FinanceType.Income).Sum(x => x.Money);
+            int expenses = FinanceManager.Finances.FindAll(x => x.Type == FinanceType.Expense).Sum(x => x.Money);
+            int deposits = FinanceManager.Finances.FindAll(x => x.Type == FinanceType.Deposit).Sum(x => x.Money);
+            FinanceManager.Balance = FinanceManager.InitialMoney + incomes - expenses - deposits;
+
+            BalanceLabel.Text = FinanceManager.Balance.FormatToNumber();
+            MonthlyExpensesLabel.Text = monthlyExpenses.Sum(x => x.Money).FormatToNumber();
         }
 
         protected override void OnAppearing()
         {
             List<Finance> automatizedFinances = FinanceManager.Finances.FindAll(x => x.IsAutomatized);
+
+            if (!automatizedFinances.Any())
+            {
+                return;
+            }
 
             // after 6 month
             after6MonthFinance.Clear();
@@ -71,13 +87,17 @@ namespace Wallet.Views
             {
                 foreach (Finance finance in automatizedFinances)
                 {
-                    if (finance.IsExpense)
+                    if (finance.Type == FinanceType.Expense)
                     {
                         money -= finance.Money;
                     }
-                    else
+                    else if (finance.Type == FinanceType.Income)
                     {
                         money += finance.Money;
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
 

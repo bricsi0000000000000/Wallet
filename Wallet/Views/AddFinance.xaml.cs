@@ -37,8 +37,9 @@ namespace Wallet.Views
             {
                 Finance finance = FinanceManager.Get(id);
                 MoneyInput.Text = finance.Money.ToString();
+                DescriptionInput.Text = finance.Description;
                 CategoryPicker.SelectedIndex = finance.CategoryId - 1;
-                FinanceTypePicker.SelectedIndex = finance.IsExpense ? 0 : 1;
+                FinanceTypePicker.SelectedIndex = (int)finance.Type;
                 SelectDate.Date = finance.Date;
                 IsAutomatizedPicker.SelectedIndex = finance.IsAutomatized ? 0 : 1;
             }
@@ -63,8 +64,9 @@ namespace Wallet.Views
                 }
 
                 finance.Money = int.Parse(MoneyInput.Text);
+                finance.Description = string.IsNullOrEmpty(DescriptionInput.Text) ? CategoryPicker.SelectedItem.ToString() : DescriptionInput.Text;
                 finance.CategoryId = selectedCategory.Id;
-                finance.IsExpense = FinanceTypePicker.SelectedIndex == 0;
+                finance.Type = (FinanceType)FinanceTypePicker.SelectedIndex;
                 finance.Date = selectedDate;
                 finance.IsAutomatized = IsAutomatizedPicker.SelectedIndex == 0;
 
@@ -77,6 +79,13 @@ namespace Wallet.Views
 
                 await Navigation.PopToRootAsync();
             }
+        }
+
+        private async void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            FinanceManager.Remove(id);
+
+            await Navigation.PopToRootAsync();
         }
 
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)

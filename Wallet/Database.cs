@@ -3,14 +3,24 @@ using System.IO;
 using System.Linq;
 using Wallet.Models;
 using Xamarin.Essentials;
-using Xamarin.Forms.PlatformConfiguration;
 
 namespace Wallet
 {
     public static class Database
     {
-        private static readonly string financesFileName = "text.csv";
+        private static readonly string initialMoneyFileName = "initialMoney.csv";
+        private static readonly string financesFileName = "finances.csv";
         private static readonly string categoriesFileName = "categories.csv";
+
+        public static void SaveInitialMoney()
+        {
+            string documentsPath = FileSystem.AppDataDirectory;
+            string filePath = Path.Combine(documentsPath, initialMoneyFileName);
+            using (StreamWriter streamWriter = new StreamWriter(filePath, append: false))
+            {
+                streamWriter.WriteLine(FinanceManager.InitialMoney);
+            }
+        }
 
         public static void SaveFinances()
         {
@@ -20,7 +30,7 @@ namespace Wallet
             {
                 foreach (Finance finance in FinanceManager.Finances)
                 {
-                    string row = $"{finance.Id};{finance.Money};{finance.CategoryId};{finance.IsExpense};{finance.Date.ToShortDateString()};{finance.IsAutomatized}";
+                    string row = $"{finance.Id};{finance.Money};{finance.Description};{finance.CategoryId};{finance.Type};{finance.Date.ToShortDateString()};{finance.IsAutomatized}";
                     streamWriter.WriteLine(row);
                 }
             }
@@ -37,6 +47,17 @@ namespace Wallet
                     string row = $"{category.Id};{category.Name};{category.ColorCode}";
                     streamWriter.WriteLine(row);
                 }
+            }
+        }
+
+        public static void LoadInitialMoney()
+        {
+            string documentsPath = FileSystem.AppDataDirectory;
+            string filePath = Path.Combine(documentsPath, initialMoneyFileName);
+
+            using (StreamReader streamReader = new StreamReader(filePath))
+            {
+                FinanceManager.InitialMoney = int.Parse(streamReader.ReadToEnd());
             }
         }
 
@@ -57,10 +78,11 @@ namespace Wallet
                         {
                             Id = int.Parse(data[0]),
                             Money = int.Parse(data[1]),
-                            CategoryId = int.Parse(data[2]),
-                            IsExpense = data[3].Equals("True"),
-                            Date = DateTime.Parse(data[4]),
-                            IsAutomatized = bool.Parse(data[5])
+                            Description = data[2],
+                            CategoryId = int.Parse(data[3]),
+                            Type = (FinanceType)Enum.Parse(typeof(FinanceType), data[4]),
+                            Date = DateTime.Parse(data[5]),
+                            IsAutomatized = bool.Parse(data[6])
                         };
 
                         FinanceManager.Add(finance);
@@ -94,6 +116,24 @@ namespace Wallet
                 }
             }
             FinanceCategoryManager.CategoryId = FinanceCategoryManager.Categories.Last().Id + 1;
+        }
+
+        public static void ResetDatabase()
+        {
+            FinanceManager.Finances.Clear();
+            Database.SaveFinances();
+
+            FinanceCategoryManager.Categories.Clear();
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 1, Name = "Grocery", ColorCode = "#fcc335" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 2, Name = "Restaurant", ColorCode = "#18ce88" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 3, Name = "Transport", ColorCode = "#d8d8d8" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 4, Name = "Shopping", ColorCode = "#fc0591" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 5, Name = "Drink", ColorCode = "#35d7fc" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 6, Name = "Scholarship", ColorCode = "#f4c773" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 7, Name = "Salary", ColorCode = "#ddf473" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 8, Name = "Deposit", ColorCode = "#262626" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 9, Name = "Subscriptions", ColorCode = "#9d59f7" });
+            Database.SaveCategories();
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Wallet
     {
         public static int FinanceId = 1;
         public static int Balance = 0;
+        public static int InitialMoney = 0;
 
         public static List<Finance> Finances { get; private set; } = new List<Finance>();
 

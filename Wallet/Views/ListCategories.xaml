@@ -6,11 +6,16 @@
              BackgroundColor="#EBEEF0">
     <ContentPage.Content>
         <AbsoluteLayout>
-            <ScrollView>
-                <StackLayout Margin="10"
-                             x:Name="ListItems"/>
-            </ScrollView>
-           
+            <Grid x:Name="MainGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ScrollView>
+                    <StackLayout Margin="10"
+                                 x:Name="ListItems"/>
+                </ScrollView>
+            </Grid>
+
             <Button Text="+"
                     CornerRadius="50"
                     FontSize="40"

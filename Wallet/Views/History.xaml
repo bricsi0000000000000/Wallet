@@ -1,24 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             x:Class="Wallet.Views.History">
+             x:Class="Wallet.Views.History"
+             BackgroundColor="#EBEEF0">
     <ContentPage.Content>
-        <StackLayout>
-            <Frame BackgroundColor="#303030"
-                   CornerRadius="5"
-                   HasShadow="True"
-                   HeightRequest="300"
-                   HorizontalOptions="CenterAndExpand">
-                <forms:ChartView Grid.Row="1"
-                                 x:Name="LastMonthExpensesChart"/>
-            </Frame>
-            <Frame BackgroundColor="#303030"
-                   CornerRadius="5"
-                   HasShadow="True"
-                   HeightRequest="300"
-                   HorizontalOptions="CenterAndExpand">
-            </Frame>
-        </StackLayout>
+        <Grid>
+            <ScrollView Margin="0,0,0,20">
+                <StackLayout Margin="10, 5, 10, 20"
+                             x:Name="ListItems">
+                </StackLayout>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

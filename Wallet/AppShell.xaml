@@ -64,7 +64,7 @@
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
 
-    <FlyoutItem Title="Home" Icon="home.png">
+    <FlyoutItem Title="List finances" Icon="finance.png">
         <ShellContent Route="ListFinances" ContentTemplate="{DataTemplate local:ListFinances}" />
     </FlyoutItem>
 
@@ -78,5 +78,9 @@
 
     <FlyoutItem Title="History" Icon="history.png">
         <ShellContent Route="History" ContentTemplate="{DataTemplate local:History}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Settings" Icon="settings.png">
+        <ShellContent Route="Settings" ContentTemplate="{DataTemplate local:Settings}" />
     </FlyoutItem>
 </Shell>

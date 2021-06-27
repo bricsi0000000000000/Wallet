@@ -2,15 +2,14 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.App">
-    <!--
-        Define global resources and styles here, that apply to all pages in your app.
-    -->
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#344955</Color>
             <Color x:Key="PrimaryBackground">#232F34</Color>
             <Color x:Key="600">#4A6572</Color>
             <Color x:Key="Secondary">#F9AA33</Color>
+            <Color x:Key="Delete">#B00020</Color>
+            <Color x:Key="White">#ffffff</Color>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">

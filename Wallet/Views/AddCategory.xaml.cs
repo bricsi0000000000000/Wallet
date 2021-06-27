@@ -25,7 +25,7 @@ namespace Wallet.Views
             {
                 FinanceCategory category = FinanceCategoryManager.Get(id);
                 NameInput.Text = category.Name;
-                ColorPickerFrame.BorderColor = Color.FromHex(category.ColorCode);
+                ColorPickerFrame.BackgroundColor = Color.FromHex(category.ColorCode);
             }
         }
 
@@ -33,14 +33,14 @@ namespace Wallet.Views
         {
             if (changeColorCode)
             {
-                ColorPickerFrame.BorderColor = colorPicked;
+                ColorPickerFrame.BackgroundColor = colorPicked;
             }
             changeColorCode = true;
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            NameFrame.BorderColor = string.IsNullOrEmpty(NameInput.Text) ? Color.FromHex(RED) : Color.FromHex(BACKGROUND);
+            NameFrame.BackgroundColor = string.IsNullOrEmpty(NameInput.Text) ? Color.FromHex(RED) : Color.FromHex(BACKGROUND);
 
             if (!string.IsNullOrEmpty(NameInput.Text))
             {
@@ -55,7 +55,7 @@ namespace Wallet.Views
                 }
 
                 category.Name = NameInput.Text;
-                category.ColorCode = ColorPickerFrame.BorderColor.ToHex();
+                category.ColorCode = ColorPickerFrame.BackgroundColor.ToHex();
 
                 if (id == -1)
                 {
@@ -66,6 +66,13 @@ namespace Wallet.Views
 
                 await Navigation.PopAsync();
             }
+        }
+
+        private async void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            FinanceCategoryManager.Remove(id);
+
+            await Navigation.PopToRootAsync();
         }
     }
 }

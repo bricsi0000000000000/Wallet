@@ -63,12 +63,28 @@
                 </xfsegmentedcontrol:ColorPicker>
             </Frame>
 
-            <Button Grid.Row="3"
-                    Text="Save"
-                    BackgroundColor="{StaticResource Secondary}"
-                    FontSize="20"
-                    Margin="60,0,60,0"
-                    Clicked="SaveButton_Clicked"/>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <ImageButton Grid.Column="0"
+                             Source="delete.png"
+                             CornerRadius="5"
+                             BackgroundColor="{StaticResource Delete}"
+                             Margin="30,0,0,0"
+                             Padding="17"
+                             Clicked="DeleteButton_Clicked"/>
+
+                <ImageButton Grid.Column="1"
+                             Source="save.png"
+                             CornerRadius="5"
+                             BackgroundColor="{StaticResource Secondary}"
+                             Margin="0,0,30,0"
+                             Padding="15"
+                             Clicked="SaveButton_Clicked"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
