@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet.Views.History"
+             BackgroundColor="#EBEEF0">
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView Margin="0,0,0,20">
+                <StackLayout Margin="10, 10, 10, 20"
+                             x:Name="ListItems">
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

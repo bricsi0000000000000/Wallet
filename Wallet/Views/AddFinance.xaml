@@ -2,96 +2,137 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.AddFinance"
-             BackgroundColor="#3a3a3a">
+             BackgroundColor="#EBEEF0">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"/>
-                <RowDefinition Height="120"/>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="110"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="90"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
-            <Frame BackgroundColor="#303030"
+            <Frame x:Name="MoneyFrame"
+                   BackgroundColor="#ffffff"
                    CornerRadius="5"
                    HasShadow="True"
-                   Margin="20, 10, 20, 10">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".4*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Text="Money"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="White"/>
-
-                    <Entry Grid.Column="1"
-                           x:Name="MoneyInput"
-                           Keyboard="Numeric"
-                           TextColor="White"
-                           />
-                </Grid>
+                   Margin="20, 20, 20, 5">
+                <Entry Grid.Column="1"
+                       x:Name="MoneyInput"
+                       Keyboard="Numeric"
+                       BackgroundColor="#ffffff"
+                       TextColor="{StaticResource Primary}"
+                       Placeholder="Money"
+                       PlaceholderColor="#a5a5a5"
+                       />
             </Frame>
 
             <Frame Grid.Row="1"
-                   BackgroundColor="#303030"
+                   x:Name="DescriptionFrame"
+                   BackgroundColor="#ffffff"
                    CornerRadius="5"
                    HasShadow="True"
-                   Margin="20,10,20,10">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".4*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Text="Category"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="White"/>
-
-                    <Picker Grid.Column="1"
-                            Title="Category"
-                            x:Name="CategoryPicker"
-                            SelectedIndexChanged="Picker_SelectedIndexChanged"
-                            >
-                        <Picker.Items>
-                            <x:String>Entertainment</x:String>
-                            <x:String>Work</x:String>
-                        </Picker.Items>
-                    </Picker>
-                </Grid>
+                   Margin="20, 0, 20, 5">
+                <Entry Grid.Column="1"
+                       x:Name="DescriptionInput"
+                       BackgroundColor="#ffffff"
+                       TextColor="{StaticResource Primary}"
+                       Placeholder="Description"
+                       PlaceholderColor="#a5a5a5"
+                       />
             </Frame>
 
             <Frame Grid.Row="2"
-                   BackgroundColor="#303030"
+                   x:Name="CategoryPickerFrame"
+                   BackgroundColor="#ffffff"
                    CornerRadius="5"
                    HasShadow="True"
-                   Margin="20, 10, 20, 10">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                   Margin="20,0,20,5">
 
-                    <Label Text="Expense / Income"
-                           FontSize="20"
-                           VerticalOptions="Center"
-                           TextColor="White"/>
-
-                    <CheckBox Grid.Column="1"
-                              CheckedChanged="CheckBox_CheckedChanged"/>
-                </Grid>
+                <Picker Grid.Column="1"
+                        Title="Category"
+                        x:Name="CategoryPicker"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged"
+                        />
             </Frame>
 
-            <Button Grid.Row="4"
-                    Text="Save"
-                    FontSize="20"
-                    Margin="60,0,60,0"
-                    Clicked="Button_Clicked"/>
+            <Frame Grid.Row="3"
+                   x:Name="FinanceTypeFrame"
+                   BackgroundColor="#ffffff"
+                   CornerRadius="5"
+                   HasShadow="True"
+                   Margin="20, 0, 20, 5">
+                <Picker Grid.Column="1"
+                        Title="Finance type"
+                        x:Name="FinanceTypePicker"
+                        SelectedIndexChanged="FinanceTypePicker_SelectedIndexChanged"
+                        TextColor="{StaticResource Primary}"
+                        >
+                    <Picker.Items>
+                        <x:String>Expense</x:String>
+                        <x:String>Income</x:String>
+                        <x:String>Deposit</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Frame>
+
+            <Frame Grid.Row="4"
+                   x:Name="DatePickerFrame"
+                   BackgroundColor="#ffffff"
+                   CornerRadius="5"
+                   HasShadow="True"
+                   Margin="20, 0, 20, 5">
+               
+                <DatePicker Grid.Column="1"
+                            x:Name="SelectDate"
+                            DateSelected="DatePicker_DateSelected"/>
+            </Frame>
+
+            <Frame Grid.Row="5"
+                   BackgroundColor="#ffffff"
+                   CornerRadius="5"
+                   HasShadow="True"
+                   Margin="20, 0, 20, 5">
+                
+                <Picker Grid.Column="1"
+                        Title="How often"
+                        x:Name="IsAutomatizedPicker"
+                        SelectedIndexChanged="IsAutomatizedPicker_SelectedIndexChanged"
+                        >
+                    <Picker.Items>
+                        <x:String>Regular</x:String>
+                        <x:String>One time</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Frame>
+
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <ImageButton Grid.Column="0"
+                             Source="delete.png"
+                             CornerRadius="5"
+                             BackgroundColor="{StaticResource Delete}"
+                             Margin="30,0,0,0"
+                             Padding="17"
+                             Clicked="DeleteButton_Clicked"/>
+
+                <ImageButton Grid.Column="1"
+                             Source="save.png"
+                             CornerRadius="5"
+                             BackgroundColor="{StaticResource Secondary}"
+                             Margin="0,0,30,0"
+                             Padding="15"
+                             Clicked="SaveButton_Clicked"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

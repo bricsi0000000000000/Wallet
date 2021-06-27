@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet.Controls.CategoryCard">
+    <Frame BackgroundColor="#ffffff"
+           CornerRadius="5"
+           HasShadow="True"
+           Padding="0"
+           >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Margin="0"
+                    x:Name="EditButton"
+                    Clicked="EditButton_Clicked"/>
+
+            <Label Grid.Column="1"
+                   x:Name="NameLabel"
+                   Text="Valami hosszú szöveg"
+                   FontSize="20"
+                   Margin="10"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource PrimaryBackground}"
+                   FontAttributes="None"/>
+        </Grid>
+    </Frame>
+</ContentView>

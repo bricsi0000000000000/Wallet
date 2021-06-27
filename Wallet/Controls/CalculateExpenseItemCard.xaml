@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="Wallet.Controls.CalculateExpenseItemCard">
+    <Frame BackgroundColor="#ffffff"
+           CornerRadius="5"
+           HasShadow="True"
+           Margin="10,2.5,10,0"
+           Padding="0,0,0,10"
+           >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <forms:ChartView x:Name="ExpensesChart"
+                             Margin="0,10,0,0"/>
+
+            <StackLayout Grid.Column="1">
+                <Label Text="Income:"
+                       FontSize="16"
+                       Padding="0,10,0,0"
+                       VerticalTextAlignment="Start"
+                       TextColor="{StaticResource Primary}"
+                       FontAttributes="None"/>
+                <Label Text="Expenses:"
+                        FontSize="16"
+                        VerticalTextAlignment="Start"
+                        TextColor="{StaticResource Primary}"
+                        FontAttributes="None"/>
+                <Label Text="Total:"
+                        FontSize="16"
+                        VerticalTextAlignment="Start"
+                        TextColor="{StaticResource Primary}"
+                        FontAttributes="None"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column="2">
+                <Label x:Name="IncomeLabel"
+                       Text="1000000"
+                       FontSize="16"
+                       Padding="0,10,0,0"
+                       VerticalTextAlignment="Start"
+                       FontAttributes="None"/>
+                <Label x:Name="ExpensesLabel"
+                        Text="1000000"
+                        FontSize="16"
+                        VerticalTextAlignment="Start"
+                        FontAttributes="None"/>
+                <Label x:Name="TotalLabel"
+                        Text="1000000"
+                        FontSize="16"
+                        VerticalTextAlignment="Start"
+                        TextColor="{StaticResource PrimaryBackground}"
+                        FontAttributes="None"/>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

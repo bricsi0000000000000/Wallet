@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.OS;
 using AndroidX.AppCompat.App;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace Wallet.Droid
 {
@@ -20,9 +21,6 @@ namespace Wallet.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
      
             LoadApplication(new App());
-
-            App.Current.UserAppTheme = OSAppTheme.Light;
-
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

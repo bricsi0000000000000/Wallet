@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet.Views.ShowMonth"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             BackgroundColor="#EBEEF0">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="400"/>
+            </Grid.RowDefinitions>
+
+            <Frame x:Name="ExpensesChartFrame"
+                   BackgroundColor="#ffffff"
+                   CornerRadius="5"
+                   Margin="10, 10, 10, 2.5"
+                   WidthRequest="1000"
+                   HorizontalOptions="CenterAndExpand">
+                <forms:ChartView x:Name="ExpensesChart"/>
+            </Frame>
+
+            <ScrollView Grid.Row="1"
+                        Padding="0,0,0,80">
+                <StackLayout Margin="10"
+                             x:Name="ListItems"/>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
