@@ -23,7 +23,8 @@
                                      x:Name="ExpensesChart"/>
                 </Frame>
 
-                <ScrollView Grid.Row="1">
+                <ScrollView Grid.Row="1"
+                            Padding="0,0,0,80">
                     <StackLayout Margin="10, 2.5, 10, 0"
                                  x:Name="ListItems"
                                  >
@@ -205,13 +206,13 @@
                 </ScrollView>
             </Grid>
 
-            <Button Text="+"
-                    CornerRadius="50"
-                    FontSize="40"
-                    AbsoluteLayout.LayoutFlags="PositionProportional"  
-                    AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
-                    BackgroundColor="{StaticResource Secondary}"
-                    Clicked="Add_Clicked"/>
+            <ImageButton Source="add.png"
+                         CornerRadius="50"
+                         Padding="25"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"  
+                         AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
+                         BackgroundColor="{StaticResource Secondary}"
+                         Clicked="Add_Clicked"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

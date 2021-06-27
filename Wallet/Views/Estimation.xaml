@@ -9,48 +9,9 @@
             <StackLayout>
                 <Frame BackgroundColor="#ffffff"
                        CornerRadius="5"
-                       Margin="10, 10, 10, 0"
-                       WidthRequest="1000"
-                       HorizontalOptions="CenterAndExpand">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Balance:"
-                                   FontSize="20"
-                                   TextColor="{StaticResource Primary}"
-                                   />
-                            <Label x:Name="BalanceLabel"
-                                   Text="1000000"
-                                   FontSize="20"
-                                   TextColor="{StaticResource PrimaryBackground}"
-                                   />
-                        </StackLayout>
-
-
-                        <StackLayout Grid.Row="1"
-                                     Orientation="Horizontal">
-                            <Label Text="Monthly expenses:"
-                                   FontSize="20"
-                                   TextColor="{StaticResource Primary}"
-                                   />
-                            <Label x:Name="MonthlyExpensesLabel"
-                                   Text="1000"
-                                   FontSize="20"
-                                   TextColor="#232F34"
-                                   />
-                        </StackLayout>
-                    </Grid>
-                </Frame>
-                
-                <Frame BackgroundColor="#ffffff"
-                       CornerRadius="5"
                        HasShadow="True"
-                       HeightRequest="300"
-                       Margin="0"
+                       HeightRequest="200"
+                       Margin="20, 20, 20, 0"
                        HorizontalOptions="CenterAndExpand">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -74,7 +35,7 @@
                 <Frame BackgroundColor="#ffffff"
                        CornerRadius="5"
                        HasShadow="True"
-                       HeightRequest="300"
+                       HeightRequest="200"
                        HorizontalOptions="CenterAndExpand">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -98,7 +59,8 @@
                 <Frame BackgroundColor="#ffffff"
                        CornerRadius="5"
                        HasShadow="True"
-                       HeightRequest="300"
+                       HeightRequest="200"
+                       Margin="0,0,0,20"
                        HorizontalOptions="CenterAndExpand">
                     <Grid>
                         <Grid.RowDefinitions>

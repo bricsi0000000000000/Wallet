@@ -12,7 +12,7 @@
             <Label x:Name="DateLabel"
                    Text="Valami hosszú szöveg"
                    FontSize="20"
-                   Margin="10, 5"
+                   Margin="10, 5, 10, 0"
                    VerticalOptions="Center"
                    TextColor="{StaticResource PrimaryBackground}"
                    FontAttributes="None"/>
@@ -63,6 +63,13 @@
                            FontAttributes="None"/>
                 </StackLayout>
             </Grid>
+
+            <Label x:Name="MostExpensesCategoryLabel"
+                   Text="Restaurant"
+                   FontSize="17"
+                   Margin="10, 0, 0, 0"
+                   VerticalOptions="Center"
+                   FontAttributes="None"/>
         </StackLayout>
     </Frame>
 </ContentView>

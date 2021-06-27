@@ -2,21 +2,18 @@
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Wallet.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Wallet.Views
+namespace Wallet.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Estimation : ContentPage
+    public partial class EstimationChartCard : ContentView
     {
-        private const string BACKGROUND_COLOR = "#ffffff";
+        List<ChartEntry> afterFinance = new List<ChartEntry>();
 
-        List<ChartEntry> after6MonthFinance = new List<ChartEntry>();
-        List<ChartEntry> after1YearFinance = new List<ChartEntry>();
-        List<ChartEntry> after3YearFinance = new List<ChartEntry>();
+        private const string BACKGROUND_COLOR = "#ffffff";
 
         private List<string> colorCodes = new List<string>
         {
@@ -28,46 +25,13 @@ namespace Wallet.Views
             "#232F34"
         };
 
-        public Estimation()
+        public EstimationChartCard(int money, List<Finance> automatizedFinances)
         {
             InitializeComponent();
-        }
 
-        protected override void OnAppearing()
-        {
-            List<Finance> automatizedFinances = FinanceManager.Finances.FindAll(x => x.IsAutomatized);
-
-            if (!automatizedFinances.Any())
-            {
-                return;
-            }
-
-            // after 6 month
-            after6MonthFinance.Clear();
-
-            float money = FinanceManager.Balance;
-
-            after6MonthFinance.Add(CreateChartEntry(money, "Today", colorCodes[0]));
-            MakeEntries(after6MonthFinance, 6, money, automatizedFinances);
-            After6MonthChart.Chart = CreateChart(after6MonthFinance);
-
-            // after 1 year
-            after1YearFinance.Clear();
-
-            money = FinanceManager.Balance;
-
-            after1YearFinance.Add(CreateChartEntry(money, "Today", colorCodes[0]));
-            MakeEntries(after1YearFinance, 12, money, automatizedFinances);
-            After1YearChart.Chart = CreateChart(after1YearFinance);
-
-            // after 3 year
-            after3YearFinance.Clear();
-
-            money = FinanceManager.Balance;
-
-            after3YearFinance.Add(CreateChartEntry(money, "Today", colorCodes[0]));
-            MakeEntries(after3YearFinance, 3 * 12, money, automatizedFinances);
-            After3YearChart.Chart = CreateChart(after3YearFinance);
+            afterFinance.Add(CreateChartEntry(money, "Today", colorCodes[0]));
+            MakeEntries(afterFinance, 12, money, automatizedFinances);
+            Chart.Chart = CreateChart(afterFinance);
         }
 
         private void MakeEntries(List<ChartEntry> finances, int monthes, float money, List<Finance> automatizedFinances)

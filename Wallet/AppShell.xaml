@@ -72,14 +72,18 @@
         <ShellContent Route="Estimation" ContentTemplate="{DataTemplate local:Estimation}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Categories" Icon="category.png">
-        <ShellContent Route="ListCategories" ContentTemplate="{DataTemplate local:ListCategories}" />
-    </FlyoutItem>
-
     <FlyoutItem Title="History" Icon="history.png">
         <ShellContent Route="History" ContentTemplate="{DataTemplate local:History}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Calculate" Icon="calculate.png">
+        <ShellContent Route="Calculator" ContentTemplate="{DataTemplate local:Calculator}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Categories" Icon="category.png">
+        <ShellContent Route="ListCategories" ContentTemplate="{DataTemplate local:ListCategories}" />
+    </FlyoutItem>
+    
     <FlyoutItem Title="Settings" Icon="settings.png">
         <ShellContent Route="Settings" ContentTemplate="{DataTemplate local:Settings}" />
     </FlyoutItem>

@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.ListCategories"
-             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              BackgroundColor="#EBEEF0">
     <ContentPage.Content>
         <AbsoluteLayout>
@@ -16,13 +15,14 @@
                 </ScrollView>
             </Grid>
 
-            <Button Text="+"
-                    CornerRadius="50"
-                    FontSize="40"
-                    AbsoluteLayout.LayoutFlags="PositionProportional"  
-                    AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
-                    BackgroundColor="{StaticResource Secondary}"
-                    Clicked="Add_Clicked"/>
+
+            <ImageButton Source="add.png"
+                         CornerRadius="50"
+                         Padding="25"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"  
+                         AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
+                         BackgroundColor="{StaticResource Secondary}"
+                         Clicked="Add_Clicked"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -137,7 +137,7 @@ namespace Wallet.Views
                 BackgroundColor = SKColor.Parse(CARD_BACKGROUND_COLOR),
                 LabelMode = LabelMode.RightOnly,
                 LabelTextSize = 30,
-                IsAnimated = true
+                IsAnimated = false
             };
         }
 

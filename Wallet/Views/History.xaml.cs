@@ -17,6 +17,9 @@ namespace Wallet.Views
             {
                 int incomeMoney = 0;
                 int expenseMoney = 0;
+                int mostSpendingCategoryId = -1;
+                int mostSpendingCategoryMoney = -1;
+
                 foreach (Finance finance in group)
                 {
                     if (finance.Type == FinanceType.Income)
@@ -30,10 +33,15 @@ namespace Wallet.Views
                     if (finance.Type == FinanceType.Expense)
                     {
                         expenseMoney += finance.Money;
+                        if (finance.Money > mostSpendingCategoryMoney)
+                        {
+                            mostSpendingCategoryMoney = finance.Money;
+                            mostSpendingCategoryId = finance.CategoryId;
+                        }
                     }
                 }
 
-                ListItems.Children.Add(new HistoryItemCard(incomeMoney, expenseMoney, new System.DateTime(group.Key.Year, group.Key.Month, 1)));
+                ListItems.Children.Add(new HistoryItemCard(incomeMoney, expenseMoney, new System.DateTime(group.Key.Year, group.Key.Month, 1), FinanceCategoryManager.Get(mostSpendingCategoryId), mostSpendingCategoryMoney));
             }
         }
     }

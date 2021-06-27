@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 namespace Wallet.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HistoryItemCard : ContentView
+    public partial class CalculateExpenseItemCard : ContentView
     {
         List<ChartEntry> expenses = new List<ChartEntry>();
 
@@ -17,7 +17,7 @@ namespace Wallet.Controls
         private const string RED = "#B00020";
         private const string GREEN = "#27a555";
 
-        public HistoryItemCard(int income, int expense, DateTime date, FinanceCategory category, int mostExpenseMoney)
+        public CalculateExpenseItemCard(int income, int expense, DateTime date)
         {
             InitializeComponent();
 
@@ -28,10 +28,6 @@ namespace Wallet.Controls
             ExpensesLabel.TextColor = Color.FromHex(RED);
 
             TotalLabel.Text = (income - expense).FormatToNumber();
-            DateLabel.Text = date.ToString("MMM yyyy");
-
-            MostExpensesCategoryLabel.Text = $"{category.Name} {mostExpenseMoney.FormatToNumber()}";
-            MostExpensesCategoryLabel.TextColor = Color.FromHex(category.ColorCode);
 
             expenses.Add(CreateChartEntry(income, false));
             expenses.Add(CreateChartEntry(expense, true));
