@@ -15,7 +15,6 @@ namespace Wallet.Views
     public partial class ListFinances : ContentPage
     {
         List<ChartEntry> expenses = new List<ChartEntry>();
-        private int allExpenses = 0;
 
         private const string CARD_BACKGROUND_COLOR = "#ffffff";
         private const string TEXT_COLOR = "#344955";
@@ -89,8 +88,6 @@ namespace Wallet.Views
 
         private void LoadUI()
         {
-            allExpenses = 0;
-
             ListItems.Children.Clear();
 
             int incomes = FinanceManager.Finances.FindAll(x => x.Type == FinanceType.Income).Sum(x => x.Money);
@@ -124,7 +121,6 @@ namespace Wallet.Views
                     finance.Money += item.Money;
                 }
 
-                allExpenses += finance.Money;
                 expenses.Add(CreateChartEntry(finance));
             }
         }

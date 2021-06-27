@@ -76,10 +76,6 @@
         <ShellContent Route="History" ContentTemplate="{DataTemplate local:History}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Calculate" Icon="calculate.png">
-        <ShellContent Route="Calculator" ContentTemplate="{DataTemplate local:Calculator}" />
-    </FlyoutItem>
-
     <FlyoutItem Title="Categories" Icon="category.png">
         <ShellContent Route="ListCategories" ContentTemplate="{DataTemplate local:ListCategories}" />
     </FlyoutItem>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Wallet.Controls;
 using Wallet.Models;
 using Xamarin.Forms;
@@ -12,6 +13,11 @@ namespace Wallet.Views
         public History()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            ListItems.Children.Clear();
 
             foreach (IGrouping<(int Year, int Month), Finance> group in FinanceManager.Finances.GroupBy(x => (x.Date.Year, x.Date.Month)))
             {
@@ -19,9 +25,11 @@ namespace Wallet.Views
                 int expenseMoney = 0;
                 int mostSpendingCategoryId = -1;
                 int mostSpendingCategoryMoney = -1;
+                List<Finance> finances = new List<Finance>();
 
                 foreach (Finance finance in group)
                 {
+                    finances.Add(finance);
                     if (finance.Type == FinanceType.Income)
                     {
                         incomeMoney += finance.Money;
@@ -41,7 +49,7 @@ namespace Wallet.Views
                     }
                 }
 
-                ListItems.Children.Add(new HistoryItemCard(incomeMoney, expenseMoney, new System.DateTime(group.Key.Year, group.Key.Month, 1), FinanceCategoryManager.Get(mostSpendingCategoryId), mostSpendingCategoryMoney));
+                ListItems.Children.Add(new HistoryItemCard(incomeMoney, expenseMoney, new System.DateTime(group.Key.Year, group.Key.Month, 1), FinanceCategoryManager.Get(mostSpendingCategoryId), mostSpendingCategoryMoney, finances));
             }
         }
     }

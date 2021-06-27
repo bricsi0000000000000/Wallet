@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <Grid>
             <ScrollView Margin="0,0,0,20">
-                <StackLayout Margin="10, 5, 10, 20"
+                <StackLayout Margin="10, 10, 10, 20"
                              x:Name="ListItems">
                 </StackLayout>
             </ScrollView>

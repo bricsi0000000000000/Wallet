@@ -85,6 +85,8 @@ namespace Wallet.Views
         {
             FinanceManager.Remove(id);
 
+            Database.SaveFinances();
+
             await Navigation.PopToRootAsync();
         }
 

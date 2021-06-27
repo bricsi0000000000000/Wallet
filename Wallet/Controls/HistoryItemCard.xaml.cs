@@ -3,6 +3,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using Wallet.Models;
+using Wallet.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,7 +18,7 @@ namespace Wallet.Controls
         private const string RED = "#B00020";
         private const string GREEN = "#27a555";
 
-        public HistoryItemCard(int income, int expense, DateTime date, FinanceCategory category, int mostExpenseMoney)
+        public HistoryItemCard(int income, int expense, DateTime date, FinanceCategory category, int mostExpenseMoney, List<Finance> finances)
         {
             InitializeComponent();
 
@@ -37,6 +38,13 @@ namespace Wallet.Controls
             expenses.Add(CreateChartEntry(expense, true));
 
             ExpensesChart.Chart = MakeChart();
+
+            TapGestureRecognizer tap = new TapGestureRecognizer();
+            tap.Tapped += (s, e) =>
+            {
+                Navigation.PushAsync(new ShowMonth(finances));
+            };
+            ExpensesChart.GestureRecognizers.Add(tap);
         }
 
         private DonutChart MakeChart()

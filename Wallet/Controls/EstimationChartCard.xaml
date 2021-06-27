@@ -5,6 +5,7 @@
              x:Class="Wallet.Controls.EstimationChartCard">
     <Frame BackgroundColor="#ffffff"
            CornerRadius="5"
+           Padding="20,0"
            HasShadow="True"
            HeightRequest="200"
            HorizontalOptions="CenterAndExpand">
@@ -14,7 +15,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Text="After 1 year"
+            <Label x:Name="AfterTimeLabel"
                    FontSize="20"
                    VerticalOptions="Center" 
                    HorizontalOptions="Center"

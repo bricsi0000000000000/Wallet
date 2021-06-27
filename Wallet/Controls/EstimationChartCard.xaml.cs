@@ -25,13 +25,26 @@ namespace Wallet.Controls
             "#232F34"
         };
 
-        public EstimationChartCard(int money, List<Finance> automatizedFinances)
+        public EstimationChartCard(int money, int monthes, List<Finance> automatizedFinances)
         {
             InitializeComponent();
 
             afterFinance.Add(CreateChartEntry(money, "Today", colorCodes[0]));
-            MakeEntries(afterFinance, 12, money, automatizedFinances);
+            MakeEntries(afterFinance, monthes, money, automatizedFinances);
             Chart.Chart = CreateChart(afterFinance);
+
+            if (monthes < 12)
+            {
+                AfterTimeLabel.Text = $"After {monthes} monthes";
+            }
+            else if (monthes == 12)
+            {
+                AfterTimeLabel.Text = $"After {monthes / 12} year";
+            }
+            else
+            {
+                AfterTimeLabel.Text = $"After {monthes / 12} years";
+            }
         }
 
         private void MakeEntries(List<ChartEntry> finances, int monthes, float money, List<Finance> automatizedFinances)
@@ -98,7 +111,8 @@ namespace Wallet.Controls
                 EnableYFadeOutGradient = true,
                 LabelOrientation = Orientation.Horizontal,
                 ValueLabelOrientation = Orientation.Horizontal,
-                LabelTextSize = 30
+                LabelTextSize = 30,
+                IsAnimated = false
             };
         }
 
