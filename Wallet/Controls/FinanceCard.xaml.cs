@@ -10,6 +10,9 @@ namespace Wallet.Controls
     {
         int id;
 
+        private const string RED = "#B00020";
+        private const string GREEN = "#27a555";
+
         public FinanceCard(Finance finance)
         {
             InitializeComponent();
@@ -18,8 +21,7 @@ namespace Wallet.Controls
 
             DescriptionLabel.Text = finance.Description;
             RegularityLabel.Text = finance.IsAutomatized ? "Regular" : "One time";
-            DateLabel.Text = finance.Date.ToString("MMM dd, yyyy");
-            MoneyLabel.Text = finance.Money.ToString("C0", System.Globalization.CultureInfo.GetCultureInfo("hu-HU"));
+            MoneyLabel.Text = $"{(finance.Type == FinanceType.Expense || finance.Type == FinanceType.Deposit ? "-" : "")}{finance.Money.FormatToMoney()}";
             EditButton.BackgroundColor = Color.FromHex(FinanceCategoryManager.Get(finance.CategoryId).ColorCode);
         }
 

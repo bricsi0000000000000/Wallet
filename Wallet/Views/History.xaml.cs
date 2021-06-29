@@ -49,7 +49,7 @@ namespace Wallet.Views
                     }
                 }
 
-                ListItems.Children.Add(new HistoryItemCard(incomeMoney, expenseMoney, new System.DateTime(group.Key.Year, group.Key.Month, 1), FinanceCategoryManager.Get(mostSpendingCategoryId), mostSpendingCategoryMoney, finances));
+                ListItems.Children.Add(new HistoryItemCard(incomeMoney, expenseMoney, new System.DateTime(group.Key.Year, group.Key.Month, 1), FinanceCategoryManager.Get(mostSpendingCategoryId), finances));
             }
         }
     }

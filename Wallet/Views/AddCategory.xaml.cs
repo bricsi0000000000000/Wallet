@@ -21,6 +21,9 @@ namespace Wallet.Views
 
             this.id = id;
 
+            BothButtonsGrid.IsVisible = id != -1;
+            OneButtonGrid.IsVisible = id == -1;
+
             if (id != -1)
             {
                 FinanceCategory category = FinanceCategoryManager.Get(id);
@@ -71,6 +74,8 @@ namespace Wallet.Views
         private async void DeleteButton_Clicked(object sender, EventArgs e)
         {
             FinanceCategoryManager.Remove(id);
+
+            Database.SaveCategories();
 
             await Navigation.PopToRootAsync();
         }

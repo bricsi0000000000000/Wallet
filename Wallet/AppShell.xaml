@@ -76,6 +76,10 @@
         <ShellContent Route="History" ContentTemplate="{DataTemplate local:History}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Budget Goal" Icon="goal.png">
+        <ShellContent Route="BudgetGoal" ContentTemplate="{DataTemplate local:BudgetGoal}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Categories" Icon="category.png">
         <ShellContent Route="ListCategories" ContentTemplate="{DataTemplate local:ListCategories}" />
     </FlyoutItem>

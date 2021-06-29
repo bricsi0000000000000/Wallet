@@ -13,21 +13,25 @@ namespace Wallet.Controls
     {
         List<ChartEntry> expenses = new List<ChartEntry>();
 
-        private const string CARD_BACKGROUND_COLOR = "#ffffff";
-        private const string RED = "#B00020";
-        private const string GREEN = "#27a555";
+        private readonly Color cardBackgroundColor;
+        private readonly Color expenseColor;
+        private readonly Color incomeColor;
 
         public CalculateExpenseItemCard(int income, int expense, DateTime date)
         {
             InitializeComponent();
 
-            IncomeLabel.Text = income.FormatToNumber();
-            IncomeLabel.TextColor = Color.FromHex(GREEN);
+            cardBackgroundColor = (Color)Application.Current.Resources["White"];
+            incomeColor = (Color)Application.Current.Resources["Income"];
+            expenseColor = (Color)Application.Current.Resources["Expense"];
 
-            ExpensesLabel.Text = expense.FormatToNumber();
-            ExpensesLabel.TextColor = Color.FromHex(RED);
+            IncomeLabel.Text = income.FormatToMoney();
+            IncomeLabel.TextColor = incomeColor;
 
-            TotalLabel.Text = (income - expense).FormatToNumber();
+            ExpensesLabel.Text = expense.FormatToMoney();
+            ExpensesLabel.TextColor = expenseColor;
+
+            TotalLabel.Text = (income - expense).FormatToMoney();
 
             expenses.Add(CreateChartEntry(income, false));
             expenses.Add(CreateChartEntry(expense, true));
@@ -40,7 +44,7 @@ namespace Wallet.Controls
             return new DonutChart
             {
                 Entries = expenses,
-                BackgroundColor = SKColor.Parse(CARD_BACKGROUND_COLOR),
+                BackgroundColor = SKColor.Parse(cardBackgroundColor.ToHex()),
                 LabelTextSize = 30,
                 IsAnimated = true
             };
@@ -50,7 +54,7 @@ namespace Wallet.Controls
         {
             return new ChartEntry(money)
             {
-                Color = isExpense ? SKColor.Parse(RED) : SKColor.Parse(GREEN)
+                Color = isExpense ? SKColor.Parse(expenseColor.ToHex()) : SKColor.Parse(incomeColor.ToHex())
             };
         }
     }

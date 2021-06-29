@@ -3,20 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.ListFinances"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             BackgroundColor="#EBEEF0">
+             >
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="{StaticResource Gradient2}"
+                          Offset="0.3" />
+            <GradientStop Color="{StaticResource White}"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
     <ContentPage.Content>
         <AbsoluteLayout>
             <Grid x:Name="MainGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="300"/>
-                    <RowDefinition Height="400"/>
+                    <RowDefinition Height="430"/>
                 </Grid.RowDefinitions>
 
                 <Frame Grid.Row="0"
                        x:Name="ExpensesChartFrame"
-                       BackgroundColor="#ffffff"
-                       CornerRadius="5"
-                       Margin="10, 10, 10, 2.5"
+                       CornerRadius="25"
+                       Margin="10, 10, 10, 0"
                        WidthRequest="1000"
                        HorizontalOptions="CenterAndExpand">
                     <forms:ChartView Grid.Row="1"
@@ -24,12 +32,12 @@
                 </Frame>
 
                 <ScrollView Grid.Row="1"
-                            Padding="0,0,0,80">
+                            Padding="0">
                     <StackLayout Margin="10, 2.5, 10, 0"
                                  x:Name="ListItems"
                                  >
                         <Frame BackgroundColor="#ffffff"
-                               CornerRadius="5"
+                               CornerRadius="10"
                                HasShadow="True"
                                Padding="0"
                                >
@@ -87,7 +95,7 @@
                             </Grid>
                         </Frame>
                         <Frame BackgroundColor="#ffffff"
-                               CornerRadius="5"
+                               CornerRadius="10"
                                HasShadow="True"
                                Padding="0"
                                >
@@ -145,7 +153,7 @@
                             </Grid>
                         </Frame>
                         <Frame BackgroundColor="#ffffff"
-                               CornerRadius="5"
+                               CornerRadius="10"
                                HasShadow="True"
                                Padding="0"
                                >

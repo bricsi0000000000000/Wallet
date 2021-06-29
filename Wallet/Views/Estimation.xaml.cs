@@ -1,6 +1,4 @@
-﻿using Microcharts;
-using SkiaSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Wallet.Controls;
@@ -13,9 +11,6 @@ namespace Wallet.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Estimation : ContentPage
     {
-        private const string RED = "#B00020";
-        private const string BACKGROUND = "#ffffff";
-
         public Estimation()
         {
             InitializeComponent();
@@ -46,6 +41,17 @@ namespace Wallet.Views
                     Type = FinanceType.Expense
                 };
                 automatizedFinances.Add(expenseFinance);
+            }
+
+            if (!string.IsNullOrEmpty(IncomeInput.Text))
+            {
+                Finance incomeFinance = new Finance
+                {
+                    Money = int.Parse(IncomeInput.Text),
+                    Date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 10),
+                    Type = FinanceType.Income
+                };
+                automatizedFinances.Add(incomeFinance);
             }
 
             int income = 0;

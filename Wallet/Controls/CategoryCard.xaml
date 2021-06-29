@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Controls.CategoryCard">
     <Frame BackgroundColor="#ffffff"
-           CornerRadius="5"
+           CornerRadius="10"
            HasShadow="True"
            Padding="0"
+           Margin="5,0,5,0"
            >
         <Grid>
             <Grid.ColumnDefinitions>
@@ -21,7 +22,7 @@
                    x:Name="NameLabel"
                    Text="Valami hosszú szöveg"
                    FontSize="20"
-                   Margin="10"
+                   Margin="10,15"
                    VerticalOptions="Center"
                    TextColor="{StaticResource PrimaryBackground}"
                    FontAttributes="None"/>

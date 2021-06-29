@@ -4,7 +4,7 @@
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="Wallet.Controls.HistoryItemCard">
     <Frame BackgroundColor="#ffffff"
-           CornerRadius="5"
+           CornerRadius="10"
            HasShadow="True"
            Padding="0,0,0,10"
            Margin="5,2.5,5,2.5"

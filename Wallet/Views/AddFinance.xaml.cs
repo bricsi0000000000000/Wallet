@@ -19,13 +19,19 @@ namespace Wallet.Views
             InitializeComponent();
 
             this.id = id;
+        }
 
+        protected override void OnAppearing()
+        {
             CategoryPicker.Items.Clear();
 
             foreach (FinanceCategory category in FinanceCategoryManager.Categories)
             {
                 CategoryPicker.Items.Add(category.Name);
             }
+
+            BothButtonsGrid.IsVisible = id != -1;
+            OneButtonGrid.IsVisible = id == -1;
 
             if (id == -1)
             {
@@ -109,6 +115,11 @@ namespace Wallet.Views
         private void IsAutomatizedPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private async void AddNewCategory_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddCategory(-1));
         }
     }
 }
