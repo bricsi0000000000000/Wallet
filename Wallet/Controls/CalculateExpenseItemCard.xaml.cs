@@ -17,7 +17,7 @@ namespace Wallet.Controls
         private readonly Color expenseColor;
         private readonly Color incomeColor;
 
-        public CalculateExpenseItemCard(int income, int expense, DateTime date)
+        public CalculateExpenseItemCard(int income, int expense)
         {
             InitializeComponent();
 

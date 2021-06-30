@@ -14,7 +14,7 @@ namespace Wallet.Views
         private const string GREEN = "#27a555";
         private const string BACKGROUND = "#EBEEF0";
 
-        public AddFinance(int id)
+        public AddFinance(int id = -1)
         {
             InitializeComponent();
 
@@ -119,7 +119,7 @@ namespace Wallet.Views
 
         private async void AddNewCategory_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddCategory(-1));
+            await Navigation.PushAsync(new AddCategory());
         }
     }
 }

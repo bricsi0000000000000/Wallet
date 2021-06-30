@@ -13,5 +13,10 @@ namespace Wallet
         {
             return date.ToString("MMM dd, yyyy");
         }
+
+        public static string FormatToMonth(this DateTime date)
+        {
+            return date.ToString("MMM");
+        }
     }
 }

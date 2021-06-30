@@ -17,10 +17,10 @@ namespace Wallet.Views
         List<ChartEntry> expenses = new List<ChartEntry>();
         DateTime date;
 
-        private const string CARD_BACKGROUND_COLOR = "#ffffff";
-        private const string TEXT_COLOR = "#344955";
-        private const string RED = "#B00020";
-        private const string GREEN = "#27a555";
+        private readonly Color cardBackgroundColor;
+        private readonly Color textColor;
+        private readonly Color expenseColor;
+        private readonly Color incomeColor;
 
         public ShowMonth(List<Finance> finances, DateTime date)
         {
@@ -28,6 +28,11 @@ namespace Wallet.Views
 
             this.finances = finances;
             this.date = date;
+
+            cardBackgroundColor = (Color)Application.Current.Resources["White"];
+            textColor = (Color)Application.Current.Resources["Primary"];
+            incomeColor = (Color)Application.Current.Resources["Income"];
+            expenseColor = (Color)Application.Current.Resources["Expense"];
         }
 
         protected override void OnAppearing()
@@ -37,7 +42,10 @@ namespace Wallet.Views
 
         private void LoadUI()
         {
-            expenses.Clear();
+            ChartLabels.Children.Clear();
+
+            List<Finance> allFinances = new List<Finance>();
+
             foreach (IGrouping<int, Finance> group in finances.FindAll(x => x.Type == FinanceType.Expense).GroupBy(x => x.CategoryId))
             {
                 Finance finance = new Finance
@@ -50,7 +58,23 @@ namespace Wallet.Views
                     finance.Money += item.Money;
                 }
 
+                allFinances.Add(finance);
+            }
+
+            Sort(allFinances);
+
+            expenses.Clear();
+
+            foreach (Finance finance in allFinances)
+            {
                 expenses.Add(CreateChartEntry(finance));
+            }
+
+            Sort(allFinances, descending: true);
+
+            foreach (Finance finance in allFinances)
+            {
+                ChartLabels.Children.Add(new ChartValue(finance));
             }
 
             ExpensesChart.Chart = MakeChart();
@@ -66,7 +90,7 @@ namespace Wallet.Views
                 Label dateLabel = new Label
                 {
                     Text = group.First().Date.FormatToDate(),
-                    TextColor = Color.FromHex(TEXT_COLOR),
+                    TextColor = textColor,
                     FontSize = 15,
                     Margin = new Thickness(20, 0, 20, 0)
                 };
@@ -87,7 +111,7 @@ namespace Wallet.Views
                 Label moneyLabel = new Label
                 {
                     Text = money.FormatToMoney(),
-                    TextColor = Color.FromHex(money < 0 ? RED : GREEN),
+                    TextColor = money < 0 ? expenseColor : incomeColor,
                     FontSize = 15,
                     HorizontalTextAlignment = TextAlignment.End,
                     Margin = new Thickness(0, 0, 20, 0)
@@ -122,15 +146,43 @@ namespace Wallet.Views
             ListItems.Children.Add(emptyFrame);
         }
 
-        private DonutChart MakeChart()
+        private void Sort(List<Finance> finances, bool descending = false)
         {
-            return new DonutChart
+            for (int j = 0; j < finances.Count - 1; j++)
+            {
+                for (int i = 0; i < finances.Count - 1; i++)
+                {
+                    if (descending)
+                    {
+                        if (finances[i].Money < finances[i + 1].Money)
+                        {
+                            Finance temp = finances[i + 1];
+                            finances[i + 1] = finances[i];
+                            finances[i] = temp;
+                        }
+                    }
+                    else
+                    {
+                        if (finances[i].Money > finances[i + 1].Money)
+                        {
+                            Finance temp = finances[i + 1];
+                            finances[i + 1] = finances[i];
+                            finances[i] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        private RadialGaugeChart MakeChart()
+        {
+            return new RadialGaugeChart
             {
                 Entries = expenses,
-                BackgroundColor = SKColor.Parse(CARD_BACKGROUND_COLOR),
-                LabelMode = LabelMode.RightOnly,
+                BackgroundColor = SKColor.Parse(cardBackgroundColor.ToHex()),
                 LabelTextSize = 30,
-                IsAnimated = false
+                IsAnimated = false,
+                AnimationDuration = new TimeSpan()
             };
         }
 
@@ -141,8 +193,10 @@ namespace Wallet.Views
                 Label = FinanceCategoryManager.Get(finance.CategoryId).Name,
                 ValueLabel = finance.Money.ToString(),
                 Color = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode),
-                TextColor = SKColor.Parse(TEXT_COLOR),
-                ValueLabelColor = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode)
+                //TextColor = SKColor.Parse(textColor.ToHex()),
+                TextColor = SKColor.Parse(cardBackgroundColor.ToHex()),
+                //ValueLabelColor = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode)
+                ValueLabelColor = SKColor.Parse(cardBackgroundColor.ToHex())
             };
         }
     }

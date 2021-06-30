@@ -20,13 +20,27 @@
                         Clicked="EditButton_Clicked"/>
 
                 <StackLayout Grid.Column="1">
-                    <Label x:Name="CategoryNameLabel"
-                       Text="Kategória neve"
-                       FontSize="20"
-                       Margin="10,10,0,0"
-                       VerticalOptions="Center"
-                       TextColor="{StaticResource PrimaryBackground}"
-                       FontAttributes="None"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="CategoryNameLabel"
+                               Text="title"
+                               FontSize="20"
+                               Margin="10,10,0,0"
+                               VerticalOptions="Center"
+                               TextColor="{StaticResource Primary}"/>
+
+                        <Label Grid.Column="1"
+                               Text=""
+                               x:Name="OverMoneyLabel"
+                               FontSize="16"
+                               HorizontalTextAlignment="End"
+                               Margin="0,10,20,0"
+                               TextColor="{StaticResource Expense}"/>
+                    </Grid>
 
                     <ProgressBar x:Name="Progress"
                                  Margin="10,0,20,0"/>
@@ -39,20 +53,19 @@
 
 
                         <Label Text="0 Ft"
-                           x:Name="CurrentMoneyLabel"
-                           FontSize="16"
-                           HorizontalTextAlignment="Start"
-                           Margin="10,0,0,5"
-                           TextColor="{StaticResource Primary}"
-                           FontAttributes="None"/>
+                               x:Name="SpentMoneyLabel"
+                               FontSize="16"
+                               HorizontalTextAlignment="Start"
+                               Margin="10,0,0,5"
+                               TextColor="{StaticResource Primary}"/>
+                        
                         <Label Grid.Column="1"
-                           Text="1 000 Ft"
-                           x:Name="MaxMoneyLabel"
-                           FontSize="16"
-                           HorizontalTextAlignment="End"
-                           Margin="0,0,20,0"
-                           TextColor="{StaticResource Primary}"
-                           FontAttributes="None"/>
+                               Text="1 000 Ft"
+                               x:Name="MaxMoneyLabel"
+                               FontSize="16"
+                               HorizontalTextAlignment="End"
+                               Margin="0,0,20,0"
+                               TextColor="{StaticResource Primary}"/>
                     </Grid>
                 </StackLayout>
             </Grid>

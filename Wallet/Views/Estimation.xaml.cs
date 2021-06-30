@@ -56,7 +56,7 @@ namespace Wallet.Views
 
             int income = 0;
             int expense = 0;
-            foreach (var item in automatizedFinances)
+            foreach (Finance item in automatizedFinances)
             {
                 if (item.Type == FinanceType.Income)
                 {
@@ -68,7 +68,7 @@ namespace Wallet.Views
                 }
             }
 
-            ListItems.Children.Add(new CalculateExpenseItemCard(income, expense, DateTime.Today));
+            ListItems.Children.Add(new CalculateExpenseItemCard(income, expense));
 
             ListItems.Children.Add(new EstimationChartCard(FinanceManager.Balance, 6, automatizedFinances));
             ListItems.Children.Add(new EstimationChartCard(FinanceManager.Balance, 12, automatizedFinances));

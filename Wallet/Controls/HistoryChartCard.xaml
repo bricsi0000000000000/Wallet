@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="Wallet.Controls.HistoryChartCard">
+    <Frame BackgroundColor="{StaticResource White}"
+           CornerRadius="10"
+           Padding="10,20,10,10"
+           Margin="15,15,15,5"
+           HasShadow="True"
+           HorizontalOptions="CenterAndExpand">
+
+        <forms:ChartView Grid.Row="1"
+                         WidthRequest="1000"
+                         HeightRequest="150"
+                         x:Name="Chart"/>
+    </Frame>
+</ContentView>

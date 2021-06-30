@@ -33,19 +33,19 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="category_primary.png"
+                        <Image Source="wallet.png"
                                Margin="7"/>
 
-                        <Entry x:Name="InitialMoneyInput"
-                           BackgroundColor="#ffffff"
-                           TextColor="{StaticResource Primary}"
-                           Placeholder="Initial money"
-                           Keyboard="Numeric"
-                           PlaceholderColor="#a5a5a5"
-                           />
+                        <Entry Grid.Column="1"
+                               x:Name="InitialMoneyInput"
+                               BackgroundColor="#ffffff"
+                               TextColor="{StaticResource Primary}"
+                               Placeholder="Initial money"
+                               Keyboard="Numeric"
+                               PlaceholderColor="#a5a5a5"
+                               />
                     </Grid>
                 </Frame>
 
@@ -58,8 +58,9 @@
                         Clicked="ResetDatabaseButton_Clicked"/>
             </Grid>
 
-            <ImageButton Source="save.png"
+            <ImageButton Source="save_white.png"
                          CornerRadius="50"
+                         Margin="3"
                          Padding="25"
                          AbsoluteLayout.LayoutFlags="PositionProportional"  
                          AbsoluteLayout.LayoutBounds=".95,.95,80,80" 

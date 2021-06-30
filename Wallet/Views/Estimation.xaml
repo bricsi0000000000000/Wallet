@@ -87,7 +87,8 @@
 
             <ImageButton Source="calculator.png"
                          CornerRadius="50"
-                         Padding="25"
+                         Margin="5"
+                         Padding="20"
                          AbsoluteLayout.LayoutFlags="PositionProportional"  
                          AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
                          BackgroundColor="{StaticResource Secondary}"

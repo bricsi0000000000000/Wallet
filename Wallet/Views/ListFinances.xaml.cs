@@ -3,6 +3,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Wallet.Controls;
 using Wallet.Models;
 using Xamarin.Forms;
@@ -29,62 +30,8 @@ namespace Wallet.Views
             incomeColor = (Color)Application.Current.Resources["Income"];
             expenseColor = (Color)Application.Current.Resources["Expense"];
 
-            LoadFromDatabase();
-        }
-
-        private void LoadFromDatabase()
-        {
-            try
-            {
-                Database.LoadFinances();
-            }
-            catch (Exception e)
-            {
-            }
-
-            try
-            {
-                Database.LoadCategories();
-            }
-            catch (Exception e)
-            {
-            }
-
-            try
-            {
-                Database.LoadInitialMoney();
-            }
-            catch (Exception e)
-            {
-            }
-
-            //LoadDefaults();
-        }
-
-        private void LoadDefaults()
-        {
-            Database.ResetDatabase();
-
-            FinanceManager.Add(new Finance { Id = 1, Description = "Asetto Corsa", Date = new DateTime(2021, 06, 02), Money = 7288, Type = FinanceType.Expense, CategoryId = 4, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 2, Description = "Wamus", Date = new DateTime(2021, 06, 07), Money = 927, Type = FinanceType.Expense, CategoryId = 1, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 3, Description = "Bus", Date = new DateTime(2021, 06, 07), Money = 119, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 4, Description = "Bus", Date = new DateTime(2021, 06, 07), Money = 119, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 5, Description = "Tesco", Date = new DateTime(2021, 06, 07), Money = 209, Type = FinanceType.Expense, CategoryId = 1, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 6, Description = "Spar", Date = new DateTime(2021, 06, 07), Money = 1164, Type = FinanceType.Expense, CategoryId = 2, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 7, Description = "Elixir kv", Date = new DateTime(2021, 06, 07), Money = 935, Type = FinanceType.Expense, CategoryId = 5, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 8, Description = "Spar", Date = new DateTime(2021, 06, 07), Money = 259, Type = FinanceType.Expense, CategoryId = 1, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 9, Description = "Salary", Date = new DateTime(2021, 06, 10), Money = 283921, Type = FinanceType.Income, CategoryId = 7, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 10, Description = "Deposit", Date = new DateTime(2021, 06, 10), Money = 280000, Type = FinanceType.Deposit, CategoryId = 8, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 11, Description = "Scholarship", Date = new DateTime(2021, 06, 10), Money = 20700, Type = FinanceType.Income, CategoryId = 6, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 12, Description = "Bus", Date = new DateTime(2021, 06, 15), Money = 119, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 13, Description = "Bus", Date = new DateTime(2021, 06, 15), Money = 119, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 14, Description = "KFC", Date = new DateTime(2021, 06, 15), Money = 1980, Type = FinanceType.Expense, CategoryId = 2, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 15, Description = "Petis döner", Date = new DateTime(2021, 06, 21), Money = 1690, Type = FinanceType.Expense, CategoryId = 2, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 16, Description = "Üveges sör", Date = new DateTime(2021, 06, 22), Money = 470, Type = FinanceType.Expense, CategoryId = 5, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 17, Description = "Sör", Date = new DateTime(2021, 06, 22), Money = 350, Type = FinanceType.Expense, CategoryId = 5, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 18, Description = "Chopsticks", Date = new DateTime(2021, 06, 23), Money = 589, Type = FinanceType.Expense, CategoryId = 4, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 19, Description = "Spotify", Date = new DateTime(2021, 05, 27), Money = 916, Type = FinanceType.Expense, CategoryId = 9, IsAutomatized = true });
-            Database.SaveFinances();
+            Database.LoadFromDatabase();
+            //Database.SaveBudgetGoals();
         }
 
         protected override void OnAppearing()
@@ -110,11 +57,26 @@ namespace Wallet.Views
             ExpensesChart.Chart = MakeChart();
 
             LoadFinanceFrames();
+            CalculateBudgetGoals();
+        }
+
+        private void CalculateBudgetGoals()
+        {
+            foreach (Budget budget in BudgetGoalManager.BudgetGoals)
+            {
+                int categoryMonthlyMoney = FinanceManager.Finances.FindAll(x => x.CategoryId == budget.CategoryId &&
+                                                                                       x.Date.Year == DateTime.Today.Year &&
+                                                                                       x.Date.Month == DateTime.Today.Month).Sum(x => x.Money);
+                budget.SpentMoney = categoryMonthlyMoney;
+            }
         }
 
         private void LoadFinances(List<Finance> monthlyExpenses)
         {
-            expenses.Clear();
+            ChartLabels.Children.Clear();
+
+            List<Finance> finances = new List<Finance>();
+
             foreach (IGrouping<int, Finance> group in monthlyExpenses.FindAll(x => x.Type == FinanceType.Expense).GroupBy(x => x.CategoryId))
             {
                 Finance finance = new Finance
@@ -127,17 +89,60 @@ namespace Wallet.Views
                     finance.Money += item.Money;
                 }
 
+                finances.Add(finance);
+            }
+
+            Sort(finances);
+
+            expenses.Clear();
+
+            foreach (Finance finance in finances)
+            {
                 expenses.Add(CreateChartEntry(finance));
+            }
+
+            Sort(finances, descending: true);
+
+            foreach (Finance finance in finances)
+            {
+                ChartLabels.Children.Add(new ChartValue(finance));
             }
         }
 
-        private DonutChart MakeChart()
+        private void Sort(List<Finance> finances, bool descending = false)
         {
-            return new DonutChart
+            for (int j = 0; j < finances.Count - 1; j++)
+            {
+                for (int i = 0; i < finances.Count - 1; i++)
+                {
+                    if (descending)
+                    {
+                        if (finances[i].Money < finances[i + 1].Money)
+                        {
+                            Finance temp = finances[i + 1];
+                            finances[i + 1] = finances[i];
+                            finances[i] = temp;
+                        }
+                    }
+                    else
+                    {
+                        if (finances[i].Money > finances[i + 1].Money)
+                        {
+                            Finance temp = finances[i + 1];
+                            finances[i + 1] = finances[i];
+                            finances[i] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        private RadialGaugeChart MakeChart()
+        {
+            return new RadialGaugeChart
             {
                 Entries = expenses,
                 BackgroundColor = SKColor.Parse(cardBackgroundColor.ToHex()),
-                LabelMode = LabelMode.RightOnly,
                 LabelTextSize = 30,
                 IsAnimated = false,
                 AnimationDuration = new TimeSpan()
@@ -253,14 +258,16 @@ namespace Wallet.Views
                 Label = FinanceCategoryManager.Get(finance.CategoryId).Name,
                 ValueLabel = finance.Money.ToString(),
                 Color = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode),
-                TextColor = SKColor.Parse(textColor.ToHex()),
-                ValueLabelColor = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode)
+                //TextColor = SKColor.Parse(textColor.ToHex()),
+                TextColor = SKColor.Parse(cardBackgroundColor.ToHex()),
+                //ValueLabelColor = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode)
+                ValueLabelColor = SKColor.Parse(cardBackgroundColor.ToHex())
             };
         }
 
         private async void Add_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddFinance(-1));
+            await Navigation.PushAsync(new AddFinance());
         }
 
         private void Delete_Clicked(object sender, EventArgs e)

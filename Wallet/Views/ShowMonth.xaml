@@ -22,11 +22,27 @@
 
             <Frame x:Name="ExpensesChartFrame"
                    BackgroundColor="#ffffff"
-                   CornerRadius="25"
+                   CornerRadius="10"
                    Margin="10, 10, 10, 2.5"
                    WidthRequest="1000"
                    HorizontalOptions="CenterAndExpand">
-                <forms:ChartView x:Name="ExpensesChart"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <forms:ChartView x:Name="ExpensesChart"
+                                             WidthRequest="220"/>
+
+                    <ScrollView Grid.Column="1">
+                        <StackLayout WidthRequest="100"
+                                         x:Name="ChartLabels"/>
+                    </ScrollView>
+
+                </Grid>
+
             </Frame>
 
             <ScrollView Grid.Row="1"

@@ -13,21 +13,23 @@ namespace Wallet.Controls
     {
         List<ChartEntry> afterFinance = new List<ChartEntry>();
 
-        private const string BACKGROUND_COLOR = "#ffffff";
+        private readonly Color cardBackgroundColor;
 
         private List<string> colorCodes = new List<string>
         {
-            "#4A6572",
-            "#455E6A",
-            "#3B505A",
-            "#34474F",
-            "#29373D",
-            "#232F34"
+            "#232F34",
+            "#295668",
+            "#2E7A98",
+            "#3292B8",
+            "#35A3CF",
+            "#38BAED"
         };
 
         public EstimationChartCard(int money, int monthes, List<Finance> automatizedFinances)
         {
             InitializeComponent();
+
+            cardBackgroundColor = (Color)Application.Current.Resources["White"];
 
             afterFinance.Add(CreateChartEntry(money, "Today", colorCodes[0]));
             MakeEntries(afterFinance, monthes, money, automatizedFinances);
@@ -107,7 +109,7 @@ namespace Wallet.Controls
                 LineSize = 8,
                 PointMode = PointMode.Circle,
                 PointSize = 18,
-                BackgroundColor = SKColor.Parse(BACKGROUND_COLOR),
+                BackgroundColor = SKColor.Parse(cardBackgroundColor.ToHex()),
                 EnableYFadeOutGradient = true,
                 LabelOrientation = Orientation.Horizontal,
                 ValueLabelOrientation = Orientation.Horizontal,

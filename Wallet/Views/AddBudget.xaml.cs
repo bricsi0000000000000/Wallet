@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using Wallet.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,39 +14,53 @@ namespace Wallet.Views
         int id;
 
         private const string RED = "#B00020";
-        private const string GREEN = "#27a555";
         private const string BACKGROUND = "#EBEEF0";
 
-        public AddBudget(int id)
+        public AddBudget(int id = -1)
         {
             InitializeComponent();
 
             this.id = id;
 
+            BothButtonsGrid.IsVisible = id != -1;
+            OneButtonGrid.IsVisible = id == -1;
+        }
+
+        protected override void OnAppearing()
+        {
             CategoryPicker.Items.Clear();
 
             foreach (FinanceCategory category in FinanceCategoryManager.Categories)
             {
-                CategoryPicker.Items.Add(category.Name);
+                if (BudgetGoalManager.BudgetGoals.Find(x => x.CategoryId == category.Id) == null)
+                {
+                    CategoryPicker.Items.Add(category.Name);
+                }
             }
 
             if (id != -1)
             {
-                Finance finance = FinanceManager.Get(id);
-                CategoryPicker.SelectedIndex = finance.CategoryId - 1;
+                Budget budget = BudgetGoalManager.Get(id);
+                selectedCategory = FinanceCategoryManager.Get(budget.CategoryId);
+                string categoryName = FinanceCategoryManager.Get(budget.CategoryId).Name;
+                CategoryPicker.Items.Add(categoryName);
+
+                CategoryPicker.SelectedIndex = CategoryPicker.Items.Count;
+
+                MaxMoneyInput.Text = budget.MaxMoney.ToString();
             }
         }
 
         private void SelectCategory(object sender, EventArgs e)
         {
-            selectedCategory = FinanceCategoryManager.Categories[((Picker)sender).SelectedIndex];
+            selectedCategory = FinanceCategoryManager.Categories.Find(x => x.Name.Equals(((Picker)sender).SelectedItem));
         }
 
         private async void DeleteButton_Clicked(object sender, EventArgs e)
         {
-            //FinanceManager.Remove(id);
+            BudgetGoalManager.Remove(id);
 
-            //Database.SaveFinances();
+            Database.SaveBudgetGoals();
 
             await Navigation.PopToRootAsync();
         }
@@ -56,8 +72,38 @@ namespace Wallet.Views
 
             if (!string.IsNullOrEmpty(MaxMoneyInput.Text) && selectedCategory != null)
             {
-                await Navigation.PopToRootAsync();
+                Budget budget = new Budget();
+
+                if (id != -1)
+                {
+                    budget = BudgetGoalManager.Get(id);
+                }
+                else
+                {
+                    budget.Id = BudgetGoalManager.BudgetGoalId++;
+                }
+
+                budget.MaxMoney = int.Parse(MaxMoneyInput.Text);
+                budget.CategoryId = selectedCategory.Id;
+
+                budget.SpentMoney = FinanceManager.Finances.FindAll(x => x.CategoryId == selectedCategory.Id &&
+                                                                                x.Date.Year == DateTime.Today.Year &&
+                                                                                x.Date.Month == DateTime.Today.Month).Sum(x => x.Money);
+
+                if (id == -1)
+                {
+                    BudgetGoalManager.Add(budget);
+                }
+
+                Database.SaveBudgetGoals();
+
+                await Navigation.PopAsync();
             }
+        }
+
+        private async void AddNewCategory_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddCategory());
         }
     }
 }

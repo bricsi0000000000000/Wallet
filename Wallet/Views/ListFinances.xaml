@@ -21,14 +21,26 @@
                     <RowDefinition Height="430"/>
                 </Grid.RowDefinitions>
 
-                <Frame Grid.Row="0"
-                       x:Name="ExpensesChartFrame"
-                       CornerRadius="25"
-                       Margin="10, 10, 10, 0"
-                       WidthRequest="1000"
-                       HorizontalOptions="CenterAndExpand">
-                    <forms:ChartView Grid.Row="1"
-                                     x:Name="ExpensesChart"/>
+                <Frame x:Name="ExpensesChartFrame"
+                        CornerRadius="10"
+                        Margin="15,15,15,5"
+                        HorizontalOptions="StartAndExpand">
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    
+                            <forms:ChartView x:Name="ExpensesChart"
+                                             WidthRequest="220"/>
+
+                        <ScrollView Grid.Column="1">
+                            <StackLayout WidthRequest="100"
+                                         x:Name="ChartLabels"/>
+                        </ScrollView>
+
+                    </Grid>
                 </Frame>
 
                 <ScrollView Grid.Row="1"
@@ -216,6 +228,7 @@
 
             <ImageButton Source="add.png"
                          CornerRadius="50"
+                         Margin="5"
                          Padding="25"
                          AbsoluteLayout.LayoutFlags="PositionProportional"  
                          AbsoluteLayout.LayoutBounds=".95,.95,80,80" 

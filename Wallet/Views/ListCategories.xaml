@@ -27,6 +27,7 @@
 
             <ImageButton Source="add.png"
                          CornerRadius="50"
+                         Margin="5"
                          Padding="25"
                          AbsoluteLayout.LayoutFlags="PositionProportional"  
                          AbsoluteLayout.LayoutBounds=".95,.95,80,80" 

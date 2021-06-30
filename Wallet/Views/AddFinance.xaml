@@ -84,12 +84,12 @@
                    BackgroundColor="#ffffff"
                    CornerRadius="10"
                    HasShadow="True"
-                   Margin="20,0,20,5">
+                   Margin="20, 0, 20, 5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
 
                     <Image Source="category_primary.png"
@@ -104,6 +104,7 @@
                     <ImageButton Grid.Column="2"
                                  BackgroundColor="{StaticResource White}"
                                  Source="add_new.png"
+                                 Margin="3"
                                  Clicked="AddNewCategory_Clicked"/>
                 </Grid>
             </Frame>
@@ -247,11 +248,11 @@
                                  Clicked="SaveButton_Clicked">
                         <ImageButton.Background>
                             <LinearGradientBrush StartPoint="0,0"
-                                             EndPoint="1,1">
+                                                 EndPoint="1,1">
                                 <GradientStop Color="{StaticResource White}"
-                              Offset="0.0" />
+                                              Offset="0.0" />
                                 <GradientStop Color="{StaticResource Gradient2}"
-                              Offset="0.7" />
+                                              Offset="0.7" />
                             </LinearGradientBrush>
                         </ImageButton.Background>
                     </ImageButton>
