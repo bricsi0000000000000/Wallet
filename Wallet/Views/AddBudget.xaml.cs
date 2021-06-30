@@ -22,6 +22,8 @@ namespace Wallet.Views
 
             this.id = id;
 
+            TitleLabel.Text = id == -1 ? "Add Budget" : "Edit Budget";
+
             BothButtonsGrid.IsVisible = id != -1;
             OneButtonGrid.IsVisible = id == -1;
         }

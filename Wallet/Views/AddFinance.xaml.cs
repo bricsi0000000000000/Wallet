@@ -19,6 +19,8 @@ namespace Wallet.Views
             InitializeComponent();
 
             this.id = id;
+
+            TitleLabel.Text = id == -1 ? "Add Finance" : "Edit Finance";
         }
 
         protected override void OnAppearing()

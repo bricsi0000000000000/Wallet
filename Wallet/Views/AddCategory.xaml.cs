@@ -23,6 +23,8 @@ namespace Wallet.Views
 
             this.id = id;
 
+            TitleLabel.Text = id == -1 ? "Add Category" : "Edit Category";
+
             BothButtonsGrid.IsVisible = id != -1;
             OneButtonGrid.IsVisible = id == -1;
 

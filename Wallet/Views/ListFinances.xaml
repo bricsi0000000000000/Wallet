@@ -4,6 +4,14 @@
              x:Class="Wallet.Views.ListFinances"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              >
+    <Shell.TitleView>
+        <Label Text="Finances"
+               TextColor="{StaticResource White}"
+               FontSize="20"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Start"
+               />
+    </Shell.TitleView>
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0"
                              EndPoint="1,1">

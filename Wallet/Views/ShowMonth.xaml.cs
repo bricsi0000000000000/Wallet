@@ -29,6 +29,8 @@ namespace Wallet.Views
             this.finances = finances;
             this.date = date;
 
+            TitleLabel.Text = date.FormatToMonthYear();
+
             cardBackgroundColor = (Color)Application.Current.Resources["White"];
             textColor = (Color)Application.Current.Resources["Primary"];
             incomeColor = (Color)Application.Current.Resources["Income"];

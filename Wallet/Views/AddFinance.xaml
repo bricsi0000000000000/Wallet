@@ -1,8 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Wallet.Views.AddFinance"
-             BackgroundColor="#EBEEF0">
+             x:Class="Wallet.Views.AddFinance">
+    <Shell.TitleView>
+        <Label x:Name="TitleLabel"
+               TextColor="{StaticResource White}"
+               FontSize="20"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Start"
+               />
+    </Shell.TitleView>
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0"
                              EndPoint="1,1">
