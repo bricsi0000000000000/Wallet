@@ -3,6 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.Settings"
              BackgroundColor="#EBEEF0">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="{StaticResource Gradient2}"
+                          Offset="0.3" />
+            <GradientStop Color="{StaticResource White}"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
     <ContentPage.Content>
         <AbsoluteLayout>
             <Grid>
@@ -15,30 +24,43 @@
                 </Grid.RowDefinitions>
 
                 <Frame x:Name="InitialMoneyFrame"
-                       CornerRadius="5"
+                       CornerRadius="10"
                        HasShadow="True"
                        WidthRequest="1000"
                        Margin="20, 20, 20, 2.5">
-                    <Entry x:Name="InitialMoneyInput"
-                           BackgroundColor="#ffffff"
-                           TextColor="{StaticResource Primary}"
-                           Placeholder="Initial money"
-                           Keyboard="Numeric"
-                           PlaceholderColor="#a5a5a5"
-                           />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="wallet.png"
+                               Margin="7"/>
+
+                        <Entry Grid.Column="1"
+                               x:Name="InitialMoneyInput"
+                               BackgroundColor="#ffffff"
+                               TextColor="{StaticResource Primary}"
+                               Placeholder="Initial money"
+                               Keyboard="Numeric"
+                               PlaceholderColor="#a5a5a5"
+                               />
+                    </Grid>
                 </Frame>
 
                 <Button Grid.Row="1"
                         Text="Reset database"
-                        CornerRadius="5"
+                        CornerRadius="10"
                         BackgroundColor="{StaticResource Delete}"
                         Margin="20,20,20,0"
                         FontSize="17"
                         Clicked="ResetDatabaseButton_Clicked"/>
             </Grid>
 
-            <ImageButton Source="save.png"
+            <ImageButton Source="save_white.png"
                          CornerRadius="50"
+                         Margin="3"
                          Padding="25"
                          AbsoluteLayout.LayoutFlags="PositionProportional"  
                          AbsoluteLayout.LayoutBounds=".95,.95,80,80" 

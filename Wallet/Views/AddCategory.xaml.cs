@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Wallet.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,11 +17,14 @@ namespace Wallet.Views
 
         private bool changeColorCode = false;
 
-        public AddCategory(int id)
+        public AddCategory(int id = -1)
         {
             InitializeComponent();
 
             this.id = id;
+
+            BothButtonsGrid.IsVisible = id != -1;
+            OneButtonGrid.IsVisible = id == -1;
 
             if (id != -1)
             {
@@ -70,9 +75,31 @@ namespace Wallet.Views
 
         private async void DeleteButton_Clicked(object sender, EventArgs e)
         {
-            FinanceCategoryManager.Remove(id);
+            bool canDeleteCategory = false;
+            List<Finance> finances = FinanceManager.Finances.FindAll(x => x.CategoryId == id);
+            if (finances.Any())
+            {
+                canDeleteCategory = await DisplayAlert("Can't delete category", $"You have {finances.Count} saved finances with this category.\nWould you like to delete all of them?", "Delete all", "Cancel");
+                if (canDeleteCategory)
+                {
+                    foreach (Finance finance in finances)
+                    {
+                        FinanceManager.Remove(finance.Id);
+                    }
+                    Database.SaveFinances();
+                }
+            }
+            else
+            {
+                canDeleteCategory = true;
+            }
 
-            await Navigation.PopToRootAsync();
+            if (canDeleteCategory)
+            {
+                FinanceCategoryManager.Remove(id);
+                Database.SaveCategories();
+                await Navigation.PopToRootAsync();
+            }
         }
     }
 }

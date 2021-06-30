@@ -10,9 +10,6 @@ namespace Wallet.Views
     public partial class ListCategories : ContentPage
     {
         private const string BACKGROUND_COLOR = "#EBEEF0";
-        private const string CARD_BACKGROUND_COLOR = "#ffffff";
-        private const string TEXT_COLOR = "#344955";
-        private const string PRIMARY_DARK = "#232F34";
 
         public ListCategories()
         {
@@ -43,7 +40,7 @@ namespace Wallet.Views
                 HasShadow = false,
                 Padding = 20,
                 HeightRequest = 50,
-                BackgroundColor = Color.FromHex(BACKGROUND_COLOR)
+                Opacity=0
             };
 
             ListItems.Children.Add(emptyFrame);

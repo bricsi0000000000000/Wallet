@@ -1,6 +1,4 @@
-﻿using Microcharts;
-using SkiaSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Wallet.Controls;
@@ -13,9 +11,6 @@ namespace Wallet.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Estimation : ContentPage
     {
-        private const string RED = "#B00020";
-        private const string BACKGROUND = "#ffffff";
-
         public Estimation()
         {
             InitializeComponent();
@@ -48,9 +43,20 @@ namespace Wallet.Views
                 automatizedFinances.Add(expenseFinance);
             }
 
+            if (!string.IsNullOrEmpty(IncomeInput.Text))
+            {
+                Finance incomeFinance = new Finance
+                {
+                    Money = int.Parse(IncomeInput.Text),
+                    Date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 10),
+                    Type = FinanceType.Income
+                };
+                automatizedFinances.Add(incomeFinance);
+            }
+
             int income = 0;
             int expense = 0;
-            foreach (var item in automatizedFinances)
+            foreach (Finance item in automatizedFinances)
             {
                 if (item.Type == FinanceType.Income)
                 {
@@ -62,7 +68,7 @@ namespace Wallet.Views
                 }
             }
 
-            ListItems.Children.Add(new CalculateExpenseItemCard(income, expense, DateTime.Today));
+            ListItems.Children.Add(new CalculateExpenseItemCard(income, expense));
 
             ListItems.Children.Add(new EstimationChartCard(FinanceManager.Balance, 6, automatizedFinances));
             ListItems.Children.Add(new EstimationChartCard(FinanceManager.Balance, 12, automatizedFinances));

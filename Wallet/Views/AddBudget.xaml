@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet.Views.AddBudget">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="1,1">
+            <GradientStop Color="{StaticResource Gradient2}"
+                              Offset="0.3" />
+            <GradientStop Color="{StaticResource White}"
+                              Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="110"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Frame x:Name="CategoryPickerFrame"
+                   BackgroundColor="#ffffff"
+                   CornerRadius="10"
+                   HasShadow="True"
+                   Margin="20,20,20,5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="category_primary.png"
+                           Margin="7"/>
+
+                    <Picker Grid.Column="1"
+                            Title="Category"
+                            x:Name="CategoryPicker"
+                            SelectedIndexChanged="SelectCategory"
+                            />
+
+                    <ImageButton Grid.Column="2"
+                                 BackgroundColor="{StaticResource White}"
+                                 Source="add_new.png"
+                                 Clicked="AddNewCategory_Clicked"/>
+                </Grid>
+            </Frame>
+
+            <Frame Grid.Row="1"
+                   x:Name="MaxMoneyFrame"
+                   BackgroundColor="#ffffff"
+                   CornerRadius="10"
+                   HasShadow="True"
+                   Margin="20, 0, 20, 5">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="goal_primary.png"/>
+
+                    <Entry Grid.Column="1"
+                       x:Name="MaxMoneyInput"
+                       Keyboard="Numeric"
+                       BackgroundColor="#ffffff"
+                       TextColor="{StaticResource Primary}"
+                       Placeholder="Max amount"
+                       PlaceholderColor="#a5a5a5"
+                       />
+                </Grid>
+            </Frame>
+
+            <Grid Grid.Row="3"
+                  x:Name="BothButtonsGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Frame Padding="0"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       Margin="30,0,0,0">
+
+                    <ImageButton Source="delete.png"
+                                 CornerRadius="10"
+                                 BackgroundColor="{StaticResource Delete}"
+                                 Padding="17"
+                                 Clicked="DeleteButton_Clicked"/>
+                </Frame>
+
+                <Frame Grid.Column="1"
+                       Padding="0"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       Margin="0, 0, 30, 0">
+
+                    <ImageButton Grid.Column="1"
+                                 Source="save.png"
+                                 CornerRadius="10"
+                                 BackgroundColor="{StaticResource Secondary}"
+                                 Padding="15"
+                                 Clicked="SaveButton_Clicked">
+                        <ImageButton.Background>
+                            <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="1,1">
+                                <GradientStop Color="{StaticResource White}"
+                              Offset="0.0" />
+                                <GradientStop Color="{StaticResource Gradient2}"
+                              Offset="0.7" />
+                            </LinearGradientBrush>
+                        </ImageButton.Background>
+                    </ImageButton>
+                </Frame>
+            </Grid>
+
+            <Grid Grid.Row="3"
+                  x:Name="OneButtonGrid">
+                <Frame Padding="0"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       Margin="30, 0, 30, 0">
+
+                    <ImageButton Source="save.png"
+                                 CornerRadius="10"
+                                 BackgroundColor="{StaticResource Secondary}"
+                                 Padding="15"
+                                 Clicked="SaveButton_Clicked">
+                        <ImageButton.Background>
+                            <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="1,1">
+                                <GradientStop Color="{StaticResource White}"
+                              Offset="0.0" />
+                                <GradientStop Color="{StaticResource Gradient2}"
+                              Offset="0.7" />
+                            </LinearGradientBrush>
+                        </ImageButton.Background>
+                    </ImageButton>
+                </Frame>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

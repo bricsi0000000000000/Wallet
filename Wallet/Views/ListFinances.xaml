@@ -3,33 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.ListFinances"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             BackgroundColor="#EBEEF0">
+             >
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="{StaticResource Gradient2}"
+                          Offset="0.3" />
+            <GradientStop Color="{StaticResource White}"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
     <ContentPage.Content>
         <AbsoluteLayout>
             <Grid x:Name="MainGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="300"/>
-                    <RowDefinition Height="400"/>
+                    <RowDefinition Height="430"/>
                 </Grid.RowDefinitions>
 
-                <Frame Grid.Row="0"
-                       x:Name="ExpensesChartFrame"
-                       BackgroundColor="#ffffff"
-                       CornerRadius="5"
-                       Margin="10, 10, 10, 2.5"
-                       WidthRequest="1000"
-                       HorizontalOptions="CenterAndExpand">
-                    <forms:ChartView Grid.Row="1"
-                                     x:Name="ExpensesChart"/>
+                <Frame x:Name="ExpensesChartFrame"
+                        CornerRadius="10"
+                        Margin="15,15,15,5"
+                        HorizontalOptions="StartAndExpand">
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    
+                            <forms:ChartView x:Name="ExpensesChart"
+                                             WidthRequest="220"/>
+
+                        <ScrollView Grid.Column="1">
+                            <StackLayout WidthRequest="100"
+                                         x:Name="ChartLabels"/>
+                        </ScrollView>
+
+                    </Grid>
                 </Frame>
 
                 <ScrollView Grid.Row="1"
-                            Padding="0,0,0,80">
+                            Padding="0">
                     <StackLayout Margin="10, 2.5, 10, 0"
                                  x:Name="ListItems"
                                  >
                         <Frame BackgroundColor="#ffffff"
-                               CornerRadius="5"
+                               CornerRadius="10"
                                HasShadow="True"
                                Padding="0"
                                >
@@ -87,7 +107,7 @@
                             </Grid>
                         </Frame>
                         <Frame BackgroundColor="#ffffff"
-                               CornerRadius="5"
+                               CornerRadius="10"
                                HasShadow="True"
                                Padding="0"
                                >
@@ -145,7 +165,7 @@
                             </Grid>
                         </Frame>
                         <Frame BackgroundColor="#ffffff"
-                               CornerRadius="5"
+                               CornerRadius="10"
                                HasShadow="True"
                                Padding="0"
                                >
@@ -208,6 +228,7 @@
 
             <ImageButton Source="add.png"
                          CornerRadius="50"
+                         Margin="5"
                          Padding="25"
                          AbsoluteLayout.LayoutFlags="PositionProportional"  
                          AbsoluteLayout.LayoutBounds=".95,.95,80,80" 

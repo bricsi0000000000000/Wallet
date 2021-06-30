@@ -1,15 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Wallet.Views.History"
-             BackgroundColor="#EBEEF0">
+             xmlns:controls="clr-namespace:Wallet.Controls"
+             x:Class="Wallet.Views.History">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="{StaticResource Gradient2}"
+                          Offset="0.3" />
+            <GradientStop Color="{StaticResource White}"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
     <ContentPage.Content>
-        <Grid>
+        <StackLayout>
+            <controls:HistoryChartCard/>
+        
             <ScrollView Margin="0,0,0,20">
                 <StackLayout Margin="10, 10, 10, 20"
                              x:Name="ListItems">
                 </StackLayout>
             </ScrollView>
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

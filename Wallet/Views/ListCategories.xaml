@@ -3,6 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.ListCategories"
              BackgroundColor="#EBEEF0">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="{StaticResource Gradient2}"
+                          Offset="0.3" />
+            <GradientStop Color="{StaticResource White}"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
     <ContentPage.Content>
         <AbsoluteLayout>
             <Grid x:Name="MainGrid">
@@ -18,6 +27,7 @@
 
             <ImageButton Source="add.png"
                          CornerRadius="50"
+                         Margin="5"
                          Padding="25"
                          AbsoluteLayout.LayoutFlags="PositionProportional"  
                          AbsoluteLayout.LayoutBounds=".95,.95,80,80" 

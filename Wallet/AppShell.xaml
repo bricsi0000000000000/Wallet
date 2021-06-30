@@ -8,6 +8,10 @@
 
     <Shell.Resources>
         <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="FiraCodeRetina">
+                <On Platform="Android" Value="FiraCode-Retina.ttf#FiraCode-Retina" />
+            </OnPlatform>
+            
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
@@ -24,6 +28,7 @@
 
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource FiraCodeRetina}"></Setter>
             </Style>
             <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -31,13 +36,11 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
                                     <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
                                     <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Secondary}" />
                                 </VisualState.Setters>
                             </VisualState>
@@ -51,8 +54,7 @@
     
     <Shell.FlyoutHeaderTemplate FlyoutHeaderBehavior="CollapseOnScroll">
         <DataTemplate>
-            <Grid BackgroundColor="{StaticResource PrimaryBackground}"
-                  HeightRequest="100">
+            <Grid HeightRequest="100">
                 <Label Text="Wallet"
                        TextColor="White"
                        HorizontalTextAlignment="Center"
@@ -63,6 +65,18 @@
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
+
+    <Shell.FlyoutBackground>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="{StaticResource PrimaryBackground}"
+                          Offset="0.1" />
+            <GradientStop Color="{StaticResource 600}"
+                          Offset="0.6" />
+            <GradientStop Color="{StaticResource Gradient2}"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </Shell.FlyoutBackground>
 
     <FlyoutItem Title="List finances" Icon="finance.png">
         <ShellContent Route="ListFinances" ContentTemplate="{DataTemplate local:ListFinances}" />
@@ -76,6 +90,10 @@
         <ShellContent Route="History" ContentTemplate="{DataTemplate local:History}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Budget Goals" Icon="goal.png">
+        <ShellContent Route="ListBudgetGoals" ContentTemplate="{DataTemplate local:ListBudgetGoals}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Categories" Icon="category.png">
         <ShellContent Route="ListCategories" ContentTemplate="{DataTemplate local:ListCategories}" />
     </FlyoutItem>
@@ -83,4 +101,15 @@
     <FlyoutItem Title="Settings" Icon="settings.png">
         <ShellContent Route="Settings" ContentTemplate="{DataTemplate local:Settings}" />
     </FlyoutItem>
+
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout>
+                <Label Text="Xaminals"
+                       TextColor="GhostWhite"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
 </Shell>
