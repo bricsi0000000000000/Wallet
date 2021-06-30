@@ -6,7 +6,12 @@ namespace Wallet
     {
         public static string FormatToMoney(this int money)
         {
-            return money.ToString("C0", System.Globalization.CultureInfo.GetCultureInfo(Settings.AcitveCurrency));
+            return money.ToString("C0", System.Globalization.CultureInfo.GetCultureInfo(SettingsManager.AcitveCurrency.Value));
+        }
+
+        public static string FormatToMoney(this float money)
+        {
+            return money.ToString("C0", System.Globalization.CultureInfo.GetCultureInfo(SettingsManager.AcitveCurrency.Value));
         }
 
         public static string FormatToDate(this DateTime date)

@@ -49,7 +49,7 @@ namespace Wallet.Controls
             }
         }
 
-        private void MakeEntries(List<ChartEntry> finances, int monthes, float money, List<Finance> automatizedFinances)
+        private void MakeEntries(List<ChartEntry> finances, int monthes, int money, List<Finance> automatizedFinances)
         {
             int entriIndex = 0;
             for (int i = 0; i < monthes; i++)
@@ -120,13 +120,22 @@ namespace Wallet.Controls
 
         private ChartEntry CreateChartEntry(float money, string label, string colorCode)
         {
-            money /= 1000000;
-            money = (float)decimal.Round((decimal)money, 2, MidpointRounding.AwayFromZero);
+            string valueLabel;
+            if (SettingsManager.AcitveCurrency.Id == 3)
+            {
+                money /= 1000000;
+                money = (float)decimal.Round((decimal)money, 2, MidpointRounding.AwayFromZero);
+                valueLabel = $"{money} M";
+            }
+            else
+            {
+                valueLabel = money.FormatToMoney();
+            }
 
             return new ChartEntry(money)
             {
                 Label = label,
-                ValueLabel = $"{money} M",
+                ValueLabel = valueLabel,
                 ValueLabelColor = SKColor.Parse(colorCode),
                 Color = SKColor.Parse(colorCode)
             };

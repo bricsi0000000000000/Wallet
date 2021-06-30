@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Wallet.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -13,20 +14,21 @@ namespace Wallet
         {
             InitializeComponent();
 
-            Settings.Currencies = new List<string>();
-            Settings.AddCurrency("en-GB");
-            Settings.AddCurrency("en-US");
-            Settings.AddCurrency("hu-HU");
+            SettingsManager.AddCurrency(new Currency { Id = 0, Name = "$", Value = "en-US" });
+            SettingsManager.AddCurrency(new Currency { Id = 1, Name = "€", Value = "de-DE" });
+            SettingsManager.AddCurrency(new Currency { Id = 2, Name = "£", Value = "en-GB" });
+            SettingsManager.AddCurrency(new Currency { Id = 3, Name = "Ft", Value = "hu-HU" });
+            SettingsManager.AddCurrency(new Currency { Id = 4, Name = "₽", Value = "ru-RU" });
 
-            Settings.AcitveCurrency = "en-US";
+            SettingsManager.AcitveCurrency = SettingsManager.Currencies[0];
 
 
             //Database.ResetDatabase();
-            //Database.LoadDefaults();
+           // Database.LoadDefaults();
             Database.LoadFromDatabase();
             //Database.SaveBudgetGoals();
 
-            if (Settings.FirstTime)
+            if (SettingsManager.FirstTime)
             {
                 Database.ResetDatabase();
             }

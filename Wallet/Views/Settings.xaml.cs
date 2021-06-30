@@ -1,4 +1,5 @@
 ﻿using System;
+using Wallet.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,12 +19,12 @@ namespace Wallet.Views
 
             CurrencyPicker.Items.Clear();
 
-            foreach (string currency in Wallet.Settings.Currencies)
+            foreach (Currency currency in SettingsManager.Currencies)
             {
-                this.CurrencyPicker.Items.Add(currency);
+                this.CurrencyPicker.Items.Add(currency.Name);
             }
 
-            this.CurrencyPicker.SelectedIndex = Wallet.Settings.Currencies.FindIndex(x => x.Equals(Wallet.Settings.AcitveCurrency));
+            this.CurrencyPicker.SelectedIndex = SettingsManager.Currencies.FindIndex(x => x.Id == SettingsManager.AcitveCurrency.Id);
         }
 
         private void SaveButton_Clicked(object sender, EventArgs e)
@@ -47,7 +48,7 @@ namespace Wallet.Views
 
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Wallet.Settings.AcitveCurrency = ((Picker)sender).SelectedItem.ToString();
+            SettingsManager.AcitveCurrency = SettingsManager.Currencies.Find(x => x.Name.Equals(((Picker)sender).SelectedItem.ToString()));
             Database.SaveActiveCurrency();
         }
     }

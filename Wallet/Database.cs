@@ -20,8 +20,8 @@ namespace Wallet
             using (StreamWriter streamWriter = new StreamWriter(filePath, append: false))
             {
                 streamWriter.WriteLine(FinanceManager.InitialMoney);
-                streamWriter.WriteLine(Settings.AcitveCurrency);
-                streamWriter.WriteLine(Settings.FirstTime);
+                streamWriter.WriteLine(SettingsManager.AcitveCurrency.Id);
+                streamWriter.WriteLine(SettingsManager.FirstTime);
             }
         }
 
@@ -86,8 +86,8 @@ namespace Wallet
             {
                 string[] content = streamReader.ReadToEnd().Split('\n');
                 FinanceManager.InitialMoney = int.Parse(content[0]);
-                Settings.AcitveCurrency = content[1];
-                Settings.FirstTime = bool.Parse(content[2]);
+                SettingsManager.AcitveCurrency = SettingsManager.Currencies.Find(x => x.Id == int.Parse(content[1]));
+                SettingsManager.FirstTime = bool.Parse(content[2]);
             }
         }
 
@@ -263,8 +263,9 @@ namespace Wallet
             FinanceManager.Add(new Finance { Id = 19, Description = "Spotify", Date = new DateTime(2021, 05, 27), Money = 916, Type = FinanceType.Expense, CategoryId = 9, IsAutomatized = true });
             SaveFinances();
 
-            Settings.FirstTime = false;
-            Settings.AcitveCurrency = "hu-HU";
+            SettingsManager.FirstTime = false;
+            SettingsManager.AcitveCurrency = SettingsManager.Currencies[3];
+            FinanceManager.InitialMoney = 807938;
             SaveSettings();
         }
     }

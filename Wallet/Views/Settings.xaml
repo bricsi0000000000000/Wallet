@@ -37,7 +37,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Source="wallet.png"
-                               Margin="7"/>
+                               Margin="5"/>
 
                         <Entry Grid.Column="1"
                                x:Name="InitialMoneyInput"
@@ -61,8 +61,8 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="category_primary.png"
-                           Margin="7"/>
+                        <Image Source="currency.png"
+                           Margin="5"/>
 
                         <Picker Grid.Column="1"
                             Title="Currency"
