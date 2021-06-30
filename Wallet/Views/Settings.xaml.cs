@@ -32,9 +32,14 @@ namespace Wallet.Views
             }
         }
 
-        private void ResetDatabaseButton_Clicked(object sender, EventArgs e)
+        private async void ResetDatabaseButton_Clicked(object sender, EventArgs e)
         {
-            Database.ResetDatabase();
+            bool canReset = await DisplayAlert("Attention", $"You are about to delete all saved data. Are you sure about that?", "Yes", "Cancel");
+
+            if (canReset)
+            {
+                Database.ResetDatabase();
+            }
         }
     }
 }
