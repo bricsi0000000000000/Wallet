@@ -49,27 +49,35 @@ namespace Wallet.Views
 
             if (!string.IsNullOrEmpty(NameInput.Text))
             {
-                FinanceCategory category = new FinanceCategory();
-                if (id != -1)
+                string name = NameInput.Text.Trim();
+                if (FinanceCategoryManager.Categories.Find(x => x.Name.Equals(name)) == null)
                 {
-                    category = FinanceCategoryManager.Get(id);
+                    FinanceCategory category = new FinanceCategory();
+                    if (id != -1)
+                    {
+                        category = FinanceCategoryManager.Get(id);
+                    }
+                    else
+                    {
+                        category.Id = FinanceCategoryManager.CategoryId++;
+                    }
+
+                    category.Name = name;
+                    category.ColorCode = ColorPickerFrame.BackgroundColor.ToHex();
+
+                    if (id == -1)
+                    {
+                        FinanceCategoryManager.Add(category);
+                    }
+
+                    Database.SaveCategories();
+
+                    await Navigation.PopAsync();
                 }
                 else
                 {
-                    category.Id = FinanceCategoryManager.CategoryId++;
+                    await DisplayAlert("Can't add category", $"You have already a category added with name {NameInput.Text}", "Ok");
                 }
-
-                category.Name = NameInput.Text;
-                category.ColorCode = ColorPickerFrame.BackgroundColor.ToHex();
-
-                if (id == -1)
-                {
-                    FinanceCategoryManager.Add(category);
-                }
-
-                Database.SaveCategories();
-
-                await Navigation.PopAsync();
             }
         }
 

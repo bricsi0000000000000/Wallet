@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -11,11 +12,24 @@ namespace Wallet
         public AppShell()
         {
             InitializeComponent();
-        }
 
-        private async void OnMenuItemClicked(object sender, EventArgs e)
-        {
-            await Current.GoToAsync("//LoginPage");
+            Settings.Currencies = new List<string>();
+            Settings.AddCurrency("en-GB");
+            Settings.AddCurrency("en-US");
+            Settings.AddCurrency("hu-HU");
+
+            Settings.AcitveCurrency = "en-US";
+
+
+            //Database.ResetDatabase();
+            //Database.LoadDefaults();
+            Database.LoadFromDatabase();
+            //Database.SaveBudgetGoals();
+
+            if (Settings.FirstTime)
+            {
+                Database.ResetDatabase();
+            }
         }
 
         private void Button_Clicked(object sender, EventArgs e)

@@ -10,9 +10,6 @@ namespace Wallet.Controls
     {
         int id;
 
-        private const string RED = "#B00020";
-        private const string GREEN = "#27a555";
-
         public FinanceCard(Finance finance)
         {
             InitializeComponent();

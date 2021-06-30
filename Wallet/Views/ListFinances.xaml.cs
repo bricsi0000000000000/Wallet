@@ -3,7 +3,6 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Wallet.Controls;
 using Wallet.Models;
 using Xamarin.Forms;
@@ -29,9 +28,6 @@ namespace Wallet.Views
             textColor = (Color)Application.Current.Resources["Primary"];
             incomeColor = (Color)Application.Current.Resources["Income"];
             expenseColor = (Color)Application.Current.Resources["Expense"];
-
-            Database.LoadFromDatabase();
-            //Database.SaveBudgetGoals();
         }
 
         protected override void OnAppearing()

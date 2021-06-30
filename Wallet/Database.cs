@@ -8,19 +8,26 @@ namespace Wallet
 {
     public static class Database
     {
-        private static readonly string initialMoneyFileName = "initialMoney.csv";
+        private static readonly string settingsFileName = "settings.csv";
         private static readonly string financesFileName = "finances.csv";
         private static readonly string categoriesFileName = "categories.csv";
         private static readonly string budgetGoalsFileName = "budgetGoals.csv";
 
-        public static void SaveInitialMoney()
+        private static void SaveSettings()
         {
             string documentsPath = FileSystem.AppDataDirectory;
-            string filePath = Path.Combine(documentsPath, initialMoneyFileName);
+            string filePath = Path.Combine(documentsPath, settingsFileName);
             using (StreamWriter streamWriter = new StreamWriter(filePath, append: false))
             {
                 streamWriter.WriteLine(FinanceManager.InitialMoney);
+                streamWriter.WriteLine(Settings.AcitveCurrency);
+                streamWriter.WriteLine(Settings.FirstTime);
             }
+        }
+
+        public static void SaveInitialMoney()
+        {
+            SaveSettings();
         }
 
         public static void SaveFinances()
@@ -65,14 +72,22 @@ namespace Wallet
             }
         }
 
-        public static void LoadInitialMoney()
+        public static void SaveActiveCurrency()
+        {
+            SaveSettings();
+        }
+
+        public static void LoadSettings()
         {
             string documentsPath = FileSystem.AppDataDirectory;
-            string filePath = Path.Combine(documentsPath, initialMoneyFileName);
+            string filePath = Path.Combine(documentsPath, settingsFileName);
 
             using (StreamReader streamReader = new StreamReader(filePath))
             {
-                FinanceManager.InitialMoney = int.Parse(streamReader.ReadToEnd());
+                string[] content = streamReader.ReadToEnd().Split('\n');
+                FinanceManager.InitialMoney = int.Parse(content[0]);
+                Settings.AcitveCurrency = content[1];
+                Settings.FirstTime = bool.Parse(content[2]);
             }
         }
 
@@ -171,11 +186,10 @@ namespace Wallet
             FinanceCategoryManager.Add(new FinanceCategory { Id = 3, Name = "Transport", ColorCode = "#d8d8d8" });
             FinanceCategoryManager.Add(new FinanceCategory { Id = 4, Name = "Shopping", ColorCode = "#fc0591" });
             FinanceCategoryManager.Add(new FinanceCategory { Id = 5, Name = "Drink", ColorCode = "#35d7fc" });
-            FinanceCategoryManager.Add(new FinanceCategory { Id = 6, Name = "Scholarship", ColorCode = "#f4c773" });
-            FinanceCategoryManager.Add(new FinanceCategory { Id = 7, Name = "Salary", ColorCode = "#ddf473" });
-            FinanceCategoryManager.Add(new FinanceCategory { Id = 8, Name = "Deposit", ColorCode = "#262626" });
-            FinanceCategoryManager.Add(new FinanceCategory { Id = 9, Name = "Subscriptions", ColorCode = "#9d59f7" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 6, Name = "Salary", ColorCode = "#ddf473" });
             SaveCategories();
+
+            SaveActiveCurrency();
         }
 
         public static void LoadFromDatabase()
@@ -198,7 +212,7 @@ namespace Wallet
 
             try
             {
-                LoadInitialMoney();
+                LoadSettings();
             }
             catch (Exception e)
             {
@@ -217,7 +231,16 @@ namespace Wallet
 
         public static void LoadDefaults()
         {
-            ResetDatabase();
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 1, Name = "Grocery", ColorCode = "#fcc335" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 2, Name = "Restaurant", ColorCode = "#18ce88" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 3, Name = "Transport", ColorCode = "#d8d8d8" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 4, Name = "Shopping", ColorCode = "#fc0591" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 5, Name = "Drink", ColorCode = "#35d7fc" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 6, Name = "Scholarship", ColorCode = "#f4c773" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 7, Name = "Salary", ColorCode = "#ddf473" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 8, Name = "Deposit", ColorCode = "#262626" });
+            FinanceCategoryManager.Add(new FinanceCategory { Id = 9, Name = "Subscriptions", ColorCode = "#9d59f7" });
+            SaveCategories();
 
             FinanceManager.Add(new Finance { Id = 1, Description = "Asetto Corsa", Date = new DateTime(2021, 06, 02), Money = 7288, Type = FinanceType.Expense, CategoryId = 4, IsAutomatized = false });
             FinanceManager.Add(new Finance { Id = 2, Description = "Wamus", Date = new DateTime(2021, 06, 07), Money = 927, Type = FinanceType.Expense, CategoryId = 1, IsAutomatized = false });
@@ -227,7 +250,7 @@ namespace Wallet
             FinanceManager.Add(new Finance { Id = 6, Description = "Spar", Date = new DateTime(2021, 06, 07), Money = 1164, Type = FinanceType.Expense, CategoryId = 2, IsAutomatized = false });
             FinanceManager.Add(new Finance { Id = 7, Description = "Elixir kv", Date = new DateTime(2021, 06, 07), Money = 935, Type = FinanceType.Expense, CategoryId = 5, IsAutomatized = false });
             FinanceManager.Add(new Finance { Id = 8, Description = "Spar", Date = new DateTime(2021, 06, 07), Money = 259, Type = FinanceType.Expense, CategoryId = 1, IsAutomatized = false });
-            FinanceManager.Add(new Finance { Id = 9, Description = "Salary", Date = new DateTime(2021, 06, 10), Money = 283921, Type = FinanceType.Income, CategoryId = 7, IsAutomatized = false });
+            FinanceManager.Add(new Finance { Id = 9, Description = "Salary", Date = new DateTime(2021, 06, 10), Money = 283921, Type = FinanceType.Income, CategoryId = 7, IsAutomatized = true });
             FinanceManager.Add(new Finance { Id = 10, Description = "Deposit", Date = new DateTime(2021, 06, 10), Money = 280000, Type = FinanceType.Deposit, CategoryId = 8, IsAutomatized = false });
             FinanceManager.Add(new Finance { Id = 11, Description = "Scholarship", Date = new DateTime(2021, 06, 10), Money = 20700, Type = FinanceType.Income, CategoryId = 6, IsAutomatized = false });
             FinanceManager.Add(new Finance { Id = 12, Description = "Bus", Date = new DateTime(2021, 06, 15), Money = 119, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
@@ -239,6 +262,10 @@ namespace Wallet
             FinanceManager.Add(new Finance { Id = 18, Description = "Chopsticks", Date = new DateTime(2021, 06, 23), Money = 589, Type = FinanceType.Expense, CategoryId = 4, IsAutomatized = false });
             FinanceManager.Add(new Finance { Id = 19, Description = "Spotify", Date = new DateTime(2021, 05, 27), Money = 916, Type = FinanceType.Expense, CategoryId = 9, IsAutomatized = true });
             SaveFinances();
+
+            Settings.FirstTime = false;
+            Settings.AcitveCurrency = "hu-HU";
+            SaveSettings();
         }
     }
 }

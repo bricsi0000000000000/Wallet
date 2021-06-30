@@ -1,5 +1,4 @@
 ﻿using System;
-using Wallet.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,9 +7,6 @@ namespace Wallet.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Settings : ContentPage
     {
-        private const string RED = "#B00020";
-        private const string BACKGROUND = "#EBEEF0";
-
         public Settings()
         {
             InitializeComponent();
@@ -19,12 +15,19 @@ namespace Wallet.Views
             {
                 InitialMoneyInput.Text = FinanceManager.InitialMoney.ToString();
             }
+
+            CurrencyPicker.Items.Clear();
+
+            foreach (string currency in Wallet.Settings.Currencies)
+            {
+                this.CurrencyPicker.Items.Add(currency);
+            }
+
+            this.CurrencyPicker.SelectedIndex = Wallet.Settings.Currencies.FindIndex(x => x.Equals(Wallet.Settings.AcitveCurrency));
         }
 
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            InitialMoneyFrame.BorderColor = string.IsNullOrEmpty(InitialMoneyInput.Text) ? Color.FromHex(RED) : Color.FromHex(BACKGROUND);
-
             if (!string.IsNullOrEmpty(InitialMoneyInput.Text))
             {
                 FinanceManager.InitialMoney = int.Parse(InitialMoneyInput.Text);
@@ -40,6 +43,12 @@ namespace Wallet.Views
             {
                 Database.ResetDatabase();
             }
+        }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Wallet.Settings.AcitveCurrency = ((Picker)sender).SelectedItem.ToString();
+            Database.SaveActiveCurrency();
         }
     }
 }

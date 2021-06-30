@@ -17,6 +17,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="110"/>
+                    <RowDefinition Height="100"/>
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="60"/>
@@ -49,7 +50,29 @@
                     </Grid>
                 </Frame>
 
-                <Button Grid.Row="1"
+                <Frame Grid.Row="1"
+                       BackgroundColor="#ffffff"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       Margin="20, 0, 20, 5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="category_primary.png"
+                           Margin="7"/>
+
+                        <Picker Grid.Column="1"
+                            Title="Currency"
+                            x:Name="CurrencyPicker"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged"
+                            />
+                    </Grid>
+                </Frame>
+
+                <Button Grid.Row="2"
                         Text="Reset database"
                         CornerRadius="10"
                         BackgroundColor="{StaticResource Delete}"
