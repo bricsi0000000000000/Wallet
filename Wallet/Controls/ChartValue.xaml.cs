@@ -14,7 +14,9 @@ namespace Wallet.Controls
             FinanceCategory category = FinanceCategoryManager.Get(finance.CategoryId);
 
             CategoryNameLabel.Text = category.Name;
-            MoneyLabel.TextColor = Color.FromHex(category.ColorCode);
+            CategoryNameLabel.TextColor = ColorManager.SecondaryText;
+
+            MoneyLabel.TextColor = category.ColorCode.ToColor();
             MoneyLabel.Text = finance.Money.FormatToMoney();
         }
     }

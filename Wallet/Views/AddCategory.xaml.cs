@@ -10,18 +10,27 @@ namespace Wallet.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddCategory : ContentPage
     {
-        private int id;
-
-        private const string RED = "#B00020";
-        private const string BACKGROUND = "#EBEEF0";
-
-        private bool changeColorCode = false;
+        private readonly int id;
 
         public AddCategory(int id = -1)
         {
             InitializeComponent();
 
             this.id = id;
+
+            NameFrame.BackgroundColor =
+            NameInput.BackgroundColor = ColorManager.Background;
+
+            NameInput.TextColor = ColorManager.Text;
+            NameInput.PlaceholderColor = ColorManager.PlaceholderText;
+
+            ColorPickerFrame.BackgroundColor =
+            ColorPicker.BackgroundColor = ColorManager.Background;
+
+            DeleteImageButton.BackgroundColor = ColorManager.DeleteButton;
+
+            SaveImageButton.BackgroundColor =
+            SaveImageButton1.BackgroundColor = ColorManager.Button;
 
             TitleLabel.Text = id == -1 ? "Add Category" : "Edit Category";
 
@@ -32,54 +41,43 @@ namespace Wallet.Views
             {
                 FinanceCategory category = FinanceCategoryManager.Get(id);
                 NameInput.Text = category.Name;
-                ColorPickerFrame.BackgroundColor = Color.FromHex(category.ColorCode);
+                ColorPicker.SelectedColor = Color.FromHex(category.ColorCode);
             }
-        }
-
-        private void ColorPicker_PickedColorChanged(object sender, Color colorPicked)
-        {
-            if (changeColorCode)
-            {
-                ColorPickerFrame.BackgroundColor = colorPicked;
-            }
-            changeColorCode = true;
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            NameFrame.BackgroundColor = string.IsNullOrEmpty(NameInput.Text) ? Color.FromHex(RED) : Color.FromHex(BACKGROUND);
+            NameFrame.BackgroundColor = ColorManager.IsInputEmpty(string.IsNullOrEmpty(NameInput.Text));
 
             if (!string.IsNullOrEmpty(NameInput.Text))
             {
                 string name = NameInput.Text.Trim();
-                if (FinanceCategoryManager.Categories.Find(x => x.Name.Equals(name)) == null)
+                FinanceCategory category = new FinanceCategory();
+
+                if (id == -1)
                 {
-                    FinanceCategory category = new FinanceCategory();
-                    if (id != -1)
+                    if (FinanceCategoryManager.Categories.Find(x => x.Name.Equals(name)) != null)
                     {
-                        category = FinanceCategoryManager.Get(id);
+                        await DisplayAlert("Can't add category", $"You have already a category added with name {NameInput.Text}", "Ok");
+                        return;
                     }
                     else
                     {
                         category.Id = FinanceCategoryManager.CategoryId++;
-                    }
-
-                    category.Name = name;
-                    category.ColorCode = ColorPickerFrame.BackgroundColor.ToHex();
-
-                    if (id == -1)
-                    {
                         FinanceCategoryManager.Add(category);
                     }
-
-                    Database.SaveCategories();
-
-                    await Navigation.PopAsync();
                 }
                 else
                 {
-                    await DisplayAlert("Can't add category", $"You have already a category added with name {NameInput.Text}", "Ok");
+                    category = FinanceCategoryManager.Get(id);
                 }
+
+                category.Name = name;
+                category.ColorCode = ColorPicker.SelectedColor.ToHex();
+
+                Database.SaveCategories();
+
+                await Navigation.PopAsync();
             }
         }
 
@@ -87,7 +85,26 @@ namespace Wallet.Views
         {
             bool canDeleteCategory = false;
             List<Finance> finances = FinanceManager.Finances.FindAll(x => x.CategoryId == id);
-            if (finances.Any())
+            List<Budget> budgets = BudgetGoalManager.BudgetGoals.FindAll(x => x.CategoryId == id);
+            if (finances.Any() && budgets.Any())
+            {
+                canDeleteCategory = await DisplayAlert("Can't delete category", $"You have {finances.Count} saved finances and {budgets.Count} saved budget goals with this category.\nWould you like to delete all of them?", "Delete all", "Cancel");
+                if (canDeleteCategory)
+                {
+                    foreach (Finance finance in finances)
+                    {
+                        FinanceManager.Remove(finance.Id);
+                    }
+                    Database.SaveFinances();
+
+                    foreach (Budget budget in budgets)
+                    {
+                        BudgetGoalManager.Remove(budget.Id);
+                    }
+                    Database.SaveBudgetGoals();
+                }
+            }
+            else if (finances.Any())
             {
                 canDeleteCategory = await DisplayAlert("Can't delete category", $"You have {finances.Count} saved finances with this category.\nWould you like to delete all of them?", "Delete all", "Cancel");
                 if (canDeleteCategory)
@@ -99,6 +116,18 @@ namespace Wallet.Views
                     Database.SaveFinances();
                 }
             }
+            else if (budgets.Any())
+            {
+                canDeleteCategory = await DisplayAlert("Can't delete category", $"You have {budgets.Count} saved budget goals with this category.\nWould you like to delete all of them?", "Delete all", "Cancel");
+                if (canDeleteCategory)
+                {
+                    foreach (Budget budget in budgets)
+                    {
+                        BudgetGoalManager.Remove(budget.Id);
+                    }
+                    Database.SaveBudgetGoals();
+                }
+            }
             else
             {
                 canDeleteCategory = true;
@@ -108,6 +137,7 @@ namespace Wallet.Views
             {
                 FinanceCategoryManager.Remove(id);
                 Database.SaveCategories();
+
                 await Navigation.PopToRootAsync();
             }
         }

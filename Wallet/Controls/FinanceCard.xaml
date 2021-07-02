@@ -2,11 +2,11 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Controls.FinanceCard">
-    <Frame CornerRadius="10"
+    <Frame x:Name="MainFrame"
+           CornerRadius="10"
            HasShadow="True"
            Padding="0"
-           Margin="5,0,5,0"
-           >
+           Margin="5,0,5,0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
@@ -15,7 +15,7 @@
 
             <Button Margin="0,0,5,0"
                     x:Name="EditButton"
-                    Clicked="EditButton_Clicked"/>
+                    Clicked="Edit"/>
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -24,13 +24,10 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0"
-                       x:Name="DescriptionLabel"
-                       Text="Valami hosszú szöveg"
-                       FontSize="20"
-                       Margin="0,5,0,0"
-                       VerticalOptions="Center"
-                       TextColor="{StaticResource PrimaryBackground}"
-                       FontAttributes="None"/>
+                        x:Name="DescriptionLabel"
+                        FontSize="20"
+                        Margin="0,5,0,0"
+                        VerticalOptions="Center"/>
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -41,19 +38,15 @@
                     <Label Text="Regular"
                             x:Name="RegularityLabel"
                             FontSize="13"
-                            VerticalOptions="Center"
-                            TextColor="{StaticResource Primary}"
-                            FontAttributes="None"/>
-                    
+                            VerticalOptions="Center"/>
+
                     <Label Grid.Column="1"
-                           x:Name="MoneyLabel"
-                           Text="3 000 000 Ft"
-                           FontSize="20"
-                           Margin="0,0,10,10"
-                           VerticalOptions="CenterAndExpand"
-                           HorizontalTextAlignment="End"
-                           TextColor="{StaticResource Secondary}"
-                           FontAttributes="None"/>
+                            x:Name="MoneyLabel"
+                            FontSize="20"
+                            Margin="0,0,10,10"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="End"
+                            TextColor="{StaticResource Secondary}"/>
                 </Grid>
             </Grid>
         </Grid>

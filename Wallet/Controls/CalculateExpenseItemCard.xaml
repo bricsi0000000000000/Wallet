@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="Wallet.Controls.CalculateExpenseItemCard">
-    <Frame BackgroundColor="#ffffff"
+    <Frame x:Name="MainFrame"
            CornerRadius="10"
            HasShadow="True"
            Margin="10,2.5,10,5"

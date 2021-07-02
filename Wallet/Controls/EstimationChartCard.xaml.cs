@@ -11,27 +11,17 @@ namespace Wallet.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EstimationChartCard : ContentView
     {
-        List<ChartEntry> afterFinance = new List<ChartEntry>();
-
-        private readonly Color cardBackgroundColor;
-
-        private List<string> colorCodes = new List<string>
-        {
-            "#232F34",
-            "#295668",
-            "#2E7A98",
-            "#3292B8",
-            "#35A3CF",
-            "#38BAED"
-        };
+        private readonly List<ChartEntry> afterFinance = new List<ChartEntry>();
 
         public EstimationChartCard(int money, int monthes, List<Finance> automatizedFinances)
         {
             InitializeComponent();
 
-            cardBackgroundColor = (Color)Application.Current.Resources["White"];
+            MainFrame.BackgroundColor = ColorManager.Background;
+            AfterTimeLabel.TextColor = ColorManager.Text;
+            Chart.BackgroundColor = ColorManager.Background;
 
-            afterFinance.Add(CreateChartEntry(money, "Today", colorCodes[0]));
+            afterFinance.Add(CreateChartEntry(money, "Today", ColorManager.GetSKChartColor(0)));
             MakeEntries(afterFinance, monthes, money, automatizedFinances);
             Chart.Chart = CreateChart(afterFinance);
 
@@ -95,7 +85,7 @@ namespace Wallet.Controls
 
                 if (addEntry)
                 {
-                    finances.Add(CreateChartEntry(money, $"{i + 1}", colorCodes[entriIndex++]));
+                    finances.Add(CreateChartEntry(money, $"{i + 1}", ColorManager.GetSKChartColor(entriIndex++)));
                 }
             }
         }
@@ -109,7 +99,7 @@ namespace Wallet.Controls
                 LineSize = 8,
                 PointMode = PointMode.Circle,
                 PointSize = 18,
-                BackgroundColor = SKColor.Parse(cardBackgroundColor.ToHex()),
+                BackgroundColor = ColorManager.BackgroundSK,
                 EnableYFadeOutGradient = true,
                 LabelOrientation = Orientation.Horizontal,
                 ValueLabelOrientation = Orientation.Horizontal,
@@ -118,7 +108,7 @@ namespace Wallet.Controls
             };
         }
 
-        private ChartEntry CreateChartEntry(float money, string label, string colorCode)
+        private ChartEntry CreateChartEntry(float money, string label, SKColor color)
         {
             string valueLabel;
             if (SettingsManager.AcitveCurrency.Id == 3)
@@ -136,8 +126,8 @@ namespace Wallet.Controls
             {
                 Label = label,
                 ValueLabel = valueLabel,
-                ValueLabelColor = SKColor.Parse(colorCode),
-                Color = SKColor.Parse(colorCode)
+                ValueLabelColor = color,
+                Color = color
             };
         }
     }

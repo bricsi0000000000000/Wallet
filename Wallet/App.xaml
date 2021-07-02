@@ -9,13 +9,19 @@
             <Color x:Key="600">#4A6572</Color>
             <Color x:Key="Secondary">#4dcef9</Color>
             <Color x:Key="Delete">#B00020</Color>
+            <Color x:Key="DeleteButtonDark">#f7748c</Color>
             <Color x:Key="White">#ffffff</Color>
             <Color x:Key="Gradient1">#C1E0FC</Color>
+            <Color x:Key="Gradient1Dark">#005491</Color>
             <Color x:Key="Gradient2">#D0DCEC</Color>
+            <Color x:Key="Gradient2Dark">#0077cc</Color>
             <Color x:Key="Income">#38baed</Color>
+            <Color x:Key="ButtonDark">#94dbf7</Color>
             <Color x:Key="Expense">#ed386b</Color>
+            <Color x:Key="BackgroundDark">#262626</Color>
+            <Color x:Key="SecondaryDarkText">#dddddd</Color>
             <Style TargetType="Button">
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource White}"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -33,6 +39,10 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
-        </ResourceDictionary>        
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource PrimaryBackground}, Light={StaticResource White}}"></Setter>
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Primary}}"></Setter>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

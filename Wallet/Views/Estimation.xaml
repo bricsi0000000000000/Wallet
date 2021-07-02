@@ -29,7 +29,6 @@
                 </Grid.RowDefinitions>
 
                 <Frame x:Name="ExpenseFrame"
-                       BackgroundColor="#ffffff"
                        CornerRadius="10"
                        HasShadow="True"
                        WidthRequest="1000"
@@ -46,19 +45,14 @@
                                Margin="5"/>
 
                         <Entry Grid.Column="1"
-                           x:Name="ExpenseInput"
-                           Keyboard="Numeric"
-                           BackgroundColor="#ffffff"
-                           TextColor="{StaticResource Primary}"
-                           Placeholder="Expenses for a month"
-                           PlaceholderColor="#a5a5a5"
-                           />
+                               x:Name="ExpenseInput"
+                               Keyboard="Numeric"
+                               Placeholder="Expenses for a month"/>
                     </Grid>
                 </Frame>
 
                 <Frame Grid.Row="1"
                        x:Name="IncomeFrame"
-                       BackgroundColor="#ffffff"
                        CornerRadius="10"
                        HasShadow="True"
                        WidthRequest="1000"
@@ -75,13 +69,9 @@
                                Margin="5"/>
 
                         <Entry Grid.Column="1"
-                           x:Name="IncomeInput"
-                           Keyboard="Numeric"
-                           BackgroundColor="#ffffff"
-                           TextColor="{StaticResource Primary}"
-                           Placeholder="Incomes for a month"
-                           PlaceholderColor="#a5a5a5"
-                           />
+                               x:Name="IncomeInput"
+                               Keyboard="Numeric"
+                               Placeholder="Incomes for a month"/>
                     </Grid>
                 </Frame>
 

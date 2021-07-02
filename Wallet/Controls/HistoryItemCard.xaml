@@ -3,20 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="Wallet.Controls.HistoryItemCard">
-    <Frame BackgroundColor="{StaticResource White}"
+    <Frame x:Name="MainFrame"
            CornerRadius="10"
            HasShadow="True"
            Padding="0,0,0,10"
-           Margin="5,2.5,5,2.5"
-           >
+           Margin="5,2.5,5,2.5">
         <StackLayout>
             <Label x:Name="DateLabel"
-                   Text="Valami hosszú szöveg"
                    FontSize="20"
                    Margin="10, 5, 10, 0"
-                   VerticalOptions="Center"
-                   TextColor="{StaticResource PrimaryBackground}"
-                   FontAttributes="None"/>
+                   VerticalOptions="Center"/>
             
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -28,49 +24,37 @@
                 <forms:ChartView x:Name="ExpensesChart"/>
 
                 <StackLayout Grid.Column="1">
-                    <Label Text="Income:"
+                    <Label x:Name="IncomeTitleLabel"
+                           Text="Income:"
                            FontSize="16"
-                           VerticalTextAlignment="Start"
-                           TextColor="{StaticResource Primary}"
-                           FontAttributes="None"/>
-                    <Label Text="Expenses:"
+                           VerticalTextAlignment="Start"/>
+                    <Label x:Name="ExpenseTitleLabel"
+                           Text="Expense:"
                            FontSize="16"
-                           VerticalTextAlignment="Start"
-                           TextColor="{StaticResource Primary}"
-                           FontAttributes="None"/>
-                    <Label Text="Total:"
+                           VerticalTextAlignment="Start"/>
+                    <Label x:Name="TotalTitleLabel"
+                           Text="Total:"
                            FontSize="16"
-                           VerticalTextAlignment="Start"
-                           TextColor="{StaticResource Primary}"
-                           FontAttributes="None"/>
+                           VerticalTextAlignment="Start"/>
                 </StackLayout>
 
                 <StackLayout Grid.Column="2">
                     <Label x:Name="IncomeLabel"
-                           Text="1000000"
                            FontSize="16"
-                           VerticalTextAlignment="Start"
-                           FontAttributes="None"/>
+                           VerticalTextAlignment="Start"/>
                     <Label x:Name="ExpensesLabel"
-                           Text="1000000"
                            FontSize="16"
-                           VerticalTextAlignment="Start"
-                           FontAttributes="None"/>
+                           VerticalTextAlignment="Start"/>
                     <Label x:Name="TotalLabel"
-                           Text="1000000"
                            FontSize="16"
-                           VerticalTextAlignment="Start"
-                           TextColor="{StaticResource PrimaryBackground}"
-                           FontAttributes="None"/>
+                           VerticalTextAlignment="Start"/>
                 </StackLayout>
             </Grid>
 
             <Label x:Name="MostExpensesCategoryLabel"
-                   Text="Restaurant"
                    FontSize="17"
                    Margin="10, 0, 0, 0"
-                   VerticalOptions="Center"
-                   FontAttributes="None"/>
+                   VerticalOptions="Center"/>
         </StackLayout>
     </Frame>
 </ContentView>

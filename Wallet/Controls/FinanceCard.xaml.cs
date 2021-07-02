@@ -8,7 +8,7 @@ namespace Wallet.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FinanceCard : ContentView
     {
-        int id;
+        private readonly int id;
 
         public FinanceCard(Finance finance)
         {
@@ -16,13 +16,17 @@ namespace Wallet.Controls
 
             this.id = finance.Id;
 
+            MainFrame.BackgroundColor = ColorManager.Background;
+
+            DescriptionLabel.TextColor = RegularityLabel.TextColor = ColorManager.SecondaryText;
+
             DescriptionLabel.Text = finance.Description;
             RegularityLabel.Text = finance.IsAutomatized ? "Regular" : "One time";
             MoneyLabel.Text = $"{(finance.Type == FinanceType.Expense || finance.Type == FinanceType.Deposit ? "-" : "")}{finance.Money.FormatToMoney()}";
-            EditButton.BackgroundColor = Color.FromHex(FinanceCategoryManager.Get(finance.CategoryId).ColorCode);
+            EditButton.BackgroundColor = FinanceCategoryManager.Get(finance.CategoryId).ColorCode.ToColor();
         }
 
-        private void EditButton_Clicked(object sender, System.EventArgs e)
+        private void Edit(object sender, System.EventArgs e)
         {
             Navigation.PushAsync(new AddFinance(id));
         }

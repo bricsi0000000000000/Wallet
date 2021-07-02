@@ -2,7 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Controls.CategoryCard">
-    <Frame BackgroundColor="#ffffff"
+    <Frame x:Name="MainFrame"
            CornerRadius="10"
            HasShadow="True"
            Padding="0"
@@ -20,12 +20,9 @@
 
             <Label Grid.Column="1"
                    x:Name="NameLabel"
-                   Text="Valami hosszú szöveg"
                    FontSize="20"
                    Margin="10,15"
-                   VerticalOptions="Center"
-                   TextColor="{StaticResource PrimaryBackground}"
-                   FontAttributes="None"/>
+                   VerticalOptions="Center"/>
         </Grid>
     </Frame>
 </ContentView>

@@ -9,10 +9,7 @@ namespace Wallet.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BudgetGoalCard : ContentView
     {
-        int id;
-
-        private readonly Color expenseColor;
-        private readonly Color income;
+        private readonly int id;
 
         public BudgetGoalCard(Budget budget)
         {
@@ -20,13 +17,19 @@ namespace Wallet.Controls
 
             id = budget.Id;
 
-            expenseColor = (Color)Application.Current.Resources["Expense"];
-            income = (Color)Application.Current.Resources["Income"];
+            MainFrame.BackgroundColor = ColorManager.Background;
 
             FinanceCategory category = FinanceCategoryManager.Get(budget.CategoryId);
 
             CategoryNameLabel.Text = category.Name;
-            EditButton.BackgroundColor = Color.FromHex(category.ColorCode);
+
+            CategoryNameLabel.TextColor =
+            OverMoneyLabel.TextColor =
+            SpentMoneyLabel.TextColor =
+            MaxMoneyLabel.TextColor = ColorManager.Text;
+
+            EditButton.BackgroundColor = category.ColorCode.ToColor();
+
             SpentMoneyLabel.Text = budget.SpentMoney.FormatToMoney();
             MaxMoneyLabel.Text = budget.MaxMoney.FormatToMoney();
 
@@ -36,14 +39,14 @@ namespace Wallet.Controls
             if (budget.SpentMoney >= budget.MaxMoney)
             {
                 OverMoneyLabel.Text += $" +{rate * 100:f0}%";
-                Progress.ProgressColor = expenseColor;
-                SpentMoneyLabel.TextColor = expenseColor;
-                OverMoneyLabel.TextColor = expenseColor;
+                Progress.ProgressColor = ColorManager.Expense;
+                SpentMoneyLabel.TextColor = ColorManager.Expense;
+                OverMoneyLabel.TextColor = ColorManager.Expense;
             }
             else
             {
                 OverMoneyLabel.Text += $"{rate * 100:f0}%";
-                OverMoneyLabel.TextColor = income;
+                OverMoneyLabel.TextColor = ColorManager.Income;
             }
         }
 

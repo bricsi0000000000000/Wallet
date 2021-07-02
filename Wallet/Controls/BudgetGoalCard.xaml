@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Controls.BudgetGoalCard">
   <ContentView.Content>
-        <Frame BackgroundColor="#ffffff"
+        <Frame x:Name="MainFrame"
                CornerRadius="10"
                HasShadow="True"
                Padding="0"
-               Margin="5,2.5,5,2.5"
+               Margin="5,0,5,0"
                >
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -27,14 +27,12 @@
                         </Grid.ColumnDefinitions>
 
                         <Label x:Name="CategoryNameLabel"
-                               Text="title"
                                FontSize="20"
                                Margin="10,10,0,0"
                                VerticalOptions="Center"
                                TextColor="{StaticResource Primary}"/>
 
                         <Label Grid.Column="1"
-                               Text=""
                                x:Name="OverMoneyLabel"
                                FontSize="16"
                                HorizontalTextAlignment="End"
@@ -52,15 +50,13 @@
                         </Grid.ColumnDefinitions>
 
 
-                        <Label Text="0 Ft"
-                               x:Name="SpentMoneyLabel"
+                        <Label x:Name="SpentMoneyLabel"
                                FontSize="16"
                                HorizontalTextAlignment="Start"
                                Margin="10,0,0,5"
                                TextColor="{StaticResource Primary}"/>
                         
                         <Label Grid.Column="1"
-                               Text="1 000 Ft"
                                x:Name="MaxMoneyLabel"
                                FontSize="16"
                                HorizontalTextAlignment="End"

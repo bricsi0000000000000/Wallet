@@ -12,6 +12,16 @@ namespace Wallet.Views
         {
             InitializeComponent();
 
+            InitialMoneyFrame.BackgroundColor =
+            CurrencyFrame.BackgroundColor =
+            CurrencyPicker.BackgroundColor = 
+            InitialMoneyInput.BackgroundColor = ColorManager.Background;
+
+            InitialMoneyInput.TextColor = ColorManager.Text;
+            InitialMoneyInput.PlaceholderColor = ColorManager.PlaceholderText;
+
+            ResetDatabaseButton.BackgroundColor = ColorManager.DeleteButton;
+
             if (FinanceManager.InitialMoney > 0)
             {
                 InitialMoneyInput.Text = FinanceManager.InitialMoney.ToString();

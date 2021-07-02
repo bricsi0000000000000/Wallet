@@ -1,8 +1,5 @@
 ﻿using Microcharts;
-using SkiaSharp;
-using System;
 using System.Collections.Generic;
-using Wallet.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,25 +8,19 @@ namespace Wallet.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalculateExpenseItemCard : ContentView
     {
-        List<ChartEntry> expenses = new List<ChartEntry>();
-
-        private readonly Color cardBackgroundColor;
-        private readonly Color expenseColor;
-        private readonly Color incomeColor;
+        private readonly List<ChartEntry> expenses = new List<ChartEntry>();
 
         public CalculateExpenseItemCard(int income, int expense)
         {
             InitializeComponent();
 
-            cardBackgroundColor = (Color)Application.Current.Resources["White"];
-            incomeColor = (Color)Application.Current.Resources["Income"];
-            expenseColor = (Color)Application.Current.Resources["Expense"];
+            MainFrame.BackgroundColor = ColorManager.Background;
 
             IncomeLabel.Text = income.FormatToMoney();
-            IncomeLabel.TextColor = incomeColor;
+            IncomeLabel.TextColor = ColorManager.Income;
 
             ExpensesLabel.Text = expense.FormatToMoney();
-            ExpensesLabel.TextColor = expenseColor;
+            ExpensesLabel.TextColor = ColorManager.Expense;
 
             TotalLabel.Text = (income - expense).FormatToMoney();
 
@@ -44,17 +35,17 @@ namespace Wallet.Controls
             return new DonutChart
             {
                 Entries = expenses,
-                BackgroundColor = SKColor.Parse(cardBackgroundColor.ToHex()),
+                BackgroundColor = ColorManager.BackgroundSK,
                 LabelTextSize = 30,
                 IsAnimated = true
             };
         }
 
-        private ChartEntry CreateChartEntry(float money, bool isExpense)
+        private ChartEntry CreateChartEntry(float money, bool expense)
         {
             return new ChartEntry(money)
             {
-                Color = isExpense ? SKColor.Parse(expenseColor.ToHex()) : SKColor.Parse(incomeColor.ToHex())
+                Color = ColorManager.ExpenseOrIncomeSK(expense)
             };
         }
     }

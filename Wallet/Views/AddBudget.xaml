@@ -12,11 +12,11 @@
     </Shell.TitleView>
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0"
-                                 EndPoint="1,1">
+                             EndPoint="1,1">
             <GradientStop Color="{StaticResource Gradient2}"
-                              Offset="0.3" />
+                          Offset="0.3" />
             <GradientStop Color="{StaticResource White}"
-                              Offset="1.0" />
+                          Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
     <ContentPage.Content>
@@ -30,7 +30,6 @@
             </Grid.RowDefinitions>
 
             <Frame x:Name="CategoryPickerFrame"
-                   BackgroundColor="#ffffff"
                    CornerRadius="10"
                    HasShadow="True"
                    Margin="20,20,20,5">
@@ -51,7 +50,7 @@
                             />
 
                     <ImageButton Grid.Column="2"
-                                 BackgroundColor="{StaticResource White}"
+                                 x:Name="AddNewCategoryImageButton"
                                  Source="add_new.png"
                                  Clicked="AddNewCategory_Clicked"/>
                 </Grid>
@@ -59,7 +58,6 @@
 
             <Frame Grid.Row="1"
                    x:Name="MaxMoneyFrame"
-                   BackgroundColor="#ffffff"
                    CornerRadius="10"
                    HasShadow="True"
                    Margin="20, 0, 20, 5">
@@ -73,13 +71,10 @@
                     <Image Source="goal_primary.png"/>
 
                     <Entry Grid.Column="1"
-                       x:Name="MaxMoneyInput"
-                       Keyboard="Numeric"
-                       BackgroundColor="#ffffff"
-                       TextColor="{StaticResource Primary}"
-                       Placeholder="Max amount"
-                       PlaceholderColor="#a5a5a5"
-                       />
+                           x:Name="MaxMoneyInput"
+                           Keyboard="Numeric"
+                           Placeholder="Max amount"
+                           />
                 </Grid>
             </Frame>
 
@@ -95,9 +90,9 @@
                        HasShadow="True"
                        Margin="30,0,0,0">
 
-                    <ImageButton Source="delete.png"
+                    <ImageButton x:Name="DeleteImageButton"
+                                 Source="delete.png"
                                  CornerRadius="10"
-                                 BackgroundColor="{StaticResource Delete}"
                                  Padding="17"
                                  Clicked="DeleteButton_Clicked"/>
                 </Frame>
@@ -109,21 +104,11 @@
                        Margin="0, 0, 30, 0">
 
                     <ImageButton Grid.Column="1"
-                                 Source="save.png"
+                                 x:Name="SaveImageButton"
+                                 Source="save_white.png"
                                  CornerRadius="10"
-                                 BackgroundColor="{StaticResource Secondary}"
                                  Padding="15"
-                                 Clicked="SaveButton_Clicked">
-                        <ImageButton.Background>
-                            <LinearGradientBrush StartPoint="0,0"
-                                             EndPoint="1,1">
-                                <GradientStop Color="{StaticResource White}"
-                              Offset="0.0" />
-                                <GradientStop Color="{StaticResource Gradient2}"
-                              Offset="0.7" />
-                            </LinearGradientBrush>
-                        </ImageButton.Background>
-                    </ImageButton>
+                                 Clicked="SaveButton_Clicked"/>
                 </Frame>
             </Grid>
 
@@ -134,21 +119,11 @@
                        HasShadow="True"
                        Margin="30, 0, 30, 0">
 
-                    <ImageButton Source="save.png"
+                    <ImageButton x:Name="SaveImageButton1"
+                                 Source="save_white.png"
                                  CornerRadius="10"
-                                 BackgroundColor="{StaticResource Secondary}"
                                  Padding="15"
-                                 Clicked="SaveButton_Clicked">
-                        <ImageButton.Background>
-                            <LinearGradientBrush StartPoint="0,0"
-                                             EndPoint="1,1">
-                                <GradientStop Color="{StaticResource White}"
-                              Offset="0.0" />
-                                <GradientStop Color="{StaticResource Gradient2}"
-                              Offset="0.7" />
-                            </LinearGradientBrush>
-                        </ImageButton.Background>
-                    </ImageButton>
+                                 Clicked="SaveButton_Clicked"/>
                 </Frame>
             </Grid>
         </Grid>

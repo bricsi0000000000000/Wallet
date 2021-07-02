@@ -13,21 +13,11 @@ namespace Wallet.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListFinances : ContentPage
     {
-        List<ChartEntry> expenses = new List<ChartEntry>();
-
-        private readonly Color cardBackgroundColor;
-        private readonly Color textColor;
-        private readonly Color expenseColor;
-        private readonly Color incomeColor;
+        private List<ChartEntry> expenses = new List<ChartEntry>();
 
         public ListFinances()
         {
             InitializeComponent();
-
-            cardBackgroundColor = (Color)Application.Current.Resources["White"];
-            textColor = (Color)Application.Current.Resources["Primary"];
-            incomeColor = (Color)Application.Current.Resources["Income"];
-            expenseColor = (Color)Application.Current.Resources["Expense"];
         }
 
         protected override void OnAppearing()
@@ -138,7 +128,7 @@ namespace Wallet.Views
             return new RadialGaugeChart
             {
                 Entries = expenses,
-                BackgroundColor = SKColor.Parse(cardBackgroundColor.ToHex()),
+                BackgroundColor = ColorManager.BackgroundSK,
                 LabelTextSize = 30,
                 IsAnimated = false,
                 AnimationDuration = new TimeSpan()
@@ -191,7 +181,7 @@ namespace Wallet.Views
                 Label dateLabel = new Label
                 {
                     Text = group.First().Date.FormatToDate(),
-                    TextColor = textColor,
+                    TextColor = ColorManager.Text,
                     FontSize = 15,
                     Margin = new Thickness(20, 0, 20, 0)
                 };
@@ -212,7 +202,7 @@ namespace Wallet.Views
                 Label moneyLabel = new Label
                 {
                     Text = money.FormatToMoney(),
-                    TextColor = money < 0 ? expenseColor : incomeColor,
+                    TextColor = ColorManager.ExpenseOrIncome(money < 0),
                     FontSize = 15,
                     HorizontalTextAlignment = TextAlignment.End,
                     Margin = new Thickness(0, 0, 20, 0)
@@ -251,13 +241,13 @@ namespace Wallet.Views
         {
             return new ChartEntry(finance.Money)
             {
-                Label = FinanceCategoryManager.Get(finance.CategoryId).Name,
-                ValueLabel = finance.Money.ToString(),
+                //Label = FinanceCategoryManager.Get(finance.CategoryId).Name,
+                //ValueLabel = finance.Money.ToString(),
                 Color = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode),
                 //TextColor = SKColor.Parse(textColor.ToHex()),
-                TextColor = SKColor.Parse(cardBackgroundColor.ToHex()),
+                //TextColor = SKColor.Parse(cardBackgroundColor.ToHex()),
                 //ValueLabelColor = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode)
-                ValueLabelColor = SKColor.Parse(cardBackgroundColor.ToHex())
+                //ValueLabelColor = SKColor.Parse(cardBackgroundColor.ToHex())
             };
         }
 

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="Wallet.Controls.HistoryChartCard">
-    <Frame BackgroundColor="{StaticResource White}"
+    <Frame x:Name="MainFrame"
            CornerRadius="10"
            Padding="10,20,10,10"
            Margin="15,15,15,5"

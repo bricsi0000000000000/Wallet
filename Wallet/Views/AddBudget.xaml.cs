@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using Wallet.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,11 +9,8 @@ namespace Wallet.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddBudget : ContentPage
     {
-        FinanceCategory selectedCategory;
-        int id;
-
-        private const string RED = "#B00020";
-        private const string BACKGROUND = "#EBEEF0";
+        private FinanceCategory selectedCategory;
+        private readonly int id;
 
         public AddBudget(int id = -1)
         {
@@ -23,6 +19,23 @@ namespace Wallet.Views
             this.id = id;
 
             TitleLabel.Text = id == -1 ? "Add Budget" : "Edit Budget";
+
+            CategoryPickerFrame.BackgroundColor =
+            MaxMoneyFrame.BackgroundColor = ColorManager.Background;
+
+            CategoryPicker.TextColor = ColorManager.Text;
+            CategoryPicker.TitleColor = ColorManager.PlaceholderText;
+
+            MaxMoneyInput.BackgroundColor = ColorManager.Background;
+            MaxMoneyInput.TextColor = ColorManager.Text;
+            MaxMoneyInput.PlaceholderColor = ColorManager.PlaceholderText;
+
+            AddNewCategoryImageButton.BackgroundColor = ColorManager.Background;
+
+            DeleteImageButton.BackgroundColor = ColorManager.DeleteButton;
+
+            SaveImageButton.BackgroundColor =
+            SaveImageButton1.BackgroundColor = ColorManager.Button;
 
             BothButtonsGrid.IsVisible = id != -1;
             OneButtonGrid.IsVisible = id == -1;
@@ -69,8 +82,8 @@ namespace Wallet.Views
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            MaxMoneyFrame.BorderColor = string.IsNullOrEmpty(MaxMoneyInput.Text) ? Color.FromHex(RED) : Color.FromHex(BACKGROUND);
-            CategoryPickerFrame.BorderColor = selectedCategory == null ? Color.FromHex(RED) : Color.FromHex(BACKGROUND);
+            MaxMoneyFrame.BorderColor = ColorManager.IsInputEmpty(string.IsNullOrEmpty(MaxMoneyInput.Text));
+            CategoryPickerFrame.BorderColor = ColorManager.IsInputEmpty(selectedCategory == null);
 
             if (!string.IsNullOrEmpty(MaxMoneyInput.Text) && selectedCategory != null)
             {

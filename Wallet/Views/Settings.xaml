@@ -49,17 +49,13 @@
 
                         <Entry Grid.Column="1"
                                x:Name="InitialMoneyInput"
-                               BackgroundColor="#ffffff"
-                               TextColor="{StaticResource Primary}"
                                Placeholder="Initial money"
-                               Keyboard="Numeric"
-                               PlaceholderColor="#a5a5a5"
-                               />
+                               Keyboard="Numeric"/>
                     </Grid>
                 </Frame>
 
                 <Frame Grid.Row="1"
-                       BackgroundColor="#ffffff"
+                       x:Name="CurrencyFrame"
                        CornerRadius="10"
                        HasShadow="True"
                        Margin="20, 0, 20, 5">
@@ -70,20 +66,19 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Source="currency.png"
-                           Margin="5"/>
+                               Margin="5"/>
 
                         <Picker Grid.Column="1"
-                            Title="Currency"
-                            x:Name="CurrencyPicker"
-                            SelectedIndexChanged="Picker_SelectedIndexChanged"
-                            />
+                                Title="Currency"
+                                x:Name="CurrencyPicker"
+                                SelectedIndexChanged="Picker_SelectedIndexChanged"/>
                     </Grid>
                 </Frame>
 
                 <Button Grid.Row="2"
+                        x:Name="ResetDatabaseButton"
                         Text="Reset database"
                         CornerRadius="10"
-                        BackgroundColor="{StaticResource Delete}"
                         Margin="20,20,20,0"
                         FontSize="17"
                         Clicked="ResetDatabaseButton_Clicked"/>

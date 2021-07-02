@@ -12,23 +12,15 @@ namespace Wallet.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HistoryChartCard : ContentView
     {
-        private readonly Color cardBackgroundColor;
-        List<ChartEntry> expenses = new List<ChartEntry>();
-        private List<string> colorCodes = new List<string>
-        {
-            "#232F34",
-            "#295668",
-            "#2E7A98",
-            "#3292B8",
-            "#35A3CF",
-            "#38BAED"
-        };
+        private readonly List<ChartEntry> expenses = new List<ChartEntry>();
 
         public HistoryChartCard()
         {
             InitializeComponent();
 
-            cardBackgroundColor = (Color)Application.Current.Resources["White"];
+            MainFrame.BackgroundColor =
+            Chart.BackgroundColor = ColorManager.Background;
+
             int index = 0;
 
             foreach (IGrouping<(int Year, int Month), Finance> group in FinanceManager.Finances.GroupBy(x => (x.Date.Year, x.Date.Month)))
@@ -46,7 +38,7 @@ namespace Wallet.Controls
                         }
                     }
 
-                    expenses.Insert(0, CreateChartEntry(money, date.FormatToMonth(), colorCodes[colorCodes.Count - index - 1]));
+                    expenses.Insert(0, CreateChartEntry(money, date.FormatToMonth(), ColorManager.GetSKChartColorFromBack(index)));
 
                     index++;
                 }
@@ -64,7 +56,7 @@ namespace Wallet.Controls
                 LineSize = 8,
                 PointMode = PointMode.Circle,
                 PointSize = 18,
-                BackgroundColor = SKColor.Parse(cardBackgroundColor.ToHex()),
+                BackgroundColor = ColorManager.BackgroundSK,
                 EnableYFadeOutGradient = true,
                 LabelOrientation = Orientation.Horizontal,
                 ValueLabelOrientation = Orientation.Horizontal,
@@ -73,14 +65,14 @@ namespace Wallet.Controls
             };
         }
 
-        private ChartEntry CreateChartEntry(int money, string label, string colorCode)
+        private ChartEntry CreateChartEntry(int money, string label, SKColor color)
         {
             return new ChartEntry(money)
             {
                 Label = label,
                 ValueLabel = money.FormatToMoney(),
-                ValueLabelColor = SKColor.Parse(colorCode),
-                Color = SKColor.Parse(colorCode)
+                ValueLabelColor = color,
+                Color = color
             };
         }
     }

@@ -34,7 +34,6 @@
             </Grid.RowDefinitions>
 
             <Frame x:Name="MoneyFrame"
-                   BackgroundColor="#ffffff"
                    CornerRadius="10"
                    HasShadow="True"
                    Margin="20, 20, 20, 5">
@@ -51,17 +50,12 @@
                            FontSize="16"
                            x:Name="MoneyInput"
                            Keyboard="Numeric"
-                           BackgroundColor="#ffffff"
-                           TextColor="{StaticResource Primary}"
-                           Placeholder="Money"
-                           PlaceholderColor="#a5a5a5"
-                           />
+                           Placeholder="Money"/>
                 </Grid>
             </Frame>
 
             <Frame Grid.Row="1"
                    x:Name="DescriptionFrame"
-                   BackgroundColor="#ffffff"
                    CornerRadius="10"
                    HasShadow="True"
                    Margin="20, 0, 20, 5">
@@ -77,18 +71,13 @@
                     <Entry Grid.Column="1"
                            x:Name="DescriptionInput"
                            FontSize="16"
-                           BackgroundColor="#ffffff"
-                           TextColor="{StaticResource Primary}"
-                           Placeholder="Description"
-                           PlaceholderColor="#a5a5a5"
-                           />
+                           Placeholder="Description"/>
                 </Grid>
 
             </Frame>
 
             <Frame Grid.Row="2"
                    x:Name="CategoryPickerFrame"
-                   BackgroundColor="#ffffff"
                    CornerRadius="10"
                    HasShadow="True"
                    Margin="20, 0, 20, 5">
@@ -109,7 +98,7 @@
                             />
 
                     <ImageButton Grid.Column="2"
-                                 BackgroundColor="{StaticResource White}"
+                                 x:Name="AddNewCategoryImageButton"
                                  Source="add_new.png"
                                  Margin="3"
                                  Clicked="AddNewCategory_Clicked"/>
@@ -118,7 +107,6 @@
 
             <Frame Grid.Row="3"
                    x:Name="FinanceTypeFrame"
-                   BackgroundColor="#ffffff"
                    CornerRadius="10"
                    HasShadow="True"
                    Margin="20, 0, 20, 5">
@@ -134,9 +122,7 @@
                     <Picker Grid.Column="1"
                         Title="Finance type"
                         x:Name="FinanceTypePicker"
-                        SelectedIndexChanged="FinanceTypePicker_SelectedIndexChanged"
-                        TextColor="{StaticResource Primary}"
-                        >
+                        SelectedIndexChanged="FinanceTypePicker_SelectedIndexChanged">
                     <Picker.Items>
                         <x:String>Expense</x:String>
                         <x:String>Income</x:String>
@@ -149,7 +135,6 @@
 
             <Frame Grid.Row="4"
                    x:Name="DatePickerFrame"
-                   BackgroundColor="#ffffff"
                    CornerRadius="10"
                    HasShadow="True"
                    Margin="20, 0, 20, 5">
@@ -164,13 +149,13 @@
                            Margin="5"/>
                     
                     <DatePicker Grid.Column="1"
-                            x:Name="SelectDate"
-                            DateSelected="DatePicker_DateSelected"/>
+                                x:Name="SelectDate"
+                                DateSelected="DatePicker_DateSelected"/>
                 </Grid>
             </Frame>
 
             <Frame Grid.Row="5"
-                   BackgroundColor="#ffffff"
+                   x:Name="IsAutomatizedFrame"
                    CornerRadius="10"
                    HasShadow="True"
                    Margin="20, 0, 20, 5">
@@ -184,16 +169,23 @@
                     <Image Source="repeat.png"
                            Margin="3"/>
 
-                    <Picker Grid.Column="1"
-                        Title="How often"
-                        x:Name="IsAutomatizedPicker"
-                        SelectedIndexChanged="IsAutomatizedPicker_SelectedIndexChanged"
-                        >
-                        <Picker.Items>
-                            <x:String>Regular</x:String>
-                            <x:String>One time</x:String>
-                        </Picker.Items>
-                    </Picker>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="IsAutomatizedLabel"
+                               Text="One time"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start"/>
+
+                        <Switch Grid.Column="1"
+                                HorizontalOptions="Start"
+                                x:Name="IsAutomatizedSwitch"
+                                Toggled="Switch_Toggled"/>
+                    </Grid>
                 </Grid>
             </Frame>
 
@@ -209,9 +201,9 @@
                        HasShadow="True"
                        Margin="30,0,0,0">
 
-                    <ImageButton Source="delete.png"
+                    <ImageButton x:Name="DeleteImageButton"
+                                 Source="delete.png"
                                  CornerRadius="10"
-                                 BackgroundColor="{StaticResource Delete}"
                                  Padding="17"
                                  Clicked="DeleteButton_Clicked"/>
                 </Frame>
@@ -221,23 +213,13 @@
                        CornerRadius="10"
                        HasShadow="True"
                        Margin="0, 0, 30, 0">
-                    
+
                     <ImageButton Grid.Column="1"
-                                 Source="save.png"
+                                 x:Name="SaveImageButton"
+                                 Source="save_white.png"
                                  CornerRadius="10"
-                                 BackgroundColor="{StaticResource Secondary}"
                                  Padding="15"
-                                 Clicked="SaveButton_Clicked">
-                        <ImageButton.Background>
-                            <LinearGradientBrush StartPoint="0,0"
-                                             EndPoint="1,1">
-                                <GradientStop Color="{StaticResource White}"
-                              Offset="0.0" />
-                                <GradientStop Color="{StaticResource Gradient2}"
-                              Offset="0.7" />
-                            </LinearGradientBrush>
-                        </ImageButton.Background>
-                    </ImageButton>
+                                 Clicked="SaveButton_Clicked"/>
                 </Frame>
             </Grid>
 
@@ -248,21 +230,11 @@
                        HasShadow="True"
                        Margin="30, 0, 30, 0">
 
-                    <ImageButton Source="save.png"
+                    <ImageButton x:Name="SaveImageButton1"
+                                 Source="save_white.png"
                                  CornerRadius="10"
-                                 BackgroundColor="{StaticResource Secondary}"
                                  Padding="15"
-                                 Clicked="SaveButton_Clicked">
-                        <ImageButton.Background>
-                            <LinearGradientBrush StartPoint="0,0"
-                                                 EndPoint="1,1">
-                                <GradientStop Color="{StaticResource White}"
-                                              Offset="0.0" />
-                                <GradientStop Color="{StaticResource Gradient2}"
-                                              Offset="0.7" />
-                            </LinearGradientBrush>
-                        </ImageButton.Background>
-                    </ImageButton>
+                                 Clicked="SaveButton_Clicked"/>
                 </Frame>
             </Grid>
         </Grid>

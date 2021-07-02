@@ -13,14 +13,12 @@ namespace Wallet.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShowMonth : ContentPage
     {
-        List<Finance> finances;
-        List<ChartEntry> expenses = new List<ChartEntry>();
-        DateTime date;
+        private List<Finance> finances;
+        private List<ChartEntry> expenses = new List<ChartEntry>();
+        private DateTime date;
 
-        private readonly Color cardBackgroundColor;
-        private readonly Color textColor;
-        private readonly Color expenseColor;
-        private readonly Color incomeColor;
+        private List<Grid> dailyFinanceLabelGrids = new List<Grid>();
+        private List<FinanceCard> financeCards = new List<FinanceCard>();
 
         public ShowMonth(List<Finance> finances, DateTime date)
         {
@@ -30,11 +28,6 @@ namespace Wallet.Views
             this.date = date;
 
             TitleLabel.Text = date.FormatToMonthYear();
-
-            cardBackgroundColor = (Color)Application.Current.Resources["White"];
-            textColor = (Color)Application.Current.Resources["Primary"];
-            incomeColor = (Color)Application.Current.Resources["Income"];
-            expenseColor = (Color)Application.Current.Resources["Expense"];
         }
 
         protected override void OnAppearing()
@@ -44,15 +37,20 @@ namespace Wallet.Views
 
         private void LoadUI()
         {
-            ChartLabels.Children.Clear();
+            ListItems.Children.Clear();
+            ChartStackLayout.Children.Clear();
 
-            List<Finance> allFinances = new List<Finance>();
+            dailyFinanceLabelGrids.Clear();
+            financeCards.Clear();
+
+            List<Finance> groupedFinances = new List<Finance>();
 
             foreach (IGrouping<int, Finance> group in finances.FindAll(x => x.Type == FinanceType.Expense).GroupBy(x => x.CategoryId))
             {
                 Finance finance = new Finance
                 {
-                    CategoryId = group.Key
+                    CategoryId = group.Key,
+                    Date = group.First().Date
                 };
 
                 foreach (Finance item in group)
@@ -60,39 +58,37 @@ namespace Wallet.Views
                     finance.Money += item.Money;
                 }
 
-                allFinances.Add(finance);
+                groupedFinances.Add(finance);
             }
 
-            Sort(allFinances);
+            Sort(groupedFinances);
 
             expenses.Clear();
 
-            foreach (Finance finance in allFinances)
+            foreach (Finance finance in groupedFinances)
             {
                 expenses.Add(CreateChartEntry(finance));
             }
 
-            Sort(allFinances, descending: true);
+            Sort(groupedFinances, descending: true);
 
-            foreach (Finance finance in allFinances)
-            {
-                ChartLabels.Children.Add(new ChartValue(finance));
-            }
-
-            ExpensesChart.Chart = MakeChart();
+            ChartStackLayout.Children.Add(new MonthlyFinancesChartCard(groupedFinances, expenses, date));
 
             List<Finance> monthlyFinances = FinanceManager.Finances.FindAll(x => x.Date.Month == date.Month && x.Date.Year == date.Year);
 
             foreach (IGrouping<int, Finance> group in monthlyFinances.GroupBy(x => x.Date.Day))
             {
-                Grid grid = new Grid();
+                Grid grid = new Grid
+                {
+                    ClassId = group.First().Date.Day.ToString()
+                };
                 ColumnDefinition columnDefinition1 = new ColumnDefinition();
                 ColumnDefinition columnDefinition2 = new ColumnDefinition();
 
                 Label dateLabel = new Label
                 {
                     Text = group.First().Date.FormatToDate(),
-                    TextColor = textColor,
+                    TextColor = ColorManager.Text,
                     FontSize = 15,
                     Margin = new Thickness(20, 0, 20, 0)
                 };
@@ -113,7 +109,7 @@ namespace Wallet.Views
                 Label moneyLabel = new Label
                 {
                     Text = money.FormatToMoney(),
-                    TextColor = money < 0 ? expenseColor : incomeColor,
+                    TextColor = ColorManager.ExpenseOrIncome(money < 0),
                     FontSize = 15,
                     HorizontalTextAlignment = TextAlignment.End,
                     Margin = new Thickness(0, 0, 20, 0)
@@ -128,11 +124,14 @@ namespace Wallet.Views
                 grid.Children.Add(dateLabel);
                 grid.Children.Add(moneyLabel);
 
+                dailyFinanceLabelGrids.Add(grid);
                 ListItems.Children.Add(grid);
 
                 foreach (Finance finance in group)
                 {
-                    ListItems.Children.Add(new FinanceCard(finance));
+                    FinanceCard financeCard = new FinanceCard(finance);
+                    financeCards.Add(financeCard);
+                    ListItems.Children.Add(financeCard);
                 }
             }
 
@@ -176,29 +175,17 @@ namespace Wallet.Views
             }
         }
 
-        private RadialGaugeChart MakeChart()
-        {
-            return new RadialGaugeChart
-            {
-                Entries = expenses,
-                BackgroundColor = SKColor.Parse(cardBackgroundColor.ToHex()),
-                LabelTextSize = 30,
-                IsAnimated = false,
-                AnimationDuration = new TimeSpan()
-            };
-        }
-
         private ChartEntry CreateChartEntry(Finance finance)
         {
             return new ChartEntry(finance.Money)
             {
-                Label = FinanceCategoryManager.Get(finance.CategoryId).Name,
-                ValueLabel = finance.Money.ToString(),
-                Color = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode),
+                //Label = FinanceCategoryManager.Get(finance.CategoryId).Name,
+                //ValueLabel = finance.Money.ToString(),
+                Color = FinanceCategoryManager.Get(finance.CategoryId).ColorCode.ToSKColor(),
                 //TextColor = SKColor.Parse(textColor.ToHex()),
-                TextColor = SKColor.Parse(cardBackgroundColor.ToHex()),
+                //TextColor = SKColor.Parse(cardBackgroundColor.ToHex()),
                 //ValueLabelColor = SKColor.Parse(FinanceCategoryManager.Get(finance.CategoryId).ColorCode)
-                ValueLabelColor = SKColor.Parse(cardBackgroundColor.ToHex())
+                //ValueLabelColor = SKColor.Parse(cardBackgroundColor.ToHex())
             };
         }
     }

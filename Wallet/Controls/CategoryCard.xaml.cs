@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using Wallet.Models;
 using Wallet.Views;
 using Xamarin.Forms;
@@ -9,7 +10,7 @@ namespace Wallet.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryCard : ContentView
     {
-        int id;
+        private readonly int id;
 
         public CategoryCard(FinanceCategory category)
         {
@@ -17,8 +18,12 @@ namespace Wallet.Controls
 
             this.id = category.Id;
 
+            MainFrame.BackgroundColor = ColorManager.Background;
+
             NameLabel.Text = category.Name;
-            EditButton.BackgroundColor = Color.FromHex(category.ColorCode);
+            NameLabel.TextColor = ColorManager.Text;
+
+            EditButton.BackgroundColor = category.ColorCode.ToColor();
         }
 
         private void EditButton_Clicked(object sender, EventArgs e)

@@ -13,35 +13,42 @@ namespace Wallet.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HistoryItemCard : ContentView
     {
-        List<ChartEntry> expenses = new List<ChartEntry>();
-
-        private readonly Color cardBackgroundColor;
-        private readonly Color expenseColor;
-        private readonly Color incomeColor;
+        private readonly List<ChartEntry> expenses = new List<ChartEntry>();
 
         public HistoryItemCard(int income, int expense, DateTime date, FinanceCategory category, List<Finance> finances)
         {
             InitializeComponent();
 
-            cardBackgroundColor = (Color)Application.Current.Resources["White"];
-            incomeColor = (Color)Application.Current.Resources["Income"];
-            expenseColor = (Color)Application.Current.Resources["Expense"];
+            MainFrame.BackgroundColor = ColorManager.Background;
+
+            IncomeTitleLabel.TextColor =
+            ExpenseTitleLabel.TextColor =
+            TotalTitleLabel.TextColor = ColorManager.SecondaryText;
+
+            DateLabel.TextColor = ColorManager.Text;
+            DateLabel.Text = date.FormatToMonthYear();
 
             IncomeLabel.Text = income.FormatToMoney();
-            this.IncomeLabel.TextColor = expenseColor;
+            IncomeLabel.TextColor = ColorManager.Income;
 
             ExpensesLabel.Text = expense.FormatToMoney();
-            ExpensesLabel.TextColor = incomeColor;
+            ExpensesLabel.TextColor = ColorManager.Expense;
 
             TotalLabel.Text = (income - expense).FormatToMoney();
-            DateLabel.Text = date.ToString("MMM yyyy");
+            TotalLabel.TextColor = ColorManager.Text;
 
             int money = FinanceManager.Finances.FindAll(x => x.Date.Year == date.Year && x.Date.Month == date.Month && x.CategoryId == category.Id).Sum(x => x.Money);
             MostExpensesCategoryLabel.Text = $"{category.Name} {money.FormatToMoney()}";
-            MostExpensesCategoryLabel.TextColor = Color.FromHex(category.ColorCode);
+            MostExpensesCategoryLabel.TextColor = category.ColorCode.ToColor();
 
-            expenses.Add(CreateChartEntry(income, false));
-            expenses.Add(CreateChartEntry(expense, true));
+            if (income > 0)
+            {
+                expenses.Add(CreateChartEntry(income, false));
+            }
+            if (expense > 0)
+            {
+                expenses.Add(CreateChartEntry(expense, true));
+            }
 
             ExpensesChart.Chart = MakeChart();
 
@@ -58,17 +65,17 @@ namespace Wallet.Controls
             return new DonutChart
             {
                 Entries = expenses,
-                BackgroundColor = SKColor.Parse(cardBackgroundColor.ToHex()),
+                BackgroundColor = ColorManager.BackgroundSK,
                 LabelTextSize = 30,
                 IsAnimated = true
             };
         }
 
-        private ChartEntry CreateChartEntry(float money, bool isExpense)
+        private ChartEntry CreateChartEntry(float money, bool expense)
         {
             return new ChartEntry(money)
             {
-                Color = isExpense ? SKColor.Parse(expenseColor.ToHex()) : SKColor.Parse(incomeColor.ToHex())
+                Color = ColorManager.ExpenseOrIncomeSK(expense)
             };
         }
     }

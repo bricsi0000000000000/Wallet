@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SkiaSharp;
+using System;
+using Xamarin.Forms;
 
 namespace Wallet
 {
@@ -27,6 +29,16 @@ namespace Wallet
         public static string FormatToMonth(this DateTime date)
         {
             return date.ToString("MMM");
+        }
+
+        public static Color ToColor(this string colorCode)
+        {
+            return Color.FromHex(colorCode);
+        }
+
+        public static SKColor ToSKColor(this string colorCode)
+        {
+            return SKColor.Parse(colorCode);
         }
     }
 }

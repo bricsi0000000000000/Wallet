@@ -9,8 +9,6 @@ namespace Wallet.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListCategories : ContentPage
     {
-        private const string BACKGROUND_COLOR = "#EBEEF0";
-
         public ListCategories()
         {
             InitializeComponent();
@@ -40,7 +38,7 @@ namespace Wallet.Views
                 HasShadow = false,
                 Padding = 20,
                 HeightRequest = 50,
-                Opacity=0
+                Opacity = 0
             };
 
             ListItems.Children.Add(emptyFrame);

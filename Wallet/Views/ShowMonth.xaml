@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.ShowMonth"
-             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms">
+             xmlns:controls="clr-namespace:Wallet.Controls">
     <Shell.TitleView>
         <Label x:Name="TitleLabel"
                TextColor="{StaticResource White}"
@@ -27,30 +27,7 @@
                 <RowDefinition Height="400"/>
             </Grid.RowDefinitions>
 
-            <Frame x:Name="ExpensesChartFrame"
-                   BackgroundColor="#ffffff"
-                   CornerRadius="10"
-                   Margin="10, 10, 10, 2.5"
-                   WidthRequest="1000"
-                   HorizontalOptions="CenterAndExpand">
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <forms:ChartView x:Name="ExpensesChart"
-                                             WidthRequest="220"/>
-
-                    <ScrollView Grid.Column="1">
-                        <StackLayout WidthRequest="100"
-                                         x:Name="ChartLabels"/>
-                    </ScrollView>
-
-                </Grid>
-
-            </Frame>
+            <StackLayout x:Name="ChartStackLayout"/>
 
             <ScrollView Grid.Row="1"
                         Padding="0,0,0,0">

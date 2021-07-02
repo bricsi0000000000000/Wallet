@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.AddCategory"
-             xmlns:xfsegmentedcontrol="clr-namespace:Udara.Plugin.XFColorPickerControl;assembly=Udara.Plugin.XFColorPickerControl">
+             xmlns:colorPicker="clr-namespace:ColorPicker;assembly=ColorPicker">
     <Shell.TitleView>
         <Label x:Name="TitleLabel"
                TextColor="{StaticResource White}"
@@ -30,7 +30,6 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
-
             <Frame x:Name="NameFrame"
                     CornerRadius="10"
                     HasShadow="True"
@@ -46,48 +45,18 @@
                            Margin="3"/>
 
                     <Entry Grid.Column="1"
-                        x:Name="NameInput"
-                        BackgroundColor="#ffffff"
-                        TextColor="{StaticResource Primary}"
-                        Placeholder="Name"
-                        PlaceholderColor="#a5a5a5"
-                        />
+                           x:Name="NameInput"
+                           Placeholder="Name"/>
                 </Grid>
             </Frame>
 
             <Frame Grid.Row="1"
                    x:Name="ColorPickerFrame"
-                    BackgroundColor="#ffffff"
-                    CornerRadius="10"
-                    HasShadow="True"
-                    Margin="20,5,20,5">
-                <xfsegmentedcontrol:ColorPicker x:Name="ColorPicker"
-	                                            ColorFlowDirection="Horizontal"
-	                                            ColorSpectrumStyle="TintToHueToShadeStyle"
-	                                            PickedColorChanged="ColorPicker_PickedColorChanged"
-	                                            PointerRingBorderUnits="0.4"
-	                                            PointerRingDiameterUnits="0.7"
-	                                            PointerRingPositionXUnits="0.6"
-	                                            PointerRingPositionYUnits="0.6">
-                    <xfsegmentedcontrol:ColorPicker.BaseColorList>
-                        <x:Array Type="{x:Type x:String}">
-                            <!--  Red  -->
-                            <x:String>#ff0000</x:String>
-                            <!--  Yellow  -->
-                            <x:String>#ffff00</x:String>
-                            <!--  Green (Lime)  -->
-                            <x:String>#00ff00</x:String>
-                            <!--  Aqua  -->
-                            <x:String>#00ffff</x:String>
-                            <!--  Blue  -->
-                            <x:String>#0000ff</x:String>
-                            <!--  Fuchsia  -->
-                            <x:String>#ff00ff</x:String>
-                            <!--  Red  -->
-                            <x:String>#ff0000</x:String>
-                        </x:Array>
-                    </xfsegmentedcontrol:ColorPicker.BaseColorList>
-                </xfsegmentedcontrol:ColorPicker>
+                   CornerRadius="10"
+                   HasShadow="True"
+                   Margin="20,5,20,5">
+                
+                <colorPicker:ColorTriangle x:Name="ColorPicker"/>
             </Frame>
 
             <Grid Grid.Row="3"
@@ -102,9 +71,9 @@
                        HasShadow="True"
                        Margin="30,0,0,0">
 
-                    <ImageButton Source="delete.png"
+                    <ImageButton x:Name="DeleteImageButton"
+                                 Source="delete.png"
                                  CornerRadius="10"
-                                 BackgroundColor="{StaticResource Delete}"
                                  Padding="17"
                                  Clicked="DeleteButton_Clicked"/>
                 </Frame>
@@ -116,21 +85,11 @@
                        Margin="0, 0, 30, 0">
 
                     <ImageButton Grid.Column="1"
-                                 Source="save.png"
+                                 x:Name="SaveImageButton"
+                                 Source="save_white.png"
                                  CornerRadius="10"
-                                 BackgroundColor="{StaticResource Secondary}"
                                  Padding="15"
-                                 Clicked="SaveButton_Clicked">
-                        <ImageButton.Background>
-                            <LinearGradientBrush StartPoint="0,0"
-                                             EndPoint="1,1">
-                                <GradientStop Color="{StaticResource White}"
-                              Offset="0.0" />
-                                <GradientStop Color="{StaticResource Gradient2}"
-                              Offset="0.7" />
-                            </LinearGradientBrush>
-                        </ImageButton.Background>
-                    </ImageButton>
+                                 Clicked="SaveButton_Clicked"/>
                 </Frame>
             </Grid>
 
@@ -141,21 +100,11 @@
                        HasShadow="True"
                        Margin="30, 0, 30, 0">
 
-                    <ImageButton Source="save.png"
+                    <ImageButton x:Name="SaveImageButton1"
+                                 Source="save_white.png"
                                  CornerRadius="10"
-                                 BackgroundColor="{StaticResource Secondary}"
                                  Padding="15"
-                                 Clicked="SaveButton_Clicked">
-                        <ImageButton.Background>
-                            <LinearGradientBrush StartPoint="0,0"
-                                             EndPoint="1,1">
-                                <GradientStop Color="{StaticResource White}"
-                              Offset="0.0" />
-                                <GradientStop Color="{StaticResource Gradient2}"
-                              Offset="0.7" />
-                            </LinearGradientBrush>
-                        </ImageButton.Background>
-                    </ImageButton>
+                                 Clicked="SaveButton_Clicked"/>
                 </Frame>
             </Grid>
         </Grid>

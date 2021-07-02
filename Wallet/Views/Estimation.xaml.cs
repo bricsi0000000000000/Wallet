@@ -14,6 +14,17 @@ namespace Wallet.Views
         public Estimation()
         {
             InitializeComponent();
+
+            ExpenseFrame.BackgroundColor =
+            IncomeFrame.BackgroundColor =
+            IncomeInput.BackgroundColor = 
+            ExpenseInput.BackgroundColor = ColorManager.Background;
+
+            ExpenseInput.TextColor = ColorManager.Text;
+            ExpenseInput.PlaceholderColor = ColorManager.PlaceholderText;
+
+            IncomeInput.TextColor = ColorManager.Text;
+            IncomeInput.PlaceholderColor = ColorManager.PlaceholderText;
         }
 
         protected override void OnAppearing()

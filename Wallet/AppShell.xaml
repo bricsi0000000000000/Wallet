@@ -14,20 +14,20 @@
             
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
-                <Setter Property="Shell.TitleColor" Value="White" />
-                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
-                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="White" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource White}" />
+                <Setter Property="Shell.TitleColor" Value="{StaticResource White}" />
+                <Setter Property="Shell.DisabledColor" Value="{StaticResource White}" />
+                <Setter Property="Shell.UnselectedColor" Value="{StaticResource White}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource White}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource White}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource White}"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource White}"/>
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
 
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource White}"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource FiraCodeRetina}"></Setter>
             </Style>
             <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
@@ -36,7 +36,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource White}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
@@ -50,13 +50,12 @@
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
-    
-    
+
     <Shell.FlyoutHeaderTemplate FlyoutHeaderBehavior="CollapseOnScroll">
         <DataTemplate>
             <Grid HeightRequest="100">
                 <Label Text="Easy Wallet"
-                       TextColor="White"
+                       TextColor="{StaticResource White}"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center" 
                        FontAttributes="Bold"

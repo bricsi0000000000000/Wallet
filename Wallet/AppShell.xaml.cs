@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Wallet.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -14,6 +13,8 @@ namespace Wallet
         {
             InitializeComponent();
 
+            ColorManager.InitializeColors();
+
             SettingsManager.AddCurrency(new Currency { Id = 0, Name = "$", Value = "en-US" });
             SettingsManager.AddCurrency(new Currency { Id = 1, Name = "€", Value = "de-DE" });
             SettingsManager.AddCurrency(new Currency { Id = 2, Name = "£", Value = "en-GB" });
@@ -24,7 +25,7 @@ namespace Wallet
 
 
             //Database.ResetDatabase();
-           // Database.LoadDefaults();
+            //Database.LoadDefaults();
             Database.LoadFromDatabase();
             //Database.SaveBudgetGoals();
 
