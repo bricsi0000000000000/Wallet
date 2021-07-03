@@ -4,7 +4,7 @@
              x:Class="Wallet.Controls.ChartValue">
     <Grid>
         <Label x:Name="CategoryNameLabel"
-                FontSize="11"/>
+               FontSize="11"/>
 
         <Label x:Name="MoneyLabel"
                 FontSize="12"

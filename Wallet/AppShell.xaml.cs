@@ -33,6 +33,8 @@ namespace Wallet
             {
                 Database.ResetDatabase();
             }
+
+            FinanceManager.Initialize();
         }
 
         private void Button_Clicked(object sender, EventArgs e)

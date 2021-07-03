@@ -55,9 +55,9 @@ namespace Wallet
         public static void InitializeColors()
         {
             backgroundLight = (Color)Application.Current.Resources["White"];
-            backgroundDark = (Color)Application.Current.Resources["BackgroundDark"];
+            backgroundDark = (Color)Application.Current.Resources["BackgroundDarkMode"];
 
-            textLight = (Color)Application.Current.Resources["Primary"];
+            textLight = (Color)Application.Current.Resources["Title"];
             textDark = (Color)Application.Current.Resources["White"];
 
             textSecondaryLight = (Color)Application.Current.Resources["600"];

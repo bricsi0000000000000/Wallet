@@ -2,33 +2,16 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             x:Class="Wallet.Controls.MonthlyFinancesChartCard">
-    <Frame x:Name="ExpensesChartFrame"
-           CornerRadius="10"
-           Margin="10, 10, 10, 2.5"
-           HeightRequest="300"
-           VerticalOptions="StartAndExpand"
-           HorizontalOptions="CenterAndExpand">
-
-        <ScrollView Orientation="Horizontal">
-            <StackLayout Orientation="Horizontal">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-
-                    <forms:ChartView x:Name="ExpensesChart"
-                                     WidthRequest="200"/>
-
-                    <ScrollView Grid.Column="1">
-                        <StackLayout x:Name="ChartLabels"/>
-                    </ScrollView>
-                </Grid>
-
-                <forms:ChartView x:Name="DailyChart"
-                                 WidthRequest="600"/>
-            </StackLayout>
+             x:Class="Wallet.Controls.MonthlyFinancesChartCard"
+             HeightRequest="300">
+    <StackLayout Orientation="Horizontal">
+        <forms:ChartView x:Name="ExpensesChart"
+                         WidthRequest="290"/>
+        <ScrollView>
+            <StackLayout x:Name="ChartLabels"
+                         VerticalOptions="Center"
+                         Spacing="2"/>
         </ScrollView>
-    </Frame>
+
+    </StackLayout>
 </ContentView>

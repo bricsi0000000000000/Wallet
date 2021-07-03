@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet.Views.Home"
+             BackgroundColor="{StaticResource White}">
+    <ContentPage.Content>
+        <Grid Padding="20,15">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             Spacing="10">
+                    <Label x:Name="MonthLabel"
+                           Text="July"
+                           FontSize="38"
+                           Margin="0,0,0,5"
+                           TextColor="{StaticResource Title}"/>
+                    
+                    <Label x:Name="DayLabel"
+                           Text="15"
+                           FontSize="38"
+                           Margin="0,0,0,5"
+                           Style="{DynamicResource ThinText}"/>
+                </StackLayout>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout>
+                        <Label x:Name="MonthlyBudgetTitleLabel"
+                               Text="Monthly budget"
+                               FontSize="17"
+                               Style="{DynamicResource LightText}"/>
+            
+                        <Label x:Name="MonthlyBudgetLabel"
+                               Text="30 000 Ft"
+                               FontSize="17"
+                               Style="{DynamicResource BoldText}"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1"
+                                 HorizontalOptions="End">
+                        <Label x:Name="NetWorthTitleLabel"
+                               Text="Net worth"
+                               FontSize="17"
+                               Style="{DynamicResource LightText}"/>
+
+                        <Label x:Name="NetWorthLabel"
+                               Text="30 000 000 Ft"
+                               FontSize="17"
+                               Style="{DynamicResource BoldText}"/>
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout Margin="0,20,0,0"
+                             x:Name="ListItems"/>
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

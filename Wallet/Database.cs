@@ -245,6 +245,31 @@ namespace Wallet
             FinanceCategoryManager.Add(new FinanceCategory { Id = 12, Name = "Random income", ColorCode = "#a6c0fc" });
             SaveCategories();
 
+            //FinanceManager.Add(new Finance { Id = 34, Description = "Vonatjegy", Date = new DateTime(2021, 07, 2), Money = 1481, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
+
+            //FinanceManager.Add(new Finance { Id = 33, Description = "Asetto Corsa", Date = new DateTime(2021, 07, 02), Money = 7288, Type = FinanceType.Expense, CategoryId = 4, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 32, Description = "Wamus", Date = new DateTime(2021, 07, 07), Money = 927, Type = FinanceType.Expense, CategoryId = 1, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 31, Description = "Bus", Date = new DateTime(2021, 07, 07), Money = 119, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 30, Description = "Bus", Date = new DateTime(2021, 07, 07), Money = 119, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 29, Description = "Tesco", Date = new DateTime(2021, 07, 07), Money = 209, Type = FinanceType.Expense, CategoryId = 1, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 28, Description = "Spar", Date = new DateTime(2021, 07, 07), Money = 1164, Type = FinanceType.Expense, CategoryId = 2, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 27, Description = "Elixir kv", Date = new DateTime(2021, 07, 07), Money = 935, Type = FinanceType.Expense, CategoryId = 5, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 26, Description = "Spar", Date = new DateTime(2021, 07, 07), Money = 259, Type = FinanceType.Expense, CategoryId = 1, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 25, Description = "Salary", Date = new DateTime(2021, 07, 10), Money = 283921, Type = FinanceType.Income, CategoryId = 7, IsAutomatized = true });
+            //FinanceManager.Add(new Finance { Id = 24, Description = "Deposit", Date = new DateTime(2021, 07, 10), Money = 280000, Type = FinanceType.Deposit, CategoryId = 8, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 23, Description = "Scholarship", Date = new DateTime(2021, 07, 10), Money = 20700, Type = FinanceType.Income, CategoryId = 6, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 22, Description = "Bus", Date = new DateTime(2021, 07, 15), Money = 119, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 21, Description = "Bus", Date = new DateTime(2021, 07, 15), Money = 119, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 20, Description = "KFC", Date = new DateTime(2021, 07, 15), Money = 1980, Type = FinanceType.Expense, CategoryId = 2, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 19, Description = "Interest", Date = new DateTime(2021, 07, 15), Money = 5, Type = FinanceType.Income, CategoryId = 12, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 18, Description = "Petis döner", Date = new DateTime(2021, 07, 18), Money = 1690, Type = FinanceType.Expense, CategoryId = 2, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 17, Description = "Üveges sör", Date = new DateTime(2021, 07, 18), Money = 470, Type = FinanceType.Expense, CategoryId = 5, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 16, Description = "Sör", Date = new DateTime(2021, 07, 18), Money = 350, Type = FinanceType.Expense, CategoryId = 5, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 15, Description = "Mandala", Date = new DateTime(2021, 07, 18), Money = 500, Type = FinanceType.Expense, CategoryId = 5, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 14, Description = "Chopsticks", Date = new DateTime(2021, 07, 23), Money = 589, Type = FinanceType.Expense, CategoryId = 4, IsAutomatized = false });
+            //FinanceManager.Add(new Finance { Id = 35, Description = "Spotify", Date = new DateTime(2021, 07, 27), Money = 916, Type = FinanceType.Expense, CategoryId = 9, IsAutomatized = true });
+
+
             FinanceManager.Add(new Finance { Id = 34, Description = "Vonatjegy", Date = new DateTime(2021, 07, 2), Money = 1481, Type = FinanceType.Expense, CategoryId = 3, IsAutomatized = false });
 
             FinanceManager.Add(new Finance { Id = 33, Description = "Asetto Corsa", Date = new DateTime(2021, 06, 02), Money = 7288, Type = FinanceType.Expense, CategoryId = 4, IsAutomatized = false });

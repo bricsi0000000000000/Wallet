@@ -12,4 +12,5 @@
 	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
 		<item name="colorAccent">#4dcef9</item>
 	</style>
+
 </resources>

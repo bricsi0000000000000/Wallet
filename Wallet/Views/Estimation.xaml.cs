@@ -81,9 +81,9 @@ namespace Wallet.Views
 
             ListItems.Children.Add(new CalculateExpenseItemCard(income, expense));
 
-            ListItems.Children.Add(new EstimationChartCard(FinanceManager.Balance, 6, automatizedFinances));
-            ListItems.Children.Add(new EstimationChartCard(FinanceManager.Balance, 12, automatizedFinances));
-            ListItems.Children.Add(new EstimationChartCard(FinanceManager.Balance, 3 * 12, automatizedFinances));
+            ListItems.Children.Add(new EstimationChartCard(FinanceManager.NetWorth, 6, automatizedFinances));
+            ListItems.Children.Add(new EstimationChartCard(FinanceManager.NetWorth, 12, automatizedFinances));
+            ListItems.Children.Add(new EstimationChartCard(FinanceManager.NetWorth, 3 * 12, automatizedFinances));
         }
 
         private void Calculate_Clicked(object sender, EventArgs e)

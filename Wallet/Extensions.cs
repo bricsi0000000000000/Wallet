@@ -1,5 +1,7 @@
 ﻿using SkiaSharp;
 using System;
+using System.Collections.Generic;
+using Wallet.Models;
 using Xamarin.Forms;
 
 namespace Wallet
@@ -31,6 +33,11 @@ namespace Wallet
             return date.ToString("MMM");
         }
 
+        public static string FormatToDay(this DateTime date)
+        {
+            return date.ToString("dd");
+        }
+
         public static Color ToColor(this string colorCode)
         {
             return Color.FromHex(colorCode);
@@ -39,6 +46,36 @@ namespace Wallet
         public static SKColor ToSKColor(this string colorCode)
         {
             return SKColor.Parse(colorCode);
+        }
+
+        public static List<Finance> SortList(this List<Finance> finances, bool descending = false)
+        {
+            for (int j = 0; j < finances.Count - 1; j++)
+            {
+                for (int i = 0; i < finances.Count - 1; i++)
+                {
+                    if (descending)
+                    {
+                        if (finances[i].Money < finances[i + 1].Money)
+                        {
+                            Finance temp = finances[i + 1];
+                            finances[i + 1] = finances[i];
+                            finances[i] = temp;
+                        }
+                    }
+                    else
+                    {
+                        if (finances[i].Money > finances[i + 1].Money)
+                        {
+                            Finance temp = finances[i + 1];
+                            finances[i + 1] = finances[i];
+                            finances[i] = temp;
+                        }
+                    }
+                }
+            }
+
+            return finances;
         }
     }
 }

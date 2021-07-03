@@ -4,13 +4,38 @@
              x:Class="Wallet.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#344955</Color>
+            <OnPlatform x:TypeArguments="x:String" x:Key="RobotoThin">
+                <On Platform="Android" Value="Roboto-Thin.ttf#Roboto-Thin" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="RobotoLight">
+                <On Platform="Android" Value="Roboto-Light.ttf#Roboto-Light" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="RobotoRegular">
+                <On Platform="Android" Value="Roboto-Regular.ttf#Roboto-Regular" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="RobotoBold">
+                <On Platform="Android" Value="Roboto-Bold.ttf#Roboto-Bold" />
+            </OnPlatform>
+
+            <Color x:Key="Primary">#30D5C8</Color>
+            <Color x:Key="LightDark">#3F4652</Color>
+            <Color x:Key="Dark">#272C33</Color>
+            <Color x:Key="White">#FFFFFF</Color>
+            <Color x:Key="Title">#6d6d6d</Color>
+            <Color x:Key="Text">#CECECE</Color>
+            <Color x:Key="ThinTextColor">#a3a3a3</Color>
+            <Color x:Key="Background">#EBECED</Color>
+            <Color x:Key="BackgroundDarkMode">#1B1B1B</Color>
+
+
             <Color x:Key="PrimaryBackground">#232F34</Color>
             <Color x:Key="600">#4A6572</Color>
-            <Color x:Key="Secondary">#4dcef9</Color>
+            <Color x:Key="Secondary">#B00020</Color>
             <Color x:Key="Delete">#B00020</Color>
             <Color x:Key="DeleteButtonDark">#f7748c</Color>
-            <Color x:Key="White">#ffffff</Color>
             <Color x:Key="Gradient1">#C1E0FC</Color>
             <Color x:Key="Gradient1Dark">#005491</Color>
             <Color x:Key="Gradient2">#D0DCEC</Color>
@@ -20,28 +45,28 @@
             <Color x:Key="Expense">#ed386b</Color>
             <Color x:Key="BackgroundDark">#262626</Color>
             <Color x:Key="SecondaryDarkText">#dddddd</Color>
-            <Style TargetType="Button">
-                <Setter Property="TextColor" Value="{StaticResource White}"></Setter>
-                <Setter Property="VisualStateManager.VisualStateGroups">
-                    <VisualStateGroupList>
-                        <VisualStateGroup x:Name="CommonStates">
-                            <VisualState x:Name="Normal">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-                                </VisualState.Setters>
-                            </VisualState>
-                            <VisualState x:Name="Disabled">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#332196F3" />
-                                </VisualState.Setters>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </Setter>
+
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}"></Setter>
             </Style>
-            <Style TargetType="Entry">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource PrimaryBackground}, Light={StaticResource White}}"></Setter>
-                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Primary}}"></Setter>
+
+            <Style TargetType="StackLayout">
+                <Setter Property="Spacing" Value="0"></Setter>
+            </Style>
+
+            <Style x:Key="BoldText" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoBold}"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource ThinTextColor}"></Setter>
+            </Style>
+
+            <Style x:Key="ThinText" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoThin}"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource ThinTextColor}"></Setter>
+            </Style>
+
+            <Style x:Key="LightText" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoLight}"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource ThinTextColor}"></Setter>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

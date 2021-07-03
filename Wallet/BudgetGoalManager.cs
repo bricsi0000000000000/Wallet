@@ -29,5 +29,29 @@ namespace Wallet
         {
             BudgetGoals = BudgetGoals.OrderByDescending(x => (float)x.SpentMoney / x.MaxMoney).ToList();
         }
+
+        public static int AllBudget
+        {
+            get
+            {
+                return BudgetGoals.Sum(x => x.MaxMoney);
+            }
+        }
+
+        public static int SpentBudget
+        {
+            get
+            {
+                return BudgetGoals.Sum(x => x.SpentMoney);
+            }
+        }
+
+        public static int LeftBudget
+        {
+            get
+            {
+                return AllBudget - SpentBudget;
+            }
+        }
     }
 }

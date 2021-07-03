@@ -16,9 +16,9 @@ namespace Wallet.Controls
 
             this.id = finance.Id;
 
-            MainFrame.BackgroundColor = ColorManager.Background;
+          //  MainFrame.BackgroundColor = ColorManager.Background;
 
-            DescriptionLabel.TextColor = RegularityLabel.TextColor = ColorManager.SecondaryText;
+            //DescriptionLabel.TextColor = RegularityLabel.TextColor = ColorManager.SecondaryText;
 
             DescriptionLabel.Text = finance.Description;
             RegularityLabel.Text = finance.IsAutomatized ? "Regular" : "One time";

@@ -55,7 +55,7 @@ namespace Wallet.Controls
             TapGestureRecognizer tap = new TapGestureRecognizer();
             tap.Tapped += (s, e) =>
             {
-                Navigation.PushAsync(new ShowMonth(finances, date));
+                Navigation.PushAsync(new ShowMonth(date));
             };
             ExpensesChart.GestureRecognizers.Add(tap);
         }
