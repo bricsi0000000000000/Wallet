@@ -17,35 +17,35 @@ namespace Wallet.Views
 
             this.id = id;
 
-            MoneyFrame.BackgroundColor =
-            DescriptionFrame.BackgroundColor =
-            MoneyInput.BackgroundColor =
-            CategoryPickerFrame.BackgroundColor =
-            CategoryPicker.BackgroundColor =
-            AddNewCategoryImageButton.BackgroundColor =
-            FinanceTypeFrame.BackgroundColor =
-            FinanceTypePicker.BackgroundColor =
-            DatePickerFrame.BackgroundColor =
-            IsAutomatizedFrame.BackgroundColor =
-            //IsAutomatizedPicker.BackgroundColor = 
-            DescriptionInput.BackgroundColor = ColorManager.Background;
+            //MoneyFrame.BackgroundColor =
+            //DescriptionFrame.BackgroundColor =
+            //MoneyInput.BackgroundColor =
+            //CategoryPickerFrame.BackgroundColor =
+            //CategoryPicker.BackgroundColor =
+            //AddNewCategoryImageButton.BackgroundColor =
+            //FinanceTypeFrame.BackgroundColor =
+            //FinanceTypePicker.BackgroundColor =
+            //DatePickerFrame.BackgroundColor =
+            //IsAutomatizedFrame.BackgroundColor =
+            ////IsAutomatizedPicker.BackgroundColor = 
+            //DescriptionInput.BackgroundColor = ColorManager.Background;
 
-            MoneyInput.TextColor = ColorManager.Text;
-            MoneyInput.PlaceholderColor = ColorManager.PlaceholderText;
+            //MoneyInput.TextColor = ColorManager.Text;
+            //MoneyInput.PlaceholderColor = ColorManager.PlaceholderText;
 
-            DescriptionInput.TextColor = ColorManager.Text;
-            DescriptionInput.PlaceholderColor = ColorManager.PlaceholderText;
+            //DescriptionInput.TextColor = ColorManager.Text;
+            //DescriptionInput.PlaceholderColor = ColorManager.PlaceholderText;
 
-            CategoryPicker.TextColor = ColorManager.Text;
-            CategoryPicker.TitleColor = ColorManager.PlaceholderText;
+            //CategoryPicker.TextColor = ColorManager.Text;
+            //CategoryPicker.TitleColor = ColorManager.PlaceholderText;
 
-            FinanceTypePicker.TextColor = ColorManager.Text;
-            FinanceTypePicker.TitleColor = ColorManager.PlaceholderText;
+            //FinanceTypePicker.TextColor = ColorManager.Text;
+            //FinanceTypePicker.TitleColor = ColorManager.PlaceholderText;
 
-            //IsAutomatizedPicker.TextColor = ColorManager.Text;
-            //IsAutomatizedPicker.TitleColor = ColorManager.PlaceholderText;
+            ////IsAutomatizedPicker.TextColor = ColorManager.Text;
+            ////IsAutomatizedPicker.TitleColor = ColorManager.PlaceholderText;
 
-            IsAutomatizedLabel.TextColor = ColorManager.Text;
+            //IsAutomatizedLabel.TextColor = ColorManager.Text;
 
             DeleteImageButton.BackgroundColor = ColorManager.DeleteButton;
 
@@ -89,9 +89,9 @@ namespace Wallet.Views
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            MoneyFrame.BorderColor = ColorManager.IsInputEmpty(string.IsNullOrEmpty(MoneyInput.Text));
+            //MoneyFrame.BorderColor = ColorManager.IsInputEmpty(string.IsNullOrEmpty(MoneyInput.Text));
             CategoryPickerFrame.BorderColor = ColorManager.IsInputEmpty(selectedCategory == null);
-            DatePickerFrame.BorderColor = ColorManager.IsInputEmpty(selectedDate == null);
+            //DatePickerFrame.BorderColor = ColorManager.IsInputEmpty(selectedDate == null);
 
             if (!string.IsNullOrEmpty(MoneyInput.Text) && selectedCategory != null && selectedDate != null)
             {
@@ -105,7 +105,12 @@ namespace Wallet.Views
                     finance.Id = FinanceManager.FinanceId++;
                 }
 
+                int money = finance.Money;
+
                 finance.Money = int.Parse(MoneyInput.Text);
+
+                money -= finance.Money;
+
                 finance.Description = string.IsNullOrEmpty(DescriptionInput.Text) ? CategoryPicker.SelectedItem.ToString() : DescriptionInput.Text;
                 finance.CategoryId = selectedCategory.Id;
                 finance.Type = (FinanceType)FinanceTypePicker.SelectedIndex;
@@ -117,6 +122,12 @@ namespace Wallet.Views
                 {
                     FinanceManager.Add(finance);
                 }
+                else
+                {
+                    BudgetGoalManager.UpdateSpentMoney(finance, money);
+                }
+
+                FinanceManager.LoadMonthlyFinances();
 
                 Database.SaveFinances();
 
@@ -127,6 +138,7 @@ namespace Wallet.Views
         private async void DeleteButton_Clicked(object sender, EventArgs e)
         {
             FinanceManager.Remove(id);
+            FinanceManager.LoadMonthlyFinances();
 
             Database.SaveFinances();
 
@@ -145,7 +157,7 @@ namespace Wallet.Views
 
         private void FinanceTypePicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FinanceTypeFrame.BackgroundColor = 
+            // FinanceTypeFrame.BackgroundColor = 
             FinanceTypePicker.BackgroundColor = FinanceTypePicker.SelectedIndex == 0 ? ColorManager.Background : ColorManager.Income;
         }
 

@@ -2,5 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Controls.ListMonthlyFinances">
-    <StackLayout x:Name="ListItems" Spacing="2"/>
+    <ScrollView>
+        <StackLayout x:Name="ListItems" Spacing="4"/>
+    </ScrollView>
 </ContentView>

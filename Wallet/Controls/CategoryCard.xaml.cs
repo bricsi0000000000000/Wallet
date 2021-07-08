@@ -18,10 +18,10 @@ namespace Wallet.Controls
 
             this.id = category.Id;
 
-            MainFrame.BackgroundColor = ColorManager.Background;
+            //MainFrame.BackgroundColor = ColorManager.Background;
 
             NameLabel.Text = category.Name;
-            NameLabel.TextColor = ColorManager.Text;
+            //NameLabel.TextColor = ColorManager.Text;
 
             EditButton.BackgroundColor = category.ColorCode.ToColor();
         }

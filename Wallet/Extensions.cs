@@ -33,6 +33,11 @@ namespace Wallet
             return date.ToString("MMM");
         }
 
+        public static string FormatToFullMonth(this DateTime date)
+        {
+            return date.ToString("MMMM");
+        }
+
         public static string FormatToDay(this DateTime date)
         {
             return date.ToString("dd");

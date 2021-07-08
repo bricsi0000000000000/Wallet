@@ -4,26 +4,17 @@
              x:Class="Wallet.Views.AddBudget">
     <Shell.TitleView>
         <Label x:Name="TitleLabel"
-               TextColor="{StaticResource White}"
+               Style="{DynamicResource LightText}"
                FontSize="20"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Start"
                />
     </Shell.TitleView>
-    <ContentPage.Background>
-        <LinearGradientBrush StartPoint="0,0"
-                             EndPoint="1,1">
-            <GradientStop Color="{StaticResource Gradient2}"
-                          Offset="0.3" />
-            <GradientStop Color="{StaticResource White}"
-                          Offset="1.0" />
-        </LinearGradientBrush>
-    </ContentPage.Background>
+  
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="110"/>
-                <RowDefinition Height="90"/>
+                <RowDefinition Height="170"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="30"/>
@@ -32,53 +23,58 @@
             <Frame x:Name="CategoryPickerFrame"
                    CornerRadius="10"
                    HasShadow="True"
-                   Margin="20,20,20,5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
+                   Padding="10,0,0,0"
+                   Margin="20,20,20,0">
+                <Grid HorizontalOptions="CenterAndExpand"
+                      WidthRequest="1000">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Image Source="category_primary.png"
-                           Margin="7"/>
+                        <Image Source="category_primary.png"
+                               Margin="7"/>
 
-                    <Picker Grid.Column="1"
-                            Title="Category"
-                            x:Name="CategoryPicker"
-                            SelectedIndexChanged="SelectCategory"
-                            />
+                        <Picker Grid.Column="1"
+                                Title="Category"
+                                x:Name="CategoryPicker"
+                                SelectedIndexChanged="SelectCategory"
+                                />
 
-                    <ImageButton Grid.Column="2"
-                                 x:Name="AddNewCategoryImageButton"
-                                 Source="add_new.png"
-                                 Clicked="AddNewCategory_Clicked"/>
+                        <ImageButton Grid.Column="2"
+                                     x:Name="AddNewCategoryImageButton"
+                                     Source="add_new.png"
+                                     BackgroundColor="{StaticResource White}"
+                                     Margin="7"
+                                     Clicked="AddNewCategory_Clicked"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="goal_primary.png"/>
+
+                        <Entry Grid.Column="1"
+                               x:Name="MaxMoneyInput"
+                               Keyboard="Numeric"
+                               Placeholder="Max amount"
+                               />
+                    </Grid>
                 </Grid>
             </Frame>
 
-            <Frame Grid.Row="1"
-                   x:Name="MaxMoneyFrame"
-                   CornerRadius="10"
-                   HasShadow="True"
-                   Margin="20, 0, 20, 5">
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="goal_primary.png"/>
-
-                    <Entry Grid.Column="1"
-                           x:Name="MaxMoneyInput"
-                           Keyboard="Numeric"
-                           Placeholder="Max amount"
-                           />
-                </Grid>
-            </Frame>
-
-            <Grid Grid.Row="3"
+            <Grid Grid.Row="2"
                   x:Name="BothButtonsGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -112,7 +108,7 @@
                 </Frame>
             </Grid>
 
-            <Grid Grid.Row="3"
+            <Grid Grid.Row="2"
                   x:Name="OneButtonGrid">
                 <Frame Padding="0"
                        CornerRadius="10"

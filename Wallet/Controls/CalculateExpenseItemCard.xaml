@@ -6,8 +6,8 @@
     <Frame x:Name="MainFrame"
            CornerRadius="10"
            HasShadow="True"
-           Margin="10,2.5,10,5"
-           Padding="0,0,0,10"
+           Margin="10,5,10,10"
+           Padding="0,5"
            >
         <Grid>
             <Grid.ColumnDefinitions>
@@ -17,28 +17,43 @@
             </Grid.ColumnDefinitions>
 
             <forms:ChartView x:Name="ExpensesChart"
-                             Margin="0,10,0,0"/>
+                             Margin="0,0,0,0"/>
 
-            <StackLayout Grid.Column="1">
+            <StackLayout Grid.Column="1"
+                         Spacing="3">
                 <Label Text="Income:"
                        FontSize="16"
                        Padding="0,10,0,0"
                        VerticalTextAlignment="Start"
-                       TextColor="{StaticResource Primary}"
+                       Style="{DynamicResource LightText}"
                        FontAttributes="None"/>
                 <Label Text="Expenses:"
                         FontSize="16"
                         VerticalTextAlignment="Start"
-                        TextColor="{StaticResource Primary}"
+                       Style="{DynamicResource LightText}"
                         FontAttributes="None"/>
                 <Label Text="Total:"
                         FontSize="16"
                         VerticalTextAlignment="Start"
-                        TextColor="{StaticResource Primary}"
+                        Style="{DynamicResource BoldText}"
+                        FontAttributes="None"
+                       Padding="0,0,0,10"/>
+               
+                <Label Text="With budget goals:"
+                        FontSize="16"
+                        VerticalTextAlignment="Start"
+                       Style="{DynamicResource LightText}"
                         FontAttributes="None"/>
+                <Label Text="With budget goals:"
+                       FontSize="16"
+                       VerticalTextAlignment="Start"
+                       Style="{DynamicResource BoldText}"
+                       FontAttributes="None"
+                       Padding="0,0,0,10"/>
             </StackLayout>
 
-            <StackLayout Grid.Column="2">
+            <StackLayout Grid.Column="2"
+                         Spacing="3">
                 <Label x:Name="IncomeLabel"
                        Text="1000000"
                        FontSize="16"
@@ -54,7 +69,20 @@
                         Text="1000000"
                         FontSize="16"
                         VerticalTextAlignment="Start"
-                        TextColor="{StaticResource PrimaryBackground}"
+                        Style="{DynamicResource BoldText}"
+                        FontAttributes="None"
+                       Padding="0,0,0,10"/>
+               
+                <Label x:Name="ExpensesWithBudgetGoalsLabel"
+                        Text="1000000"
+                        FontSize="16"
+                        VerticalTextAlignment="Start"
+                        FontAttributes="None"/>
+                <Label x:Name="TotalWithBudgetGoalsLabel"
+                        Text="1000000"
+                        FontSize="16"
+                        VerticalTextAlignment="Start"
+                        Style="{DynamicResource BoldText}"
                         FontAttributes="None"/>
             </StackLayout>
         </Grid>

@@ -15,14 +15,22 @@ namespace Wallet.Views
             InitializeComponent();
 
             this.date = date;
+
+            TitleLabel.Text = date.FormatToFullMonth();
         }
 
         protected override void OnAppearing()
         {
             ListItems.Children.Clear();
 
-            ListItems.Children.Add(new MonthlyFinancesChartCard(date));
-            ListItems.Children.Add(new ListMonthlyFinances(date));
+            MonthlyFinancesChartCard monthlyFinances = new MonthlyFinancesChartCard(date);
+            ListMonthlyFinances listFinances = new ListMonthlyFinances(date);
+
+            monthlyFinances.SetValue(Grid.RowProperty, 0);
+            listFinances.SetValue(Grid.RowProperty, 1);
+
+            ListItems.Children.Add(monthlyFinances);
+            ListItems.Children.Add(listFinances);
         }
     }
 }

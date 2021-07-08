@@ -4,59 +4,75 @@
              x:Class="Wallet.Views.Home"
              BackgroundColor="{StaticResource White}">
     <ContentPage.Content>
-        <Grid Padding="20,15">
-            <StackLayout>
-                <StackLayout Orientation="Horizontal"
-                             Spacing="10">
-                    <Label x:Name="MonthLabel"
-                           Text="July"
-                           FontSize="38"
-                           Margin="0,0,0,5"
-                           TextColor="{StaticResource Title}"/>
+        <AbsoluteLayout>
+            <Grid Padding="20,15">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                                 Spacing="10">
+                        <Label x:Name="MonthLabel"
+                               Text="July"
+                               FontSize="38"
+                               Margin="0,0,0,5"
+                               TextColor="{StaticResource Title}"/>
                     
-                    <Label x:Name="DayLabel"
-                           Text="15"
-                           FontSize="38"
-                           Margin="0,0,0,5"
-                           Style="{DynamicResource ThinText}"/>
-                </StackLayout>
+                        <Label x:Name="DayLabel"
+                               Text="15"
+                               FontSize="38"
+                               Margin="0,0,0,5"
+                               Style="{DynamicResource ThinText}"/>
+                    </StackLayout>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <StackLayout>
-                        <Label x:Name="MonthlyBudgetTitleLabel"
-                               Text="Monthly budget"
-                               FontSize="17"
-                               Style="{DynamicResource LightText}"/>
+                        <StackLayout>
+                            <Label x:Name="MonthlyBudgetTitleLabel"
+                                   Text="Monthly budget"
+                                   FontSize="17"
+                                   Style="{DynamicResource LightText}"/>
             
-                        <Label x:Name="MonthlyBudgetLabel"
-                               Text="30 000 Ft"
-                               FontSize="17"
-                               Style="{DynamicResource BoldText}"/>
-                    </StackLayout>
+                            <Label x:Name="MonthlyBudgetLabel"
+                                   Text="30 000 Ft"
+                                   FontSize="17"
+                                   Style="{DynamicResource BoldText}"/>
+                        </StackLayout>
 
-                    <StackLayout Grid.Column="1"
-                                 HorizontalOptions="End">
-                        <Label x:Name="NetWorthTitleLabel"
-                               Text="Net worth"
-                               FontSize="17"
-                               Style="{DynamicResource LightText}"/>
+                        <StackLayout Grid.Column="1"
+                                     HorizontalOptions="End">
+                            <Label x:Name="NetWorthTitleLabel"
+                                   Text="Net worth"
+                                   FontSize="17"
+                                   Style="{DynamicResource LightText}"/>
 
-                        <Label x:Name="NetWorthLabel"
-                               Text="30 000 000 Ft"
-                               FontSize="17"
-                               Style="{DynamicResource BoldText}"/>
-                    </StackLayout>
-                </Grid>
+                            <Label x:Name="NetWorthLabel"
+                                   Text="30 000 000 Ft"
+                                   FontSize="17"
+                                   Style="{DynamicResource BoldText}"/>
+                        </StackLayout>
+                    </Grid>
 
-                <StackLayout Margin="0,20,0,0"
-                             x:Name="ListItems"/>
+                    <Grid Margin="0,40,0,0"
+                          x:Name="ListItems">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="300"/>
+                            <RowDefinition Height="400"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
 
-            </StackLayout>
-        </Grid>
+                </StackLayout>
+            </Grid>
+            
+            <ImageButton Source="add.png"
+                         CornerRadius="50"
+                         Margin="5"
+                         Padding="25"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"  
+                         AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
+                         BackgroundColor="{StaticResource Primary}"
+                         Clicked="AddFinance"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

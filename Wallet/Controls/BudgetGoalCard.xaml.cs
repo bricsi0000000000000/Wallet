@@ -23,10 +23,10 @@ namespace Wallet.Controls
 
             CategoryNameLabel.Text = category.Name;
 
-            CategoryNameLabel.TextColor =
-            OverMoneyLabel.TextColor =
-            SpentMoneyLabel.TextColor =
-            MaxMoneyLabel.TextColor = ColorManager.Text;
+            //CategoryNameLabel.TextColor =
+            //OverMoneyLabel.TextColor =
+            //SpentMoneyLabel.TextColor =
+            //MaxMoneyLabel.TextColor = ColorManager.Text;
 
             EditButton.BackgroundColor = category.ColorCode.ToColor();
 

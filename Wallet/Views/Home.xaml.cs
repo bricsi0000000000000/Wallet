@@ -22,8 +22,19 @@ namespace Wallet.Views
 
             ListItems.Children.Clear();
 
-            ListItems.Children.Add(new MonthlyFinancesChartCard(DateTime.Today));
-            ListItems.Children.Add(new ListMonthlyFinances(DateTime.Today));
+            MonthlyFinancesChartCard monthlyFinances = new MonthlyFinancesChartCard(DateTime.Today);
+            ListMonthlyFinances listFinances = new ListMonthlyFinances(DateTime.Today);
+
+            monthlyFinances.SetValue(Grid.RowProperty, 0);
+            listFinances.SetValue(Grid.RowProperty, 1);
+
+            ListItems.Children.Add(monthlyFinances);
+            ListItems.Children.Add(listFinances);
+        }
+
+        private async void AddFinance(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddFinance());
         }
     }
 }

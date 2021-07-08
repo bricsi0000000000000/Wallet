@@ -5,21 +5,12 @@
              x:Class="Wallet.Views.History">
     <Shell.TitleView>
         <Label Text="History"
-               TextColor="{StaticResource White}"
+               Style="{DynamicResource LightText}"
                FontSize="20"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Start"
                />
     </Shell.TitleView>
-    <ContentPage.Background>
-        <LinearGradientBrush StartPoint="0,0"
-                             EndPoint="1,1">
-            <GradientStop Color="{StaticResource Gradient2}"
-                          Offset="0.3" />
-            <GradientStop Color="{StaticResource White}"
-                          Offset="1.0" />
-        </LinearGradientBrush>
-    </ContentPage.Background>
     <ContentPage.Content>
         <StackLayout>
             <controls:HistoryChartCard/>

@@ -20,17 +20,17 @@ namespace Wallet.Views
 
             TitleLabel.Text = id == -1 ? "Add Budget" : "Edit Budget";
 
-            CategoryPickerFrame.BackgroundColor =
-            MaxMoneyFrame.BackgroundColor = ColorManager.Background;
+            //CategoryPickerFrame.BackgroundColor =
+            //MaxMoneyFrame.BackgroundColor = ColorManager.Background;
 
-            CategoryPicker.TextColor = ColorManager.Text;
-            CategoryPicker.TitleColor = ColorManager.PlaceholderText;
+            //CategoryPicker.TextColor = ColorManager.Text;
+            //CategoryPicker.TitleColor = ColorManager.PlaceholderText;
 
-            MaxMoneyInput.BackgroundColor = ColorManager.Background;
-            MaxMoneyInput.TextColor = ColorManager.Text;
-            MaxMoneyInput.PlaceholderColor = ColorManager.PlaceholderText;
+            //MaxMoneyInput.BackgroundColor = ColorManager.Background;
+            //MaxMoneyInput.TextColor = ColorManager.Text;
+            //MaxMoneyInput.PlaceholderColor = ColorManager.PlaceholderText;
 
-            AddNewCategoryImageButton.BackgroundColor = ColorManager.Background;
+            //AddNewCategoryImageButton.BackgroundColor = ColorManager.Background;
 
             DeleteImageButton.BackgroundColor = ColorManager.DeleteButton;
 
@@ -82,7 +82,7 @@ namespace Wallet.Views
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            MaxMoneyFrame.BorderColor = ColorManager.IsInputEmpty(string.IsNullOrEmpty(MaxMoneyInput.Text));
+           //MaxMoneyFrame.BorderColor = ColorManager.IsInputEmpty(string.IsNullOrEmpty(MaxMoneyInput.Text));
             CategoryPickerFrame.BorderColor = ColorManager.IsInputEmpty(selectedCategory == null);
 
             if (!string.IsNullOrEmpty(MaxMoneyInput.Text) && selectedCategory != null)

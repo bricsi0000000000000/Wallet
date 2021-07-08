@@ -15,16 +15,16 @@ namespace Wallet.Views
         {
             InitializeComponent();
 
-            ExpenseFrame.BackgroundColor =
-            IncomeFrame.BackgroundColor =
-            IncomeInput.BackgroundColor = 
-            ExpenseInput.BackgroundColor = ColorManager.Background;
+            //ExpenseFrame.BackgroundColor =
+            //IncomeFrame.BackgroundColor =
+            //IncomeInput.BackgroundColor = 
+            //ExpenseInput.BackgroundColor = ColorManager.Background;
 
-            ExpenseInput.TextColor = ColorManager.Text;
-            ExpenseInput.PlaceholderColor = ColorManager.PlaceholderText;
+            //ExpenseInput.TextColor = ColorManager.Text;
+            //ExpenseInput.PlaceholderColor = ColorManager.PlaceholderText;
 
-            IncomeInput.TextColor = ColorManager.Text;
-            IncomeInput.PlaceholderColor = ColorManager.PlaceholderText;
+            //IncomeInput.TextColor = ColorManager.Text;
+            //IncomeInput.PlaceholderColor = ColorManager.PlaceholderText;
         }
 
         protected override void OnAppearing()
@@ -67,19 +67,25 @@ namespace Wallet.Views
 
             int income = 0;
             int expense = 0;
-            foreach (Finance item in automatizedFinances)
+            foreach (Finance finance in automatizedFinances)
             {
-                if (item.Type == FinanceType.Income)
+                if (finance.Type == FinanceType.Income)
                 {
-                    income += item.Money;
+                    income += finance.Money;
                 }
-                if (item.Type == FinanceType.Expense)
+                if (finance.Type == FinanceType.Expense)
                 {
-                    expense += item.Money;
+                    expense += finance.Money;
                 }
             }
 
-            ListItems.Children.Add(new CalculateExpenseItemCard(income, expense));
+            int expenseWithBudgets = 0;
+            foreach (Budget budget in BudgetGoalManager.BudgetGoals)
+            {
+                expenseWithBudgets += budget.SpentMoney;
+            }
+
+            ListItems.Children.Add(new CalculateExpenseItemCard(income, expense, expenseWithBudgets));
 
             ListItems.Children.Add(new EstimationChartCard(FinanceManager.NetWorth, 6, automatizedFinances));
             ListItems.Children.Add(new EstimationChartCard(FinanceManager.NetWorth, 12, automatizedFinances));

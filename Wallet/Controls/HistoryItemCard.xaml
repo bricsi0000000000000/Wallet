@@ -6,12 +6,13 @@
     <Frame x:Name="MainFrame"
            CornerRadius="10"
            HasShadow="True"
-           Padding="0,0,0,10"
-           Margin="5,2.5,5,2.5">
+            Margin="10,5,10,10"
+           Padding="0,5">
         <StackLayout>
             <Label x:Name="DateLabel"
                    FontSize="20"
-                   Margin="10, 5, 10, 0"
+                   Style="{DynamicResource ThinText}"
+                   Margin="10, 5, 10, 5"
                    VerticalOptions="Center"/>
             
             <Grid>
@@ -23,22 +24,27 @@
 
                 <forms:ChartView x:Name="ExpensesChart"/>
 
-                <StackLayout Grid.Column="1">
+                <StackLayout Grid.Column="1"
+                             Spacing="3">
                     <Label x:Name="IncomeTitleLabel"
                            Text="Income:"
                            FontSize="16"
+                           Style="{DynamicResource LightText}"
                            VerticalTextAlignment="Start"/>
                     <Label x:Name="ExpenseTitleLabel"
                            Text="Expense:"
                            FontSize="16"
+                           Style="{DynamicResource LightText}"
                            VerticalTextAlignment="Start"/>
                     <Label x:Name="TotalTitleLabel"
                            Text="Total:"
                            FontSize="16"
+                           Style="{DynamicResource BoldText}"
                            VerticalTextAlignment="Start"/>
                 </StackLayout>
 
-                <StackLayout Grid.Column="2">
+                <StackLayout Grid.Column="2"
+                             Spacing="3">
                     <Label x:Name="IncomeLabel"
                            FontSize="16"
                            VerticalTextAlignment="Start"/>
@@ -47,7 +53,9 @@
                            VerticalTextAlignment="Start"/>
                     <Label x:Name="TotalLabel"
                            FontSize="16"
-                           VerticalTextAlignment="Start"/>
+                           Style="{DynamicResource BoldText}"
+                           VerticalTextAlignment="Start"
+                           Margin="0,0,0,10"/>
                 </StackLayout>
             </Grid>
 

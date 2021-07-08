@@ -6,8 +6,8 @@
         <Frame x:Name="MainFrame"
                CornerRadius="10"
                HasShadow="True"
+               Margin="10,5,10,10"
                Padding="0"
-               Margin="5,0,5,0"
                >
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -17,9 +17,11 @@
 
                 <Button Margin="0,0,5,0"
                         x:Name="EditButton"
+                        CornerRadius="0"
                         Clicked="EditButton_Clicked"/>
 
-                <StackLayout Grid.Column="1">
+                <StackLayout Grid.Column="1"
+                             Spacing="3">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -30,7 +32,7 @@
                                FontSize="20"
                                Margin="10,10,0,0"
                                VerticalOptions="Center"
-                               TextColor="{StaticResource Primary}"/>
+                               Style="{DynamicResource LightText}"/>
 
                         <Label Grid.Column="1"
                                x:Name="OverMoneyLabel"
@@ -54,14 +56,14 @@
                                FontSize="16"
                                HorizontalTextAlignment="Start"
                                Margin="10,0,0,5"
-                               TextColor="{StaticResource Primary}"/>
+                               Style="{DynamicResource BoldText}"/>
                         
                         <Label Grid.Column="1"
                                x:Name="MaxMoneyLabel"
                                FontSize="16"
                                HorizontalTextAlignment="End"
-                               Margin="0,0,20,0"
-                               TextColor="{StaticResource Primary}"/>
+                               Margin="0,0,20,10"
+                               Style="{DynamicResource BoldText}"/>
                     </Grid>
                 </StackLayout>
             </Grid>

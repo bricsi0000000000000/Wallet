@@ -4,192 +4,167 @@
              x:Class="Wallet.Views.AddFinance">
     <Shell.TitleView>
         <Label x:Name="TitleLabel"
-               TextColor="{StaticResource White}"
+               Style="{DynamicResource LightText}"
                FontSize="20"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Start"
                />
     </Shell.TitleView>
-    <ContentPage.Background>
-        <LinearGradientBrush StartPoint="0,0"
-                             EndPoint="1,1">
-            <GradientStop Color="{StaticResource Gradient2}"
-                          Offset="0.3" />
-            <GradientStop Color="{StaticResource White}"
-                          Offset="1.0" />
-        </LinearGradientBrush>
-    </ContentPage.Background>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="110"/>
-                <RowDefinition Height="90"/>
-                <RowDefinition Height="90"/>
-                <RowDefinition Height="90"/>
-                <RowDefinition Height="90"/>
-                <RowDefinition Height="90"/>
+                <RowDefinition Height="430"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
-            <Frame x:Name="MoneyFrame"
+            <Frame x:Name="CategoryPickerFrame"
                    CornerRadius="10"
                    HasShadow="True"
-                   Margin="20, 20, 20, 5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                   Padding="20,10,0,10"
+                   Margin="20,20,20,0">
+                <Grid HorizontalOptions="CenterAndExpand"
+                      WidthRequest="1000">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
                     
-                    <Image Source="money.png"
-                           Margin="3"/>
-                    
-                    <Entry Grid.Column="1"
-                           FontSize="16"
-                           x:Name="MoneyInput"
-                           Keyboard="Numeric"
-                           Placeholder="Money"/>
-                </Grid>
-            </Frame>
-
-            <Frame Grid.Row="1"
-                   x:Name="DescriptionFrame"
-                   CornerRadius="10"
-                   HasShadow="True"
-                   Margin="20, 0, 20, 5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="info.png"
-                           Margin="2"/>
-                    
-                    <Entry Grid.Column="1"
-                           x:Name="DescriptionInput"
-                           FontSize="16"
-                           Placeholder="Description"/>
-                </Grid>
-
-            </Frame>
-
-            <Frame Grid.Row="2"
-                   x:Name="CategoryPickerFrame"
-                   CornerRadius="10"
-                   HasShadow="True"
-                   Margin="20, 0, 20, 5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="50"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="category_primary.png"
-                           Margin="7"/>
-
-                    <Picker Grid.Column="1"
-                            Title="Category"
-                            x:Name="CategoryPicker"
-                            SelectedIndexChanged="Picker_SelectedIndexChanged"
-                            />
-
-                    <ImageButton Grid.Column="2"
-                                 x:Name="AddNewCategoryImageButton"
-                                 Source="add_new.png"
-                                 Margin="3"
-                                 Clicked="AddNewCategory_Clicked"/>
-                </Grid>
-            </Frame>
-
-            <Frame Grid.Row="3"
-                   x:Name="FinanceTypeFrame"
-                   CornerRadius="10"
-                   HasShadow="True"
-                   Margin="20, 0, 20, 5">
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="expense.png"/>
-                    
-                    <Picker Grid.Column="1"
-                        Title="Finance type"
-                        x:Name="FinanceTypePicker"
-                        SelectedIndexChanged="FinanceTypePicker_SelectedIndexChanged">
-                    <Picker.Items>
-                        <x:String>Expense</x:String>
-                        <x:String>Income</x:String>
-                        <x:String>Deposit</x:String>
-                    </Picker.Items>
-                </Picker>
-                    
-                </Grid>
-            </Frame>
-
-            <Frame Grid.Row="4"
-                   x:Name="DatePickerFrame"
-                   CornerRadius="10"
-                   HasShadow="True"
-                   Margin="20, 0, 20, 5">
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="date.png"
-                           Margin="5"/>
-                    
-                    <DatePicker Grid.Column="1"
-                                x:Name="SelectDate"
-                                DateSelected="DatePicker_DateSelected"/>
-                </Grid>
-            </Frame>
-
-            <Frame Grid.Row="5"
-                   x:Name="IsAutomatizedFrame"
-                   CornerRadius="10"
-                   HasShadow="True"
-                   Margin="20, 0, 20, 5">
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="repeat.png"
-                           Margin="3"/>
-
-                    <Grid Grid.Column="1">
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label x:Name="IsAutomatizedLabel"
-                               Text="One time"
-                               VerticalTextAlignment="Center"
-                               HorizontalTextAlignment="Start"/>
+                        <Image Source="money.png"
+                                Margin="3"/>
 
-                        <Switch Grid.Column="1"
-                                HorizontalOptions="Start"
-                                x:Name="IsAutomatizedSwitch"
-                                Toggled="Switch_Toggled"/>
+                        <Entry Grid.Column="1"
+                                FontSize="16"
+                                x:Name="MoneyInput"
+                                Keyboard="Numeric"
+                                Placeholder="Money"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="info.png"
+                               Margin="2"/>
+
+                        <Entry Grid.Column="1"
+                               x:Name="DescriptionInput"
+                               FontSize="16"
+                               Placeholder="Description"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="category_primary.png"
+                               Margin="7"/>
+
+                        <Picker Grid.Column="1"
+                                Title="Category"
+                                x:Name="CategoryPicker"
+                                SelectedIndexChanged="Picker_SelectedIndexChanged"
+                                />
+
+                        <ImageButton Grid.Column="2"
+                                     BackgroundColor="{StaticResource White}"
+                                     x:Name="AddNewCategoryImageButton"
+                                     Source="add_new.png"
+                                     Margin="7"
+                                     Clicked="AddNewCategory_Clicked"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="expense.png"/>
+                    
+                        <Picker Grid.Column="1"
+                                Title="Finance type"
+                                x:Name="FinanceTypePicker"
+                                SelectedIndexChanged="FinanceTypePicker_SelectedIndexChanged">
+                            <Picker.Items>
+                                <x:String>Expense</x:String>
+                                <x:String>Income</x:String>
+                                <x:String>Deposit</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    
+                    </Grid>
+
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="date.png"
+                               Margin="5"/>
+                    
+                        <DatePicker Grid.Column="1"
+                                    x:Name="SelectDate"
+                                    DateSelected="DatePicker_DateSelected"/>
+                    </Grid>
+
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="repeat.png"
+                               Margin="3"/>
+
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="IsAutomatizedLabel"
+                                   Text="One time"
+                                   FontSize="18"
+                                   Style="{DynamicResource LightText}"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"/>
+
+                            <Switch Grid.Column="1"
+                                    HorizontalOptions="Start"
+                                    x:Name="IsAutomatizedSwitch"
+                                    Toggled="Switch_Toggled"/>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Frame>
 
-            <Grid Grid.Row="7"
+            <Grid Grid.Row="2"
                   x:Name="BothButtonsGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -223,7 +198,7 @@
                 </Frame>
             </Grid>
 
-            <Grid Grid.Row="7"
+            <Grid Grid.Row="2"
                   x:Name="OneButtonGrid">
                 <Frame Padding="0"
                        CornerRadius="10"

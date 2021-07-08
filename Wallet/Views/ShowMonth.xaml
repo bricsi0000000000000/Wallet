@@ -2,8 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet.Views.ShowMonth">
+    <Shell.TitleView>
+        <Label x:Name="TitleLabel"
+               Style="{DynamicResource LightText}"
+               FontSize="25"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Start"
+               />
+    </Shell.TitleView>
     <ContentPage.Content>
-        <StackLayout Margin="0,20,0,0"
-                     x:Name="ListItems"/>
+        <Grid Margin="0,20,0,0"
+              x:Name="ListItems">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="400"/>
+            </Grid.RowDefinitions>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -5,27 +5,18 @@
              xmlns:colorPicker="clr-namespace:ColorPicker;assembly=ColorPicker">
     <Shell.TitleView>
         <Label x:Name="TitleLabel"
-               TextColor="{StaticResource White}"
+               Style="{DynamicResource LightText}"
                FontSize="20"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Start"
                />
     </Shell.TitleView>
-    <ContentPage.Background>
-        <LinearGradientBrush StartPoint="0,0"
-                             EndPoint="1,1">
-            <GradientStop Color="{StaticResource Gradient2}"
-                          Offset="0.3" />
-            <GradientStop Color="{StaticResource White}"
-                          Offset="1.0" />
-        </LinearGradientBrush>
-    </ContentPage.Background>
+   
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="110"/>
-                <RowDefinition Height="300"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="410"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
@@ -33,33 +24,36 @@
             <Frame x:Name="NameFrame"
                     CornerRadius="10"
                     HasShadow="True"
-                    Margin="20, 20, 20, 5">
+                    Padding="10,0,0,0"
+                    Margin="20,20,20,0">
+                <Grid HorizontalOptions="CenterAndExpand"
+                      WidthRequest="1000">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="300"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                        <Image Source="name.png"
+                               Margin="3"/>
 
-                    <Image Source="name.png"
-                           Margin="3"/>
-
-                    <Entry Grid.Column="1"
-                           x:Name="NameInput"
-                           Placeholder="Name"/>
+                        <Entry Grid.Column="1"
+                               x:Name="NameInput"
+                               Placeholder="Name"/>
+                    </Grid>
+          
+                    <colorPicker:ColorTriangle Grid.Row="1"
+                                               Margin="10"
+                                               x:Name="ColorPicker"/>
                 </Grid>
             </Frame>
 
-            <Frame Grid.Row="1"
-                   x:Name="ColorPickerFrame"
-                   CornerRadius="10"
-                   HasShadow="True"
-                   Margin="20,5,20,5">
-                
-                <colorPicker:ColorTriangle x:Name="ColorPicker"/>
-            </Frame>
-
-            <Grid Grid.Row="3"
+            <Grid Grid.Row="2"
                   x:Name="BothButtonsGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -93,7 +87,7 @@
                 </Frame>
             </Grid>
 
-            <Grid Grid.Row="3"
+            <Grid Grid.Row="2"
                   x:Name="OneButtonGrid">
                 <Frame Padding="0"
                        CornerRadius="10"

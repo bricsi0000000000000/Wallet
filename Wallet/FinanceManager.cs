@@ -71,6 +71,7 @@ namespace Wallet
         public static void LoadMonthlyFinances()
         {
             Sort();
+            MonthlyFinances.Clear();
             foreach (Finance finance in Finances)
             {
                 MonthlyFinance monthlyFinance = GetMonthlyFinance(finance.Date);
@@ -98,6 +99,7 @@ namespace Wallet
 
         public static void Add(Finance finance)
         {
+            BudgetGoalManager.AddSpentMoney(finance);
             Finances.Add(finance);
         }
 
@@ -108,6 +110,7 @@ namespace Wallet
 
         public static void Remove(int id)
         {
+            BudgetGoalManager.UpdateSpentMoney(Get(id));
             Finances.RemoveAt(Finances.FindIndex(x => x.Id == id));
         }
 

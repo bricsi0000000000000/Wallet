@@ -17,6 +17,7 @@
             </Grid.RowDefinitions>
 
             <Label x:Name="AfterTimeLabel"
+                   Style="{DynamicResource ThinText}"
                    FontSize="20"
                    VerticalOptions="Center" 
                    HorizontalOptions="Center"/>

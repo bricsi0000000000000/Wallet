@@ -68,6 +68,12 @@
                 <Setter Property="FontFamily" Value="{StaticResource RobotoLight}"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource ThinTextColor}"></Setter>
             </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
+                <Setter Property="PlaceholderColor" Value="{DynamicResource ThinTextColor}"></Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,31 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Wallet.Views.Settings"
-             BackgroundColor="#EBEEF0">
+             x:Class="Wallet.Views.Settings">
     <Shell.TitleView>
         <Label Text="Settings"
-               TextColor="{StaticResource White}"
+               Style="{DynamicResource LightText}"
                FontSize="20"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Start"
                />
     </Shell.TitleView>
-    <ContentPage.Background>
-        <LinearGradientBrush StartPoint="0,0"
-                             EndPoint="1,1">
-            <GradientStop Color="{StaticResource Gradient2}"
-                          Offset="0.3" />
-            <GradientStop Color="{StaticResource White}"
-                          Offset="1.0" />
-        </LinearGradientBrush>
-    </ContentPage.Background>
     <ContentPage.Content>
         <AbsoluteLayout>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="110"/>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="170"/>
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="60"/>
@@ -36,42 +25,47 @@
                        CornerRadius="10"
                        HasShadow="True"
                        WidthRequest="1000"
-                       Margin="20, 20, 20, 2.5">
+                       Padding="10,0,0,0"
+                       Margin="20,20,20,0">
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <Grid HorizontalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="70"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Image Source="wallet.png"
-                               Margin="5"/>
+                            <Image Source="wallet.png"
+                                   Margin="5"/>
 
-                        <Entry Grid.Column="1"
-                               x:Name="InitialMoneyInput"
-                               Placeholder="Initial money"
-                               Keyboard="Numeric"/>
-                    </Grid>
-                </Frame>
+                            <Entry Grid.Column="1"
+                                   x:Name="InitialMoneyInput"
+                                   Placeholder="Initial money"
+                                   Keyboard="Numeric"/>
+                        </Grid>
+             
+                        <Grid Grid.Row="1"
+                              WidthRequest="1000"
+                              Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
 
-                <Frame Grid.Row="1"
-                       x:Name="CurrencyFrame"
-                       CornerRadius="10"
-                       HasShadow="True"
-                       Margin="20, 0, 20, 5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                            <Image Source="currency.png"
+                                   Margin="5"/>
 
-                        <Image Source="currency.png"
-                               Margin="5"/>
-
-                        <Picker Grid.Column="1"
-                                Title="Currency"
-                                x:Name="CurrencyPicker"
-                                SelectedIndexChanged="Picker_SelectedIndexChanged"/>
+                            <Picker Grid.Column="1"
+                                    Title="Currency"
+                                    x:Name="CurrencyPicker"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged"/>
+                        </Grid>
                     </Grid>
                 </Frame>
 
@@ -90,7 +84,7 @@
                          Padding="25"
                          AbsoluteLayout.LayoutFlags="PositionProportional"  
                          AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
-                         BackgroundColor="{StaticResource Secondary}"
+                         BackgroundColor="{StaticResource Primary}"
                          Clicked="SaveButton_Clicked"/>
             
         </AbsoluteLayout>

@@ -25,6 +25,54 @@ namespace Wallet
             BudgetGoals.RemoveAt(BudgetGoals.FindIndex(x => x.Id == id));
         }
 
+        public static void AddSpentMoney(Finance finance)
+        {
+            Budget budget = BudgetGoals.Find(x => x.CategoryId == finance.CategoryId);
+            if (budget != null)
+            {
+                if (finance.Type == FinanceType.Income)
+                {
+                    budget.SpentMoney -= finance.Money;
+                }
+                else
+                {
+                    budget.SpentMoney += finance.Money;
+                }
+            }
+        }
+
+        public static void UpdateSpentMoney(Finance finance)
+        {
+            Budget budget = BudgetGoals.Find(x => x.CategoryId == finance.CategoryId);
+            if (budget != null)
+            {
+                if (finance.Type == FinanceType.Income)
+                {
+                    budget.SpentMoney += finance.Money;
+                }
+                else
+                {
+                    budget.SpentMoney -= finance.Money;
+                }
+            }
+        }
+
+        public static void UpdateSpentMoney(Finance finance, int money)
+        {
+            Budget budget = BudgetGoals.Find(x => x.CategoryId == finance.CategoryId);
+            if (budget != null)
+            {
+                if (finance.Type == FinanceType.Income)
+                {
+                    budget.SpentMoney += money;
+                }
+                else
+                {
+                    budget.SpentMoney -= money;
+                }
+            }
+        }
+
         public static void Sort()
         {
             BudgetGoals = BudgetGoals.OrderByDescending(x => (float)x.SpentMoney / x.MaxMoney).ToList();

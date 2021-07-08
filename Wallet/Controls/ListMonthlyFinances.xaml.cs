@@ -47,7 +47,7 @@ namespace Wallet.Controls
                 Label moneyLabel = new Label
                 {
                     Text = money.FormatToMoney(),
-                    TextColor = ColorManager.ExpenseOrIncome(money < 0),
+                    Style = (Style)Application.Current.Resources["BoldText"],
                     FontSize = 15,
                     HorizontalTextAlignment = TextAlignment.End,
                     Margin = new Thickness(0, 0, 20, 0)

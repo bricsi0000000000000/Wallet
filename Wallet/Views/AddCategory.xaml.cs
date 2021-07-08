@@ -18,14 +18,14 @@ namespace Wallet.Views
 
             this.id = id;
 
-            NameFrame.BackgroundColor =
-            NameInput.BackgroundColor = ColorManager.Background;
+            //NameFrame.BackgroundColor =
+            //NameInput.BackgroundColor = ColorManager.Background;
 
-            NameInput.TextColor = ColorManager.Text;
-            NameInput.PlaceholderColor = ColorManager.PlaceholderText;
+            //NameInput.TextColor = ColorManager.Text;
+            //NameInput.PlaceholderColor = ColorManager.PlaceholderText;
 
-            ColorPickerFrame.BackgroundColor =
-            ColorPicker.BackgroundColor = ColorManager.Background;
+            //ColorPickerFrame.BackgroundColor =
+            //ColorPicker.BackgroundColor = ColorManager.Background;
 
             DeleteImageButton.BackgroundColor = ColorManager.DeleteButton;
 
