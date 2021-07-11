@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet.Views.ListRegularFinances">
+    <Shell.TitleView>
+        <Label Text="Regular finances"
+               Style="{DynamicResource LightText}"
+               FontSize="25"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Start"
+               />
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Grid>
+                <ScrollView>
+                    <StackLayout Margin="10, 2.5, 10, 0"
+                                 Padding="0,10,0,0"
+                                 Spacing="4"
+                                 x:Name="ListItems"/>
+                </ScrollView>
+            </Grid>
+
+            <ImageButton Source="add.png"
+                         CornerRadius="50"
+                         Margin="5"
+                         Padding="25"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"  
+                         AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
+                         BackgroundColor="{StaticResource Primary}"
+                         Clicked="Add_Clicked"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

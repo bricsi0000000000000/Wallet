@@ -13,28 +13,30 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="430"/>
+                <RowDefinition Height="550"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
             <Frame x:Name="CategoryPickerFrame"
-                   CornerRadius="10"
-                   HasShadow="True"
-                   Padding="20,10,0,10"
-                   Margin="20,20,20,0">
+                    CornerRadius="10"
+                    HasShadow="True"
+                    Padding="20,10,0,20"
+                    Margin="20,20,20,0">
                 <Grid HorizontalOptions="CenterAndExpand"
-                      WidthRequest="1000">
+                        WidthRequest="1000">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="60"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
-                    
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
@@ -50,6 +52,7 @@
                                 x:Name="MoneyInput"
                                 Keyboard="Numeric"
                                 Placeholder="Money"/>
+
                     </Grid>
 
                     <Grid Grid.Row="1">
@@ -60,14 +63,13 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Source="info.png"
-                               Margin="2"/>
+                                Margin="2"/>
 
                         <Entry Grid.Column="1"
-                               x:Name="DescriptionInput"
-                               FontSize="16"
-                               Placeholder="Description"/>
+                                x:Name="DescriptionInput"
+                                FontSize="16"
+                                Placeholder="Description"/>
                     </Grid>
-
 
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
@@ -78,7 +80,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Source="category_primary.png"
-                               Margin="7"/>
+                                Margin="7"/>
 
                         <Picker Grid.Column="1"
                                 Title="Category"
@@ -87,11 +89,11 @@
                                 />
 
                         <ImageButton Grid.Column="2"
-                                     BackgroundColor="{StaticResource White}"
-                                     x:Name="AddNewCategoryImageButton"
-                                     Source="add_new.png"
-                                     Margin="7"
-                                     Clicked="AddNewCategory_Clicked"/>
+                                        BackgroundColor="{StaticResource White}"
+                                        x:Name="AddNewCategoryImageButton"
+                                        Source="add_new.png"
+                                        Margin="7"
+                                        Clicked="AddNewCategory_Clicked"/>
                     </Grid>
 
                     <Grid Grid.Row="3">
@@ -101,19 +103,12 @@
                             <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="expense.png"/>
-                    
-                        <Picker Grid.Column="1"
-                                Title="Finance type"
-                                x:Name="FinanceTypePicker"
-                                SelectedIndexChanged="FinanceTypePicker_SelectedIndexChanged">
-                            <Picker.Items>
-                                <x:String>Expense</x:String>
-                                <x:String>Income</x:String>
-                                <x:String>Deposit</x:String>
-                            </Picker.Items>
-                        </Picker>
-                    
+                        <Image Source="date.png"
+                                Margin="5"/>
+
+                        <DatePicker Grid.Column="1"
+                                    x:Name="SelectDate"
+                                    DateSelected="DatePicker_DateSelected"/>
                     </Grid>
 
                     <Grid Grid.Row="4">
@@ -123,14 +118,28 @@
                             <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="date.png"
-                               Margin="5"/>
-                    
-                        <DatePicker Grid.Column="1"
-                                    x:Name="SelectDate"
-                                    DateSelected="DatePicker_DateSelected"/>
-                    </Grid>
+                        <Image Source="repeat.png"
+                                Margin="3"/>
 
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="IsExpenseLabel"
+                                   Text="Expense"
+                                   FontSize="18"
+                                   Style="{DynamicResource LightText}"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"/>
+
+                            <Switch Grid.Column="1"
+                                    HorizontalOptions="Start"
+                                    x:Name="IsExpenseSwitch"/>
+                        </Grid>
+                    </Grid>
+                  
                     <Grid Grid.Row="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
@@ -139,77 +148,121 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Source="repeat.png"
-                               Margin="3"/>
+                                Margin="3"/>
 
                         <Grid Grid.Column="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="80"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <Label x:Name="IsAutomatizedLabel"
-                                   Text="One time"
-                                   FontSize="18"
-                                   Style="{DynamicResource LightText}"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Start"/>
+                                    Text="One time"
+                                    FontSize="18"
+                                    Style="{DynamicResource LightText}"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Start"/>
 
                             <Switch Grid.Column="1"
                                     HorizontalOptions="Start"
-                                    x:Name="IsAutomatizedSwitch"
-                                    Toggled="Switch_Toggled"/>
+                                    x:Name="IsAutomatizedSwitch"/>
                         </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="template.png"
+                                Margin="6"/>
+
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="IsTemplateLabel"
+                                    Text="Template"
+                                    FontSize="18"
+                                    Style="{DynamicResource LightText}"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Start"/>
+
+                            <Switch Grid.Column="1"
+                                    HorizontalOptions="Start"
+                                    x:Name="IsTemplateSwitch"
+                                    Toggled="IsTemplateSwitch_Toggled"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="templates_primary.png"
+                               Margin="0"/>
+
+                        <Picker x:Name="TemplatePicker"
+                                Grid.Column="1"
+                                Title="Select template"
+                                SelectedIndexChanged="TemplatePicker_SelectedIndexChanged"/>
                     </Grid>
                 </Grid>
             </Frame>
 
-            <Grid Grid.Row="2"
-                  x:Name="BothButtonsGrid">
+            <Grid Grid.Row="3"
+                    x:Name="BothButtonsGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
                 <Frame Padding="0"
-                       CornerRadius="10"
-                       HasShadow="True"
-                       Margin="30,0,0,0">
+                        CornerRadius="10"
+                        HasShadow="True"
+                        Margin="30,0,0,0">
 
                     <ImageButton x:Name="DeleteImageButton"
-                                 Source="delete.png"
-                                 CornerRadius="10"
-                                 Padding="17"
-                                 Clicked="DeleteButton_Clicked"/>
+                                    Source="delete.png"
+                                    CornerRadius="10"
+                                    Padding="17"
+                                    Clicked="DeleteButton_Clicked"/>
                 </Frame>
-                
+
                 <Frame Grid.Column="1"
-                       Padding="0"
-                       CornerRadius="10"
-                       HasShadow="True"
-                       Margin="0, 0, 30, 0">
+                        Padding="0"
+                        CornerRadius="10"
+                        HasShadow="True"
+                        Margin="0, 0, 30, 0">
 
                     <ImageButton Grid.Column="1"
-                                 x:Name="SaveImageButton"
-                                 Source="save_white.png"
-                                 CornerRadius="10"
-                                 Padding="15"
-                                 Clicked="SaveButton_Clicked"/>
+                                    x:Name="SaveImageButton"
+                                    Source="save_white.png"
+                                    CornerRadius="10"
+                                    Padding="15"
+                                    Clicked="SaveButton_Clicked"/>
                 </Frame>
             </Grid>
 
-            <Grid Grid.Row="2"
-                  x:Name="OneButtonGrid">
+            <Grid Grid.Row="3"
+                    x:Name="OneButtonGrid">
                 <Frame Padding="0"
-                       CornerRadius="10"
-                       HasShadow="True"
-                       Margin="30, 0, 30, 0">
+                        CornerRadius="10"
+                        HasShadow="True"
+                        Margin="30, 0, 30, 0">
 
                     <ImageButton x:Name="SaveImageButton1"
-                                 Source="save_white.png"
-                                 CornerRadius="10"
-                                 Padding="15"
-                                 Clicked="SaveButton_Clicked"/>
+                                    Source="save_white.png"
+                                    CornerRadius="10"
+                                    Padding="15"
+                                    Clicked="SaveButton_Clicked"/>
                 </Frame>
             </Grid>
         </Grid>

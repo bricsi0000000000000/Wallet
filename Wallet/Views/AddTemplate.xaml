@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Wallet.Views.AddBudget">
+             x:Class="Wallet.Views.AddTemplate">
     <Shell.TitleView>
         <Label x:Name="TitleLabel"
                Style="{DynamicResource LightText}"
@@ -10,11 +10,10 @@
                HorizontalTextAlignment="Start"
                />
     </Shell.TitleView>
-  
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="170"/>
+                <RowDefinition Height="300"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="30"/>
@@ -23,15 +22,53 @@
             <Frame x:Name="CategoryPickerFrame"
                    CornerRadius="10"
                    HasShadow="True"
-                   Padding="10,0,0,0"
-                   Margin="15,20,15,0">
+                   Padding="20,10,0,10"
+                   Margin="20,20,20,0">
                 <Grid HorizontalOptions="CenterAndExpand"
                       WidthRequest="1000">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
                         <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
+
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="money.png"
+                                Margin="3"/>
+
+                        <Entry Grid.Column="1"
+                                FontSize="16"
+                                x:Name="MoneyInput"
+                                Keyboard="Numeric"
+                                Placeholder="Money"/>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="info.png"
+                               Margin="2"/>
+
+                        <Entry Grid.Column="1"
+                               x:Name="DescriptionInput"
+                               FontSize="16"
+                               Placeholder="Description"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
@@ -45,41 +82,48 @@
                         <Picker Grid.Column="1"
                                 Title="Category"
                                 x:Name="CategoryPicker"
-                                SelectedIndexChanged="SelectCategory"
+                                SelectedIndexChanged="Picker_SelectedIndexChanged"
                                 />
 
                         <ImageButton Grid.Column="2"
+                                     BackgroundColor="{StaticResource White}"
                                      x:Name="AddNewCategoryImageButton"
                                      Source="add_new.png"
-                                     BackgroundColor="{StaticResource White}"
                                      Margin="7"
                                      Clicked="AddNewCategory_Clicked"/>
                     </Grid>
 
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="goal_primary.png"/>
+                        <Image Source="repeat.png"
+                                Margin="3"/>
 
-                        <Entry Grid.Column="1"
-                               x:Name="MaxMoneyInput"
-                               Keyboard="Numeric"
-                               Placeholder="Max amount"
-                               />
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="IsExpenseLabel"
+                                   Text="Expense"
+                                   FontSize="18"
+                                   Style="{DynamicResource LightText}"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"/>
+
+                            <Switch Grid.Column="1"
+                                    HorizontalOptions="Start"
+                                    x:Name="IsExpenseSwitch"/>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Frame>
 
-            <ScrollView Grid.Row="1">
-                <StackLayout Spacing="4"
-                             Margin="10"
-                             x:Name="ListItems"/>
-            </ScrollView>
-            
             <Grid Grid.Row="2"
                   x:Name="BothButtonsGrid">
                 <Grid.ColumnDefinitions>

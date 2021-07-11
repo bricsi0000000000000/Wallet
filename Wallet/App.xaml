@@ -29,6 +29,7 @@
             <Color x:Key="ThinTextColor">#a3a3a3</Color>
             <Color x:Key="Background">#EBECED</Color>
             <Color x:Key="BackgroundDarkMode">#1B1B1B</Color>
+            <Color x:Key="Warning">#f9ab02</Color>
 
 
             <Color x:Key="PrimaryBackground">#232F34</Color>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Wallet.Controls;
 using Wallet.Models;
 using Xamarin.Forms;
 
@@ -9,7 +11,8 @@ namespace Wallet.Views
         private readonly int id;
         private FinanceCategory selectedCategory;
         private DateTime selectedDate = DateTime.Now;
-        private bool isAutomatized = false;
+        private bool isTemplate = false;
+        private List<int> templatesIds = new List<int>();
 
         public AddFinance(int id = -1)
         {
@@ -64,27 +67,38 @@ namespace Wallet.Views
                 CategoryPicker.Items.Add(category.Name);
             }
 
+            TemplatePicker.Items.Clear();
+            templatesIds.Clear();
+            foreach (Template template in FinanceManager.Templates)
+            {
+                TemplatePicker.Items.Add(template.ToString());
+                templatesIds.Add(template.Id);
+            }
+
             BothButtonsGrid.IsVisible = id != -1;
             OneButtonGrid.IsVisible = id == -1;
 
             if (id == -1)
             {
                 SelectDate.Date = selectedDate;
-                FinanceTypePicker.SelectedIndex = 0;
-                //IsAutomatizedPicker.SelectedIndex = 1;
+                IsExpenseSwitch.IsToggled = true;
                 IsAutomatizedSwitch.IsToggled = false;
+                IsTemplateSwitch.IsToggled = false;
             }
             else
             {
-                Finance finance = FinanceManager.Get(id);
-                MoneyInput.Text = finance.Money.ToString();
-                DescriptionInput.Text = finance.Description;
-                CategoryPicker.SelectedIndex = finance.CategoryId - 1;
-                FinanceTypePicker.SelectedIndex = (int)finance.Type;
-                SelectDate.Date = finance.Date;
-                //IsAutomatizedPicker.SelectedIndex = finance.IsAutomatized ? 0 : 1;
-                IsAutomatizedSwitch.IsToggled = finance.IsAutomatized;
+                Update(FinanceManager.Get(id));
             }
+        }
+
+        private void Update(Finance finance)
+        {
+            MoneyInput.Text = finance.Money.ToString();
+            DescriptionInput.Text = finance.Description;
+            CategoryPicker.SelectedIndex = finance.CategoryId - 1;
+            IsExpenseSwitch.IsToggled = finance.Type == FinanceType.Expense;
+            SelectDate.Date = finance.Date;
+            IsAutomatizedSwitch.IsToggled = finance.IsAutomatized;
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
@@ -111,12 +125,11 @@ namespace Wallet.Views
 
                 money -= finance.Money;
 
-                finance.Description = string.IsNullOrEmpty(DescriptionInput.Text) ? CategoryPicker.SelectedItem.ToString() : DescriptionInput.Text;
+                finance.Description = string.IsNullOrEmpty(DescriptionInput.Text) ? CategoryPicker.SelectedItem.ToString() : DescriptionInput.Text.Trim();
                 finance.CategoryId = selectedCategory.Id;
-                finance.Type = (FinanceType)FinanceTypePicker.SelectedIndex;
+                finance.Type = IsExpenseSwitch.IsToggled ? FinanceType.Expense : FinanceType.Income;
                 finance.Date = selectedDate;
-                //finance.IsAutomatized = IsAutomatizedPicker.SelectedIndex == 0;
-                finance.IsAutomatized = isAutomatized;
+                finance.IsAutomatized = IsAutomatizedSwitch.IsToggled;
 
                 if (id == -1)
                 {
@@ -128,8 +141,14 @@ namespace Wallet.Views
                 }
 
                 FinanceManager.LoadMonthlyFinances();
-
                 Database.SaveFinances();
+
+                if (isTemplate)
+                {
+                    FinanceManager.AddTemplate(finance);
+                }
+
+                Database.SaveTemplates();
 
                 await Navigation.PopToRootAsync();
             }
@@ -155,22 +174,19 @@ namespace Wallet.Views
             selectedDate = e.NewDate;
         }
 
-        private void FinanceTypePicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // FinanceTypeFrame.BackgroundColor = 
-            FinanceTypePicker.BackgroundColor = FinanceTypePicker.SelectedIndex == 0 ? ColorManager.Background : ColorManager.Income;
-        }
-
         private async void AddNewCategory_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AddCategory());
         }
 
-        private void Switch_Toggled(object sender, ToggledEventArgs e)
+        private void IsTemplateSwitch_Toggled(object sender, ToggledEventArgs e)
         {
-            isAutomatized = e.Value;
+            isTemplate = e.Value;
+        }
 
-            IsAutomatizedLabel.Text = isAutomatized ? "Regular" : "One time";
+        private void TemplatePicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Update(new Finance(FinanceManager.GetTemplate(templatesIds[TemplatePicker.SelectedIndex])));
         }
     }
 }

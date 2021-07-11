@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Wallet.Models;
+using Wallet.Views;
 
 namespace Wallet
 {
@@ -12,6 +13,8 @@ namespace Wallet
         public static int InitialMoney = 0;
 
         public static List<Finance> Finances { get; private set; } = new List<Finance>();
+        public static List<Template> Templates { get; private set; } = new List<Template>();
+        public static List<Finance> RegularFinances => Finances.FindAll(x => x.IsAutomatized);
 
         public static List<MonthlyFinance> MonthlyFinances = new List<MonthlyFinance>();
 
@@ -19,8 +22,7 @@ namespace Wallet
         {
             int incomes = Finances.FindAll(x => x.Type == FinanceType.Income).Sum(x => x.Money);
             int expenses = Finances.FindAll(x => x.Type == FinanceType.Expense).Sum(x => x.Money);
-            int deposits = Finances.FindAll(x => x.Type == FinanceType.Deposit).Sum(x => x.Money);
-            NetWorth = InitialMoney + incomes - expenses - deposits;
+            NetWorth = InitialMoney + incomes - expenses;
 
             LoadMonthlyFinances();
             CalculateBudgetGoals();
@@ -117,6 +119,31 @@ namespace Wallet
         public static void Sort()
         {
             Finances = Finances.OrderByDescending(x => x.Date).ToList();
+        }
+
+        public static bool AddTemplate(Template template)
+        {
+            foreach (Template item in Templates)
+            {
+                if (item.Equals(template))
+                {
+                    return false;
+                }
+            }
+
+            Templates.Add(template);
+
+            return true;
+        }
+
+        public static Template GetTemplate(int id)
+        {
+            return Templates.Find(x => x.Id == id);
+        }
+
+        public static void RemoveTemplate(int id)
+        {
+            Templates.RemoveAt(Templates.FindIndex(x => x.Id == id));
         }
     }
 }

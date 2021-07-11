@@ -9,26 +9,36 @@ namespace Wallet.Controls
     public partial class FinanceCard : ContentView
     {
         private readonly int id;
+        private readonly bool isFinance;
 
-        public FinanceCard(Finance finance)
+        public FinanceCard(Template template, bool isReadonly = false)
         {
             InitializeComponent();
 
-            this.id = finance.Id;
+            id = template.Id;
+            isFinance = template is Finance;
 
-          //  MainFrame.BackgroundColor = ColorManager.Background;
-
-            //DescriptionLabel.TextColor = RegularityLabel.TextColor = ColorManager.SecondaryText;
-
-            DescriptionLabel.Text = finance.Description;
-            RegularityLabel.Text = finance.IsAutomatized ? "Regular" : "One time";
-            MoneyLabel.Text = $"{(finance.Type == FinanceType.Expense || finance.Type == FinanceType.Deposit ? "-" : "")}{finance.Money.FormatToMoney()}";
-            EditButton.BackgroundColor = FinanceCategoryManager.Get(finance.CategoryId).ColorCode.ToColor();
+            DescriptionLabel.Text = template.Description;
+            if (isFinance)
+            {
+                RegularityLabel.Text = (template as Finance).IsAutomatized ? "Regular" : "One time";
+            }
+            MoneyLabel.Text = $"{(template.Type == FinanceType.Expense ? "-" : "")}{template.Money.FormatToMoney()}";
+            MoneyLabel.TextColor = template.Type == FinanceType.Expense ? ColorManager.Expense: ColorManager.Income;
+            EditButton.BackgroundColor = FinanceCategoryManager.Get(template.CategoryId).ColorCode.ToColor();
+            EditButton.IsEnabled = !isReadonly;
         }
 
         private void Edit(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new AddFinance(id));
+            if (isFinance)
+            {
+                Navigation.PushAsync(new AddFinance(id));
+            }
+            else
+            {
+                Navigation.PushAsync(new AddTemplate(id));
+            }
         }
     }
 }

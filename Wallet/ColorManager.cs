@@ -32,6 +32,8 @@ namespace Wallet
 
         private static Color buttonDark;
 
+        private static Color warningColor;
+
         private static List<string> chartLightColorCodes = new List<string>
         {
             "#232F34",
@@ -79,6 +81,8 @@ namespace Wallet
             gradient2Dark = (Color)Application.Current.Resources["Gradient2Dark"];
 
             buttonDark = (Color)Application.Current.Resources["ButtonDark"];
+
+            warningColor = (Color)Application.Current.Resources["Warning"];
         }
 
         public static Color Background
@@ -184,6 +188,14 @@ namespace Wallet
             get
             {
                 return IsDarkMode ? gradient2Dark : gradient2Light;
+            }
+        }
+
+        public static Color Warning
+        {
+            get
+            {
+                return warningColor;
             }
         }
 

@@ -2,21 +2,25 @@
 
 namespace Wallet.Models
 {
-    public enum FinanceType
+    public class Finance : Template
     {
-         Expense = 0,
-         Income = 1,
-         Deposit = 2
-    }
-
-    public class Finance
-    {
-        public int Id { get; set; }
-        public int Money { get; set; }
-        public string Description { get; set; }
-        public int CategoryId { get; set; }
-        public FinanceType Type { get; set; }
         public DateTime Date { get; set; }
         public bool IsAutomatized { get; set; }
+
+        public Finance()
+        {
+
+        }
+
+        public Finance(Template template)
+        {
+            Id = template.Id;
+            Money = template.Money;
+            Description = template.Description;
+            CategoryId = template.CategoryId;
+            Type = template.Type;
+            IsAutomatized = false;
+            Date = DateTime.Today;
+        }
     }
 }

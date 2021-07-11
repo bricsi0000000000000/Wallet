@@ -75,7 +75,7 @@ namespace Wallet.Controls
                 CornerRadius = 5,
                 HasShadow = false,
                 Padding = 20,
-                HeightRequest = 100,
+                HeightRequest = 200,
                 Opacity = 0
             };
 

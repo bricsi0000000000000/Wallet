@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Wallet.Controls;
 using Wallet.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,18 +20,6 @@ namespace Wallet.Views
             this.id = id;
 
             TitleLabel.Text = id == -1 ? "Add Budget" : "Edit Budget";
-
-            //CategoryPickerFrame.BackgroundColor =
-            //MaxMoneyFrame.BackgroundColor = ColorManager.Background;
-
-            //CategoryPicker.TextColor = ColorManager.Text;
-            //CategoryPicker.TitleColor = ColorManager.PlaceholderText;
-
-            //MaxMoneyInput.BackgroundColor = ColorManager.Background;
-            //MaxMoneyInput.TextColor = ColorManager.Text;
-            //MaxMoneyInput.PlaceholderColor = ColorManager.PlaceholderText;
-
-            //AddNewCategoryImageButton.BackgroundColor = ColorManager.Background;
 
             DeleteImageButton.BackgroundColor = ColorManager.DeleteButton;
 
@@ -63,12 +52,28 @@ namespace Wallet.Views
                 CategoryPicker.SelectedIndex = CategoryPicker.Items.Count;
 
                 MaxMoneyInput.Text = budget.MaxMoney.ToString();
+
+                UpdateListItems(budget.CategoryId);
+            }
+        }
+
+        private void UpdateListItems(int categoryId)
+        {
+            ListItems.Children.Clear();
+
+            foreach (Finance finance in FinanceManager.GetMonthlyFinance(DateTime.Today).Finances)
+            {
+                if (finance.CategoryId == categoryId)
+                {
+                    ListItems.Children.Add(new FinanceCard(finance, isReadonly: true));
+                }
             }
         }
 
         private void SelectCategory(object sender, EventArgs e)
         {
             selectedCategory = FinanceCategoryManager.Categories.Find(x => x.Name.Equals(((Picker)sender).SelectedItem));
+            UpdateListItems(selectedCategory.Id);
         }
 
         private async void DeleteButton_Clicked(object sender, EventArgs e)
@@ -82,7 +87,7 @@ namespace Wallet.Views
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-           //MaxMoneyFrame.BorderColor = ColorManager.IsInputEmpty(string.IsNullOrEmpty(MaxMoneyInput.Text));
+            //MaxMoneyFrame.BorderColor = ColorManager.IsInputEmpty(string.IsNullOrEmpty(MaxMoneyInput.Text));
             CategoryPickerFrame.BorderColor = ColorManager.IsInputEmpty(selectedCategory == null);
 
             if (!string.IsNullOrEmpty(MaxMoneyInput.Text) && selectedCategory != null)

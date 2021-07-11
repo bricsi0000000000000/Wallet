@@ -79,13 +79,13 @@ namespace Wallet.Views
                 }
             }
 
-            int expenseWithBudgets = 0;
-            foreach (Budget budget in BudgetGoalManager.BudgetGoals)
-            {
-                expenseWithBudgets += budget.SpentMoney;
-            }
+            //int expenseWithBudgets = 0;
+            //foreach (Budget budget in BudgetGoalManager.BudgetGoals)
+            //{
+            //    expenseWithBudgets += budget.SpentMoney;
+            //}
 
-            ListItems.Children.Add(new CalculateExpenseItemCard(income, expense, expenseWithBudgets));
+            ListItems.Children.Add(new CalculateExpenseItemCard(income, expense));
 
             ListItems.Children.Add(new EstimationChartCard(FinanceManager.NetWorth, 6, automatizedFinances));
             ListItems.Children.Add(new EstimationChartCard(FinanceManager.NetWorth, 12, automatizedFinances));

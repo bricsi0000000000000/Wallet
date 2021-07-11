@@ -39,9 +39,15 @@ namespace Wallet.Controls
             if (budget.SpentMoney >= budget.MaxMoney)
             {
                 OverMoneyLabel.Text += $" +{rate * 100:f0}%";
-                Progress.ProgressColor = ColorManager.Expense;
-                SpentMoneyLabel.TextColor = ColorManager.Expense;
+                Progress.ProgressColor =
+                SpentMoneyLabel.TextColor =
                 OverMoneyLabel.TextColor = ColorManager.Expense;
+            }
+            else if (budget.SpentMoney >= budget.MaxMoney * .8)
+            {
+                OverMoneyLabel.Text += $"{rate * 100:f0}%";
+                OverMoneyLabel.TextColor =
+                Progress.ProgressColor = ColorManager.Warning;
             }
             else
             {

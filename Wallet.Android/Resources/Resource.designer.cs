@@ -16881,25 +16881,40 @@ namespace Wallet.Droid
 			public const int repeat = 2131165348;
 			
 			// aapt resource value: 0x7F0700A5
-			public const int save = 2131165349;
+			public const int repeat_white = 2131165349;
 			
 			// aapt resource value: 0x7F0700A6
-			public const int save_white = 2131165350;
+			public const int save = 2131165350;
 			
 			// aapt resource value: 0x7F0700A7
-			public const int settings = 2131165351;
+			public const int save_white = 2131165351;
 			
 			// aapt resource value: 0x7F0700A8
-			public const int test_custom_background = 2131165352;
+			public const int settings = 2131165352;
 			
 			// aapt resource value: 0x7F0700A9
-			public const int tooltip_frame_dark = 2131165353;
-			
-			// aapt resource value: 0x7F0700AA
-			public const int tooltip_frame_light = 2131165354;
+			public const int template = 2131165353;
 			
 			// aapt resource value: 0x7F0700AB
-			public const int wallet = 2131165355;
+			public const int templates = 2131165355;
+			
+			// aapt resource value: 0x7F0700AC
+			public const int templates_primary = 2131165356;
+			
+			// aapt resource value: 0x7F0700AA
+			public const int template_white = 2131165354;
+			
+			// aapt resource value: 0x7F0700AD
+			public const int test_custom_background = 2131165357;
+			
+			// aapt resource value: 0x7F0700AE
+			public const int tooltip_frame_dark = 2131165358;
+			
+			// aapt resource value: 0x7F0700AF
+			public const int tooltip_frame_light = 2131165359;
+			
+			// aapt resource value: 0x7F0700B0
+			public const int wallet = 2131165360;
 			
 			static Drawable()
 			{

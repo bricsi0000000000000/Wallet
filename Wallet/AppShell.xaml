@@ -89,7 +89,15 @@
     <FlyoutItem Title="Categories" Icon="category.png">
         <ShellContent Route="ListCategories" ContentTemplate="{DataTemplate local:ListCategories}" />
     </FlyoutItem>
-    
+
+    <FlyoutItem Title="Templates" Icon="templates.png">
+        <ShellContent Route="ListTemplates" ContentTemplate="{DataTemplate local:ListTemplates}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Regular finances" Icon="repeat_white.png">
+        <ShellContent Route="ListRegularFinances" ContentTemplate="{DataTemplate local:ListRegularFinances}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Settings" Icon="settings.png">
         <ShellContent Route="Settings" ContentTemplate="{DataTemplate local:Settings}" />
     </FlyoutItem>

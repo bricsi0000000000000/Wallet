@@ -10,6 +10,7 @@ namespace Wallet
     {
         private static readonly string settingsFileName = "settings.csv";
         private static readonly string financesFileName = "finances.csv";
+        private static readonly string templatesFileName = "templates.csv";
         private static readonly string categoriesFileName = "categories.csv";
         private static readonly string budgetGoalsFileName = "budgetGoals.csv";
 
@@ -39,6 +40,20 @@ namespace Wallet
                 foreach (Finance finance in FinanceManager.Finances)
                 {
                     string row = $"{finance.Id};{finance.Money};{finance.Description};{finance.CategoryId};{finance.Type};{finance.Date.ToShortDateString()};{finance.IsAutomatized}";
+                    streamWriter.WriteLine(row);
+                }
+            }
+        }
+
+        public static void SaveTemplates()
+        {
+            string documentsPath = FileSystem.AppDataDirectory;
+            string filePath = Path.Combine(documentsPath, templatesFileName);
+            using (StreamWriter streamWriter = new StreamWriter(filePath))
+            {
+                foreach (Template template in FinanceManager.Templates)
+                {
+                    string row = $"{template.Id};{template.Money};{template.Description};{template.CategoryId};{template.Type}";
                     streamWriter.WriteLine(row);
                 }
             }
@@ -120,6 +135,34 @@ namespace Wallet
                 }
             }
             FinanceManager.FinanceId = FinanceManager.Finances.Last().Id + 1;
+        }
+
+        public static void LoadTemplates()
+        {
+            string documentsPath = FileSystem.AppDataDirectory;
+            string filePath = Path.Combine(documentsPath, templatesFileName);
+
+            using (StreamReader streamReader = new StreamReader(filePath))
+            {
+                string content = streamReader.ReadToEnd();
+                foreach (string row in content.Split('\n'))
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        string[] data = row.Split(';');
+                        Template template = new Template
+                        {
+                            Id = int.Parse(data[0]),
+                            Money = int.Parse(data[1]),
+                            Description = data[2],
+                            CategoryId = int.Parse(data[3]),
+                            Type = (FinanceType)Enum.Parse(typeof(FinanceType), data[4])
+                        };
+
+                        FinanceManager.AddTemplate(template);
+                    }
+                }
+            }
         }
 
         public static void LoadCategories()
@@ -227,12 +270,20 @@ namespace Wallet
             {
             }
 
+            try
+            {
+                LoadTemplates();
+            }
+            catch (Exception e)
+            {
+            }
+
             //LoadDefaults();
         }
 
         public static void LoadDefaults()
         {
-          
+           
         }
     }
 }

@@ -38,18 +38,6 @@
                         Style="{DynamicResource BoldText}"
                         FontAttributes="None"
                        Padding="0,0,0,10"/>
-               
-                <Label Text="With budget goals:"
-                        FontSize="16"
-                        VerticalTextAlignment="Start"
-                       Style="{DynamicResource LightText}"
-                        FontAttributes="None"/>
-                <Label Text="With budget goals:"
-                       FontSize="16"
-                       VerticalTextAlignment="Start"
-                       Style="{DynamicResource BoldText}"
-                       FontAttributes="None"
-                       Padding="0,0,0,10"/>
             </StackLayout>
 
             <StackLayout Grid.Column="2"
@@ -72,18 +60,6 @@
                         Style="{DynamicResource BoldText}"
                         FontAttributes="None"
                        Padding="0,0,0,10"/>
-               
-                <Label x:Name="ExpensesWithBudgetGoalsLabel"
-                        Text="1000000"
-                        FontSize="16"
-                        VerticalTextAlignment="Start"
-                        FontAttributes="None"/>
-                <Label x:Name="TotalWithBudgetGoalsLabel"
-                        Text="1000000"
-                        FontSize="16"
-                        VerticalTextAlignment="Start"
-                        Style="{DynamicResource BoldText}"
-                        FontAttributes="None"/>
             </StackLayout>
         </Grid>
     </Frame>
